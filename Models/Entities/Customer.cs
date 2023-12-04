@@ -9,7 +9,7 @@ namespace KK.Models.Entities
     public class Customer
     {
         // Primary Key
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
 
         // Attributes
         public string Name { get; set; }
@@ -22,5 +22,11 @@ namespace KK.Models.Entities
         // Navigation Property
         public Membership? Membership { get; set; }
         public ICollection<Entry>? Entries { get; set; }
+
+        // Constructor
+        public Customer()
+        {
+            
+        }
     }
 }

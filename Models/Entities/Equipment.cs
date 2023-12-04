@@ -13,12 +13,19 @@ namespace KK.Models.Entities
        
         // Attributes
         public string Name { get; set; }
-        public Decimal Price { get; set; }
+        public decimal Price { get; set; }
 
         // Foreign Key
         public int EntryId { get; set; }
 
         // Navigation Property
         public Entry Entry { get; set; }
+
+
+        // Constructor
+        public Equipment()
+        {
+            
+        }
     }
 }

@@ -9,11 +9,11 @@ namespace KK.Models.Entities
     public class Entry
     {
         // Primary Key
-        public int EntryId { get; set; }
+        public int Id { get; set; }
 
         // Attributes
         public DateTime CheckInTime { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
 
         // Foreign Key
         public int CustomerId { get; set; }
@@ -22,5 +22,11 @@ namespace KK.Models.Entities
         public Customer Customer { get; set; }
         public ICollection<Pass>? Passes { get; set; }
         public ICollection<Equipment>? Equipment { get; set; }
+
+        // Constructor
+        public Entry()
+        {
+            
+        }
     }   
 }

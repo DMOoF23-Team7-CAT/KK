@@ -20,6 +20,12 @@ namespace KK.Models.Entities
         public int CustomerId { get; set; }
 
         // Navigation Propperty
-        public Customer Cutomer { get; set; }
+        public Customer Customer { get; set; }
+
+        // Constructor
+        public Membership()
+        {
+            
+        }
     }
 }
