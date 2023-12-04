@@ -31,7 +31,7 @@ namespace KK.Models.Repositories
                     command.Parameters.AddWithValue("@EntryId", entity.Entry.Id); // Assuming Entry is a navigation property
 
                     // Execute the SQL command and get the inserted ID
-                    entity.PassId = Convert.ToInt32(command.ExecuteScalar());
+                    entity.Id = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace KK.Models.Repositories
 
                 using (SqlCommand command = new SqlCommand("DELETE FROM kk_PASS WHERE PassId = @PassId", connection))
                 {
-                    command.Parameters.AddWithValue("@PassId", entity.PassId);
+                    command.Parameters.AddWithValue("@PassId", entity.Id);
                     command.ExecuteNonQuery();
                 }
             }
