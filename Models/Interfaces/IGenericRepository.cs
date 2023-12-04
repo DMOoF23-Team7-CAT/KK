@@ -16,14 +16,14 @@ namespace KK.Models.Interfaces
         // READ
         T GetById(int id);
         IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
+        // IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
 
         // UPDATE
         void Update(T entity);
-        //void UpdateRange(IEnumerable<T> entities);
+        // void UpdateRange(IEnumerable<T> entities);
 
         // DELETE
         void Remove(T entity);
-        //void RemoveRange(IEnumerable<T> entities);
+        // void RemoveRange(IEnumerable<T> entities);
     }
 }

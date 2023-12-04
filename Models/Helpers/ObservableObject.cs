@@ -12,13 +12,13 @@ namespace KK.Models.Helpers
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // A method to simplify raising the PropertyChanged event
+        // Method to simplify raising the PropertyChanged event
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // A method to update a property value and raise the PropertyChanged event
+        // Method to update a property value and raise the PropertyChanged event
         protected bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
