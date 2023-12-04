@@ -11,16 +11,17 @@ namespace KK.Models.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly DatabaseConfiguration _databaseConfiguration;
+        private readonly string _connectionString;
 
-        public CustomerRepository(DatabaseConfiguration databaseConfiguration)
+        public CustomerRepository()
         {
-            _databaseConfiguration = databaseConfiguration;
+            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            _connectionString = config.GetConnectionString("MyDBConnection");
         }
 
         public void Add(Customer entity)
         {
-            using (SqlConnection connection = new SqlConnection(_databaseConfiguration.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -43,7 +44,7 @@ namespace KK.Models.Repositories
         {
             List<Customer> customers = new List<Customer>();
 
-            using (SqlConnection connection = new SqlConnection(_databaseConfiguration.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -66,7 +67,7 @@ namespace KK.Models.Repositories
         {
             Customer customer = null;
 
-            using (SqlConnection connection = new SqlConnection(_databaseConfiguration.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -89,7 +90,7 @@ namespace KK.Models.Repositories
 
         public void Remove(Customer entity)
         {
-            using (SqlConnection connection = new SqlConnection(_databaseConfiguration.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
@@ -103,7 +104,7 @@ namespace KK.Models.Repositories
 
         public void Update(Customer entity)
         {
-            using (SqlConnection connection = new SqlConnection(_databaseConfiguration.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
