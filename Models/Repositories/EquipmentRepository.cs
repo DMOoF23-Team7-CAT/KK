@@ -123,7 +123,7 @@ namespace KK.Models.Repositories
                 Id = Convert.ToInt32(reader["Id"]),
                 Name = reader["Name"].ToString(),
                 Price = Convert.ToDecimal(reader["Price"]),
-                EntryId = Convert.ToInt32(reader["EnrtyId"]),
+                EntryId = Convert.ToInt32(reader["EntryId"]),
                 Entry = null // Set Entry property if needed
                 // Add other mapping as needed
             };

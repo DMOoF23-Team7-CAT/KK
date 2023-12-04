@@ -67,9 +67,9 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_PASS WHERE PassId = @PassId", connection))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_PASS WHERE Id = @Id", connection))
                 {
-                    command.Parameters.AddWithValue("@PassId", id);
+                    command.Parameters.AddWithValue("@Id", id);
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -90,9 +90,9 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("DELETE FROM kk_PASS WHERE PassId = @PassId", connection))
+                using (SqlCommand command = new SqlCommand("DELETE FROM kk_PASS WHERE Id = @Id", connection))
                 {
-                    command.Parameters.AddWithValue("@PassId", entity.Id);
+                    command.Parameters.AddWithValue("@Id", entity.Id);
                     command.ExecuteNonQuery();
                 }
             }
@@ -104,9 +104,9 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("UPDATE kk_PASS SET Name = @Name, Price = @Price, EntryId = @EntryId WHERE PassId = @PassId", connection))
+                using (SqlCommand command = new SqlCommand("UPDATE kk_PASS SET Name = @Name, Price = @Price, EntryId = @EntryId WHERE Id = @Id", connection))
                 {
-                    command.Parameters.AddWithValue("@PassId", entity.Id);
+                    command.Parameters.AddWithValue("@Id", entity.Id);
                     command.Parameters.AddWithValue("@Name", entity.Name);
                     command.Parameters.AddWithValue("@Price", entity.Price);
                     command.Parameters.AddWithValue("@EntryId", entity.Entry.Id); // Assuming Entry is a navigation property
@@ -123,7 +123,7 @@ namespace KK.Models.Repositories
                 Id = Convert.ToInt32(reader["Id"]),
                 Name = reader["Name"].ToString(),
                 Price = Convert.ToDecimal(reader["Price"]),
-                EntryId = Convert.ToInt32(reader["EnrtyId"]),
+                EntryId = Convert.ToInt32(reader["EntryId"]),
                 Entry = null // Set Entry property if needed
                 // Add other mapping as needed
             };

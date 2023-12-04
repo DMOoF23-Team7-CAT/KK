@@ -133,6 +133,7 @@ namespace KK.Models.Repositories
                 Email = reader["Email"] is DBNull ? null : reader["Email"].ToString(),
                 Qualifications = reader["Qualifications"] is DBNull ? null : reader["Qualifications"].ToString(),
                 HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"])
+
             };
         }
     }
