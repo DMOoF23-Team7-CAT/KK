@@ -1,11 +1,11 @@
-﻿using KK.Models.Entities;
-using KK.Models.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using KK.DataAccess;
+using KK.Models.Entities;
+using KK.Models.Interfaces;
 
 namespace KK.Models.Repositories
 {
@@ -40,6 +40,5 @@ namespace KK.Models.Repositories
         {
             throw new NotImplementedException();
         }
-
     }
 }

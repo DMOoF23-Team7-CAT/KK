@@ -14,10 +14,11 @@ namespace KK.Models.Entities
         // Attributes
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public bool HasSignedDisclaimer { get; set; }
+
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Qualifications { get; set; }
-        public bool? HasSignedDisclaimer { get; set; }
 
         // Navigation Property
         public Membership? Membership { get; set; }
