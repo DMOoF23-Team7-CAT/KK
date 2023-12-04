@@ -26,8 +26,8 @@
             Margin="215,71,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Search"
-            Click="SearchButton_Click"/>
+            Click="SearchButton_Click"
+            Content="Search" />
 
         <ListView
             Width="295"
@@ -40,7 +40,7 @@
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                    <!-- Add other columns as needed -->
+                    <!--  Add other columns as needed  -->
                 </GridView>
             </ListView.View>
         </ListView>
@@ -52,8 +52,8 @@
             Margin="475,159,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Create"
-            Click="CreateButton_Click"/>
+            Click="CreateButton_Click"
+            Content="Create" />
         <Button
             x:Name="UpdateButton"
             Width="65"
@@ -61,8 +61,8 @@
             Margin="475,217,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Update" 
-            Click="UpdateButton_Click"/>
+            Click="UpdateButton_Click"
+            Content="Update" />
         <Button
             x:Name="DeleteButton"
             Width="65"
@@ -70,7 +70,7 @@
             Margin="475,272,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Delete"
-            Click="DeleteButton_Click"/>
+            Click="DeleteButton_Click"
+            Content="Delete" />
     </Grid>
 </Window>

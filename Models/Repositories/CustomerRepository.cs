@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using KK.DataAccess;
 using KK.Models.Entities;
 using KK.Models.Interfaces;
 using Microsoft.Data.SqlClient;
