@@ -14,11 +14,11 @@ namespace KK.Models.Entities
         // Attributes
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public bool HasSignedDisclaimer { get; set; }
+        public bool HasSignedDisclaimer { get; set; } = false;
 
         public string? Phone { get; set; }
         public string? Email { get; set; }
-        public string? Qualifications { get; set; }
+        public Qualification Certification { get; set; }
 
         // Navigation Property
         public Membership? Membership { get; set; }
@@ -27,7 +27,7 @@ namespace KK.Models.Entities
         // Constructor
         public Customer()
         {
-            
+            Certification = Qualification.None;
         }
     }
 }
