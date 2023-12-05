@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KK.Models.Entities
+namespace KK.Models.Interfaces
 {
-    public enum Qualification
+    public interface IServiceItemRepository : IGenericRepository<IServiceItemRepository>
     {
-        None = 0,
-        TopRope = 1,
-        Lead = 2
     }
 }
