@@ -19,6 +19,7 @@ namespace KK.Models.Repositories
             _connectionString = config.GetConnectionString("MyDBConnection");
         }
 
+        // CRUD Methods
         public void Add(Customer entity)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -123,6 +124,7 @@ namespace KK.Models.Repositories
             }
         }
 
+        // Get Customer and all the coresponding tables in the database usses mapping tables to set the data
         public Customer GetCustomer(int customerId)
         {
             Customer customer = null;
@@ -149,6 +151,7 @@ namespace KK.Models.Repositories
         }
 
 
+        // Mapping Profiles
         private static Customer MapCustomer(SqlDataReader reader)
         {
             return new Customer
