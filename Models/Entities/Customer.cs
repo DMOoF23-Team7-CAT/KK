@@ -29,5 +29,11 @@ namespace KK.Models.Entities
         public Customer()
         {
         }
+
+        // Method to Add Entry to Entries
+        public void AddEntry(Entry entry)
+        {
+            Entries.Add(entry);
+        }
     }
 }
