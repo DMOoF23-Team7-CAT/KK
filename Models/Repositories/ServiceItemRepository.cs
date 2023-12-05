@@ -1,37 +1,128 @@
-﻿using KK.Models.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using KK.Models.Entities;
+using KK.Models.Interfaces;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace KK.Models.Repositories
 {
     public class ServiceItemRepository : IServiceItemRepository
     {
-        public void Add(IServiceItemRepository entity)
+        private readonly string _connectionString;
+
+        public ServiceItemRepository()
         {
-            throw new NotImplementedException();
+            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            _connectionString = config.GetConnectionString("MyDBConnection");
         }
 
-        public IEnumerable<IServiceItemRepository> GetAll()
+        public void Add(ServiceItem entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("INSERT INTO kk_SERVICEITEM (Name, EntryId) VALUES (@Name, @EntryId); SELECT SCOPE_IDENTITY();", connection))
+                {
+                    command.Parameters.AddWithValue("@Name", entity.Name);
+                    command.Parameters.AddWithValue("@EntryId", entity.EntryId);
+
+                    // Execute the SQL command and get the inserted ID
+                    entity.Id = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
         }
 
-        public IServiceItemRepository GetById(int id)
+        public IEnumerable<ServiceItem> GetAll()
         {
-            throw new NotImplementedException();
+            List<ServiceItem> serviceItems = new List<ServiceItem>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_SERVICEITEM", connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            serviceItems.Add(MapDataToServiceItem(reader));
+                        }
+                    }
+                }
+            }
+
+            return serviceItems;
         }
 
-        public void Remove(IServiceItemRepository entity)
+        public ServiceItem GetById(int id)
         {
-            throw new NotImplementedException();
+            ServiceItem serviceItem = null;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_SERVICEITEM WHERE Id = @Id", connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            serviceItem = MapDataToServiceItem(reader);
+                        }
+                    }
+                }
+            }
+
+            return serviceItem;
         }
 
-        public void Update(IServiceItemRepository entity)
+        public void Remove(ServiceItem entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("DELETE FROM kk_SERVICEITEM WHERE Id = @Id", connection))
+                {
+                    command.Parameters.AddWithValue("@Id", entity.Id);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
+
+        public void Update(ServiceItem entity)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("UPDATE kk_SERVICEITEM SET Name = @Name, EntryId = @EntryId WHERE Id = @Id", connection))
+                {
+                    command.Parameters.AddWithValue("@Id", entity.Id);
+                    command.Parameters.AddWithValue("@Name", entity.Name);
+                    command.Parameters.AddWithValue("@EntryId", entity.EntryId);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private static ServiceItem MapDataToServiceItem(SqlDataReader reader)
+        {
+            return new ServiceItem
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                Name = reader["Name"].ToString(),
+                EntryId = Convert.ToInt32(reader["EntryId"])
+            };
+        }
+
     }
 }

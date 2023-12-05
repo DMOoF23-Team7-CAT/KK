@@ -1,35 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KK.Models.Entities
 {
     public class ServiceItem
     {
+        // Private backing field for Name
+        private string _name;
+
         // Primary Key
         public int Id { get; set; }
 
-        // Attributes
-        public string Name { get; set; }
-        public decimal Price => GetItemPrice(Name);
+        // Public getter and setter for Name Ensure the value is always stored in uppercase
+        public string Name
+        {
+            get => _name;
+            set => _name = value.ToUpper();
+        }
+
+        // Public getter for Price
+        public decimal Price => GetItemPrice(Name); // sets default price to the calculated price
 
         // Foreign Key
         public int EntryId { get; set; }
 
-        // Method to set Price in acordence with the coresponding name
+        // Method to set Price in accordance with the corresponding name
         private static decimal GetItemPrice(string name)
         {
             return name switch
             {
                 "MONTH" => 500.00m,
-                "QYARTER" => 1200.00m,
+                "QUARTER" => 1200.00m,
                 "YEAR" => 4000.00m,
                 "CHILD" => 60.00m,
                 "DAY" => 120.00m,
                 "TENTIMES" => 1000.00m,
-
                 "HARNESS" => 25.00m,
                 "CLIMBINGSHOES" => 40.00m,
                 "ROPE" => 50.00m,
@@ -37,10 +41,9 @@ namespace KK.Models.Entities
             };
         }
 
-        // Constructor that takes one parameter  for Name and change the string to uppercase
-        public ServiceItem(string name)
+        // Constructor
+        public ServiceItem()
         {
-            Name = name.ToUpper();
         }
     }
 }

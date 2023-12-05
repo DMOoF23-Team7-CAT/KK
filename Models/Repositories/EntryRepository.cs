@@ -1,5 +1,4 @@
-﻿// EntryRepository.cs
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using KK.Models.Entities;
@@ -29,7 +28,7 @@ namespace KK.Models.Repositories
                 {
                     command.Parameters.AddWithValue("@CheckInTime", entity.CheckInTime);
                     command.Parameters.AddWithValue("@Price", entity.Price);
-                    command.Parameters.AddWithValue("@CustomerId", entity.Customer.Id); // Assuming Customer is already associated with Entry
+                    command.Parameters.AddWithValue("@CustomerId", entity.CustomerId); // Assuming CustomerId is now used
 
                     // Execute the SQL command and get the inserted ID
                     entity.Id = Convert.ToInt32(command.ExecuteScalar());
@@ -110,7 +109,7 @@ namespace KK.Models.Repositories
                     command.Parameters.AddWithValue("@Id", entity.Id);
                     command.Parameters.AddWithValue("@CheckInTime", entity.CheckInTime);
                     command.Parameters.AddWithValue("@Price", entity.Price);
-                    command.Parameters.AddWithValue("@CustomerId", entity.Customer.Id); // Assuming Customer is already associated with Entry
+                    command.Parameters.AddWithValue("@CustomerId", entity.CustomerId);
 
                     command.ExecuteNonQuery();
                 }
@@ -129,6 +128,5 @@ namespace KK.Models.Repositories
                                 // Add other mapping as needed
             };
         }
-
     }
 }
