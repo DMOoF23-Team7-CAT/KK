@@ -54,7 +54,7 @@ namespace KK.Models.Repositories
                     {
                         while (reader.Read())
                         {
-                            customers.Add(MapDataToCustomer(reader));
+                            customers.Add(MapCustomer(reader));
                         }
                     }
                 }
@@ -79,7 +79,7 @@ namespace KK.Models.Repositories
                     {
                         if (reader.Read())
                         {
-                            customer = MapDataToCustomer(reader);
+                            customer = MapCustomer(reader);
                         }
                     }
                 }
@@ -123,7 +123,7 @@ namespace KK.Models.Repositories
             }
         }
 
-        public Customer GetCustomer(int id)
+        public Customer GetCustomer(int customerId)
         {
             Customer customer = null;
 
@@ -131,9 +131,10 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_CUSTOMER WHERE Id = @Id", connection))
+                using (SqlCommand command = new SqlCommand("kk_spGetCustomerDetailsById", connection))
                 {
-                    command.Parameters.AddWithValue("@Id", id);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@CustomerId", customerId);
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -144,11 +145,11 @@ namespace KK.Models.Repositories
                     }
                 }
             }
-
             return customer;
         }
 
-        private static Customer MapDataToCustomer(SqlDataReader reader)
+
+        private static Customer MapCustomer(SqlDataReader reader)
         {
             return new Customer
             {
@@ -161,5 +162,84 @@ namespace KK.Models.Repositories
                 HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"])
             };
         }
+
+        private static Customer MapDataToCustomer(SqlDataReader reader)
+        {
+            Customer customer = new Customer
+            {
+                Id = Convert.ToInt32(reader["CustomerId"]),
+                Name = Convert.ToString(reader["CustomerName"]),
+                DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
+                Phone = reader["Phone"] as string,
+                Email = reader["Email"] as string,
+                HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"]),
+                Qualification = (Qualification)Enum.Parse(typeof(Qualification), reader["Qualifications"].ToString()),
+                Membership = MapDataToMembership(reader),
+                Entries = MapDataToEntries(reader)
+            };
+
+            return customer;
+        }
+
+        private static Membership MapDataToMembership(SqlDataReader reader)
+        {
+            if (reader["MembershipId"] == DBNull.Value)
+            {
+                return null;
+            }
+
+            Membership membership = new Membership
+            {
+                Id = Convert.ToInt32(reader["MembershipId"]),
+                StartDate = Convert.ToDateTime(reader["MembershipStartDate"]),
+                EndDate = Convert.ToDateTime(reader["MembershipEndDate"]),
+                IsActive = Convert.ToBoolean(reader["MembershipIsActive"])
+            };
+
+            return membership;
+        }
+
+        private static ICollection<Entry> MapDataToEntries(SqlDataReader reader)
+        {
+            List<Entry> entries = new List<Entry>();
+
+            do
+            {
+                Entry entry = new Entry
+                {
+                    Id = Convert.ToInt32(reader["EntryId"]),
+                    CheckInTime = Convert.ToDateTime(reader["EntryCheckInTime"]),
+                    Price = Convert.ToDecimal(reader["EntryPrice"]),
+                    CustomerId = Convert.ToInt32(reader["CustomerId"]),
+                    Items = MapDataToServiceItems(reader)
+                };
+
+                entries.Add(entry);
+
+            } while (reader.Read() && Convert.ToInt32(reader["CustomerId"]) == entries[0].CustomerId);
+
+            return entries;
+        }
+
+        private static ICollection<ServiceItem> MapDataToServiceItems(SqlDataReader reader)
+        {
+            List<ServiceItem> serviceItems = new List<ServiceItem>();
+
+            do
+            {
+                ServiceItem serviceItem = new ServiceItem
+                {
+                    Id = Convert.ToInt32(reader["ServiceItemId"]),
+                    Name = Convert.ToString(reader["ServiceItemName"]),
+                    EntryId = Convert.ToInt32(reader["EntryId"])
+                };
+
+                serviceItems.Add(serviceItem);
+
+            } while (reader.Read() && Convert.ToInt32(reader["EntryId"]) == serviceItems[0].EntryId);
+
+            return serviceItems;
+        }
     }
 }
+
