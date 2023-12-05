@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using KK.Models.Entities;
+using KK.Models.Entities.Enum;
 using KK.Models.Interfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -24,13 +25,13 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("INSERT INTO kk_CUSTOMER (Name, DateOfBirth, Phone, Email, Qualifications, HasSignedDisclaimer) VALUES (@Name, @DateOfBirth, @Phone, @Email, @Qualifications, @HasSignedDisclaimer); SELECT SCOPE_IDENTITY();", connection))
+                using (SqlCommand command = new SqlCommand("INSERT INTO kk_CUSTOMER (Name, DateOfBirth, Phone, Email, Qualification, HasSignedDisclaimer) VALUES (@Name, @DateOfBirth, @Phone, @Email, @Qualification, @HasSignedDisclaimer); SELECT SCOPE_IDENTITY();", connection))
                 {
                     command.Parameters.AddWithValue("@Name", entity.Name);
                     command.Parameters.AddWithValue("@DateOfBirth", entity.DateOfBirth);
                     command.Parameters.AddWithValue("@Phone", entity.Phone ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Email", entity.Email ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Qualifications", entity.Qualifications ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Qualification", (int)entity.Qualification);
                     command.Parameters.AddWithValue("@HasSignedDisclaimer", entity.HasSignedDisclaimer);
 
                     // Execute the SQL command and get the inserted ID
@@ -107,14 +108,14 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("UPDATE kk_CUSTOMER SET Name = @Name, DateOfBirth = @DateOfBirth, Phone = @Phone, Email = @Email, Qualifications = @Qualifications, HasSignedDisclaimer = @HasSignedDisclaimer WHERE Id = @Id", connection))
+                using (SqlCommand command = new SqlCommand("UPDATE kk_CUSTOMER SET Name = @Name, DateOfBirth = @DateOfBirth, Phone = @Phone, Email = @Email, Qualification = @Qualification, HasSignedDisclaimer = @HasSignedDisclaimer WHERE Id = @Id", connection))
                 {
                     command.Parameters.AddWithValue("@Id", entity.Id);
                     command.Parameters.AddWithValue("@Name", entity.Name);
                     command.Parameters.AddWithValue("@DateOfBirth", entity.DateOfBirth);
                     command.Parameters.AddWithValue("@Phone", entity.Phone ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Email", entity.Email ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Qualifications", entity.Qualifications ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Qualification", (int)entity.Qualification);
                     command.Parameters.AddWithValue("@HasSignedDisclaimer", entity.HasSignedDisclaimer);
 
                     command.ExecuteNonQuery();
@@ -156,9 +157,8 @@ namespace KK.Models.Repositories
                 DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
                 Phone = reader["Phone"] is DBNull ? null : reader["Phone"].ToString(),
                 Email = reader["Email"] is DBNull ? null : reader["Email"].ToString(),
-                Qualifications = reader["Qualifications"] is DBNull ? null : reader["Qualifications"].ToString(),
+                Qualification = (Qualification)Convert.ToInt32(reader["Qualification"]),
                 HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"])
-
             };
         }
     }

@@ -19,7 +19,7 @@ namespace KK.Models.Entities
 
         public string? Phone { get; set; }
         public string? Email { get; set; }
-        public Qualification Certification { get; set; } = Qualification.None; // default value
+        public Qualification Qualification { get; set; } = Qualification.None; // default value
 
         // Navigation Property
         public Membership? Membership { get; set; }
