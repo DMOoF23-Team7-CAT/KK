@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\Test\\Test.csproj": {}
+    "C:\\Users\\Casper\\source\\repos\\KK\\KK\\Test\\Test.csproj": {}
   },
   "projects": {
-    "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\KK\\KK.csproj": {
+    "C:\\Users\\Casper\\source\\repos\\KK\\KK\\KK\\KK.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\KK\\KK.csproj",
+        "projectUniqueName": "C:\\Users\\Casper\\source\\repos\\KK\\KK\\KK\\KK.csproj",
         "projectName": "KK",
-        "projectPath": "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\KK\\KK.csproj",
-        "packagesPath": "C:\\Users\\trygvebechsgaard\\.nuget\\packages\\",
-        "outputPath": "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\KK\\obj\\",
+        "projectPath": "C:\\Users\\Casper\\source\\repos\\KK\\KK\\KK\\KK.csproj",
+        "packagesPath": "C:\\Users\\Casper\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Casper\\source\\repos\\KK\\KK\\KK\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\trygvebechsgaard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Casper\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -72,25 +68,21 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\Test\\Test.csproj": {
+    "C:\\Users\\Casper\\source\\repos\\KK\\KK\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\Test\\Test.csproj",
+        "projectUniqueName": "C:\\Users\\Casper\\source\\repos\\KK\\KK\\Test\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\Test\\Test.csproj",
-        "packagesPath": "C:\\Users\\trygvebechsgaard\\.nuget\\packages\\",
-        "outputPath": "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\Test\\obj\\",
+        "projectPath": "C:\\Users\\Casper\\source\\repos\\KK\\KK\\Test\\Test.csproj",
+        "packagesPath": "C:\\Users\\Casper\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Casper\\source\\repos\\KK\\KK\\Test\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\trygvebechsgaard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Casper\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -104,8 +96,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\KK\\KK.csproj": {
-                "projectPath": "\\\\Mac\\Home\\Desktop\\skole\\2 semester\\KK-Examen2023\\KK\\KK.csproj"
+              "C:\\Users\\Casper\\source\\repos\\KK\\KK\\KK\\KK.csproj": {
+                "projectPath": "C:\\Users\\Casper\\source\\repos\\KK\\KK\\KK\\KK.csproj"
               }
             }
           }
@@ -153,7 +145,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
