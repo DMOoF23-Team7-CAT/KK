@@ -8,9 +8,21 @@ namespace KK.ViewModels
 {
     public class MainViewModel : ObservableObject
     {
+        
+        
         private readonly CustomerRepository _customerRepo;
-
         private ObservableCollection<Customer> _customers;
+        private Customer _selectedCustomer;
+
+        public Customer SelectedCustomer
+        {
+            get { return _selectedCustomer; }
+            set
+            {
+                _selectedCustomer = value;
+                OnPropertyChanged(nameof(SelectedCustomer));
+            }
+        }
 
         public ObservableCollection<Customer> Customers
         {
@@ -22,55 +34,20 @@ namespace KK.ViewModels
             }
         }
 
-
         public MainViewModel()
         {
             _customerRepo = new CustomerRepository();
+
+            // Create a new ObservableCollection and add items from the List
             Customers = new ObservableCollection<Customer>(_customerRepo.GetAll());
         }
 
-
-        public void CreateCustomer()
+        public void GetCustomer(int id)
         {
-            var newCustomer = new Customer
-            {
-                Name = "New Customer",
-                DateOfBirth = new System.DateTime(1990, 1, 1),
-                HasSignedDisclaimer = true
-            };
+            SelectedCustomer = _customerRepo.GetCustomer(id);
 
-            _customerRepo.Add(newCustomer);
-            Customers.Add(newCustomer);
         }
 
-        public void UpdateCustomer()
-        {
-            if (Customers.Count > 0)
-            {
-                var customerToUpdate = Customers[0];
-                customerToUpdate.Name = "Updated Customer";
-                _customerRepo.Update(customerToUpdate);
-            }
-        }
-
-        public void DeleteCustomer()
-        {
-            if (Customers.Count > 0)
-            {
-                var customerToDelete = Customers[0];
-                _customerRepo.Remove(customerToDelete);
-                Customers.Remove(customerToDelete);
-            }
-        }
-
-        public void SearchCustomerById(int customerId)
-        {
-            var foundCustomer = _customerRepo.GetById(customerId);
-            Customers.Clear();
-            if (foundCustomer != null)
-            {
-                Customers.Add(foundCustomer);
-            }
-        }
     }
 }
+

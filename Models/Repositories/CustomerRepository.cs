@@ -204,45 +204,61 @@ namespace KK.Models.Repositories
 
         private static ICollection<Entry> MapDataToEntries(SqlDataReader reader)
         {
-            List<Entry> entries = new List<Entry>();
-
-            do
+            if (reader["EntryId"] == DBNull.Value)
             {
-                Entry entry = new Entry
+                return null;
+            }
+            else
+            {
+                List<Entry> entries = new List<Entry>();
+
+                do
                 {
-                    Id = Convert.ToInt32(reader["EntryId"]),
-                    CheckInTime = Convert.ToDateTime(reader["EntryCheckInTime"]),
-                    Price = Convert.ToDecimal(reader["EntryPrice"]),
-                    CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                    Items = MapDataToServiceItems(reader)
-                };
+                    Entry entry = new Entry
+                    {
+                        Id = Convert.ToInt32(reader["EntryId"]),
+                        CheckInTime = Convert.ToDateTime(reader["EntryCheckInTime"]),
+                        Price = Convert.ToDecimal(reader["EntryPrice"]),
+                        CustomerId = Convert.ToInt32(reader["CustomerId"]),
+                        Items = MapDataToServiceItems(reader)
+                    };
 
-                entries.Add(entry);
+                    entries.Add(entry);
 
-            } while (reader.Read() && Convert.ToInt32(reader["CustomerId"]) == entries[0].CustomerId);
+                } while (reader.Read() && Convert.ToInt32(reader["CustomerId"]) == entries[0].CustomerId);
 
-            return entries;
+                return entries;
+            }
+            
         }
 
         private static ICollection<ServiceItem> MapDataToServiceItems(SqlDataReader reader)
         {
-            List<ServiceItem> serviceItems = new List<ServiceItem>();
-
-            do
+            if (reader["ServiceItemId"] == DBNull.Value)
             {
-                ServiceItem serviceItem = new ServiceItem
+                return null;
+            }
+            else
+            {
+                List<ServiceItem> serviceItems = new List<ServiceItem>();
+
+                do
                 {
-                    Id = Convert.ToInt32(reader["ServiceItemId"]),
-                    Name = Convert.ToString(reader["ServiceItemName"]),
-                    EntryId = Convert.ToInt32(reader["EntryId"])
-                };
+                    ServiceItem serviceItem = new ServiceItem
+                    {
+                        Id = Convert.ToInt32(reader["ServiceItemId"]),
+                        Name = Convert.ToString(reader["ServiceItemName"]),
+                        EntryId = Convert.ToInt32(reader["EntryId"])
+                    };
 
-                serviceItems.Add(serviceItem);
+                    serviceItems.Add(serviceItem);
 
-            } while (reader.Read() && Convert.ToInt32(reader["EntryId"]) == serviceItems[0].EntryId);
+                } while (reader.Read() && Convert.ToInt32(reader["EntryId"]) == serviceItems[0].EntryId);
 
-            return serviceItems;
+                return serviceItems;
+            }
         }
     }
+    
 }
 

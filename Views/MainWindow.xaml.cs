@@ -18,22 +18,22 @@ namespace KK.Views
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            mainVM.CreateCustomer();
+           // mainVM.CreateCustomer();
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            mainVM.UpdateCustomer();
+           // mainVM.UpdateCustomer();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            mainVM.DeleteCustomer();
+           // mainVM.DeleteCustomer();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            mainVM.SearchCustomerById(Convert.ToInt32(tb_Search.Text.ToString()));
+            mainVM.GetCustomer(Convert.ToInt32(tb_Search.Text.ToString()));
         }
     }
 }

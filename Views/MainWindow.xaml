@@ -31,8 +31,8 @@
 
         <ListView
             Width="295"
-            Height="265"
-            Margin="90,139,0,0"
+            Height="266"
+            Margin="365,140,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             ItemsSource="{Binding Customers}">
@@ -40,6 +40,10 @@
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                    <GridViewColumn DisplayMemberBinding="{Binding DateOfBirth}" Header="DateOfBirth" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email" />
+                    <GridViewColumn DisplayMemberBinding="{Binding HasSignedDisclaimer}" Header="disclaimer" />
                     <!--  Add other columns as needed  -->
                 </GridView>
             </ListView.View>
@@ -49,7 +53,7 @@
             x:Name="CreateButton"
             Width="65"
             Height="25"
-            Margin="475,159,0,0"
+            Margin="685,156,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="CreateButton_Click"
@@ -58,7 +62,7 @@
             x:Name="UpdateButton"
             Width="65"
             Height="25"
-            Margin="475,217,0,0"
+            Margin="685,214,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="UpdateButton_Click"
@@ -67,10 +71,29 @@
             x:Name="DeleteButton"
             Width="65"
             Height="24"
-            Margin="475,272,0,0"
+            Margin="685,269,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="DeleteButton_Click"
             Content="Delete" />
+        <ListView
+            Width="295"
+            Height="266"
+            Margin="30,140,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding SelectedCustomer}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                    <GridViewColumn DisplayMemberBinding="{Binding DateOfBirth}" Header="DateOfBirth" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email" />
+                    <GridViewColumn DisplayMemberBinding="{Binding HasSignedDisclaimer}" Header="disclaimer" />
+                    <!--  Add other columns as needed  -->
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
