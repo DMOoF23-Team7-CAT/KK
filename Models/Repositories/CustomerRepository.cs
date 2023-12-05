@@ -122,6 +122,31 @@ namespace KK.Models.Repositories
             }
         }
 
+        public Customer GetCustomer(int id)
+        {
+            Customer customer = null;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_CUSTOMER WHERE Id = @Id", connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            customer = MapDataToCustomer(reader);
+                        }
+                    }
+                }
+            }
+
+            return customer;
+        }
+
         private static Customer MapDataToCustomer(SqlDataReader reader)
         {
             return new Customer

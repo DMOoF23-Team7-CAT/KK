@@ -9,5 +9,6 @@ namespace KK.Models.Interfaces
 {
     public interface ICustomerRepository : IGenericRepository<Customer>
     {
+        Customer GetCustomer(int id);
     }
 }
