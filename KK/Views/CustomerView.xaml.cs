@@ -29,6 +29,8 @@ namespace KK.Views
             InitializeComponent();
         }
 
+
+        // Think we should changes this to style triggers and move it into Themes and xaml
         private void BorderYear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (bb_YearMembership.BorderThickness == new Thickness(0, 0, 4, 4))
