@@ -6,46 +6,49 @@ using System.Windows;
 
 namespace KK.ViewModels
 {
-    public class MainViewModel : ObservableObject
+    internal class MainViewModel : ObservableObject
     {
-        
-        
-        private readonly CustomerRepository _customerRepo;
-        private ObservableCollection<Customer> _customers;
-        private Customer _selectedCustomer;
 
-        public Customer SelectedCustomer
+        private object _currentView;
+
+        public StartViewModel StartVM { get; set; }
+        public OverviewViewModel OverviewVM { get; set; }
+        public CustomerViewModel CustomerVM { get; set; }
+
+        public RelayCommand StartViewCommand { get; set; }
+        public RelayCommand OverviewViewCommand { get; set; }
+        public RelayCommand CustomerViewCommand { get; set; }
+
+        public object CurrentView
         {
-            get { return _selectedCustomer; }
+            get { return _currentView; }
             set
             {
-                _selectedCustomer = value;
-                OnPropertyChanged(nameof(SelectedCustomer));
-            }
-        }
-
-        public ObservableCollection<Customer> Customers
-        {
-            get { return _customers; }
-            set
-            {
-                _customers = value;
-                OnPropertyChanged(nameof(Customers));
+                _currentView = value;
+                OnPropertyChanged();
             }
         }
 
         public MainViewModel()
         {
-            _customerRepo = new CustomerRepository();
+            StartVM = new StartViewModel();
+            OverviewVM = new OverviewViewModel();
+            CustomerVM = new CustomerViewModel();
 
-            // Create a new ObservableCollection and add items from the List
-            Customers = new ObservableCollection<Customer>(_customerRepo.GetAll());
-        }
+            CurrentView = StartVM;
 
-        public void GetCustomer(int id)
-        {
-            SelectedCustomer = _customerRepo.GetCustomer(id);
-
+            StartViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = StartVM;
+            });
+            OverviewViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = OverviewVM;
+            });
+            CustomerViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = CustomerVM;
+            });
         }
 
     }

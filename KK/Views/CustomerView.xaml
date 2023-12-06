@@ -1,12 +1,487 @@
-﻿<UserControl x:Class="KK.Views.CustomerView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KK.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="KK.Views.CustomerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModel="clr-namespace:KK.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:KK.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="704"
+    d:DesignWidth="1346"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <ViewModel:CustomerViewModel />
+    </UserControl.DataContext>
+
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--#region Customer details section-->
+        <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}">
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" MinHeight="50" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Page Title  -->
+                <TextBlock
+                    Grid.Row="0"
+                    Style="{StaticResource tk_CustermerViewHeaders}"
+                    Text="Kundedetaljer" />
+
+                <!--  Name  -->
+                <Grid Grid.Row="1">
+                    <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Navn:" />
+                    <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                        <TextBlock
+                            Width="170"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                            Text="Navn . . ."
+                            Visibility="{Binding ElementName=tb_TxtName, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox
+                            x:Name="tb_TxtName"
+                            Foreground="Black"
+                            Style="{StaticResource tb_TextBoxInput}"
+                            Text="{Binding InsertCustomer.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                </Grid>
+
+                <!--  Birthday  -->
+                <Grid Grid.Row="3">
+                    <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Fødselsdato:" />
+                    <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                        <TextBlock
+                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                            Text="dd/mm/åååå"
+                            Visibility="{Binding ElementName=tb_TxtBirthday, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox
+                            x:Name="tb_TxtBirthday"
+                            Foreground="Black"
+                            Style="{StaticResource tb_TextBoxInput}"
+                            Text="{Binding InsertCustomer.DateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                </Grid>
+
+                <!--  Phone  -->
+                <Grid Grid.Row="4">
+                    <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Telefonnummer:" />
+                    <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                        <TextBlock
+                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                            Text="+45 12 34 56 78"
+                            Visibility="{Binding ElementName=tb_TxtPhone, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox
+                            x:Name="tb_TxtPhone"
+                            Foreground="Black"
+                            Style="{StaticResource tb_TextBoxInput}"
+                            Text="{Binding InsertCustomer.Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                </Grid>
+
+                <!--  Email  -->
+                <Grid Grid.Row="5">
+                    <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Email:" />
+                    <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                        <TextBlock
+                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                            Text="mail@mail.com"
+                            Visibility="{Binding ElementName=tb_TxtMail, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox
+                            x:Name="tb_TxtMail"
+                            Foreground="Black"
+                            Style="{StaticResource tb_TextBoxInput}"
+                            Text="{Binding InsertCustomer.Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                </Grid>
+
+                <!--  Disclaimer  -->
+                <Grid Grid.Row="6" Margin="0,20,0,5">
+                    <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Fraskrivningserklæring:" />
+                    <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
+                        <CheckBox HorizontalAlignment="Center" IsChecked="{Binding InsertCustomer.HasSignedDisclaimer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                </Grid>
+
+                <!--  Seperator  -->
+                <Separator
+                    Grid.Row="7"
+                    Height="1"
+                    Margin="25,15,25,10"
+                    VerticalAlignment="Top"
+                    Background="Gray" />
+
+                <!--  Qualifications  -->
+                <Grid Grid.Row="7">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Foreground="#FFFFFF"
+                        Text="Kvalifikationer:" />
+                </Grid>
+
+                <!--  Lead Qual  -->
+                <Grid Grid.Row="8" Margin="0,20,0,10">
+                    <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Lead sikret:" />
+                    <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
+                        <CheckBox HorizontalAlignment="Center" />
+                    </Grid>
+                </Grid>
+
+                <!--  Top Qual  -->
+                <Grid Grid.Row="9" Margin="0,20,0,50">
+                    <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Top-reb:" />
+                    <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
+                        <CheckBox HorizontalAlignment="Center" />
+                    </Grid>
+                </Grid>
+
+
+
+
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Customer membership section-->
+        <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="80*" />
+                    <RowDefinition Height="20*" />
+                </Grid.RowDefinitions>
+
+                <!--  Page Title  -->
+                <TextBlock
+                    Grid.Row="0"
+                    Style="{StaticResource tk_CustermerViewHeaders}"
+                    Text="Medlemskab" />
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*" />
+                        <ColumnDefinition Width="60*" />
+                        <ColumnDefinition Width="20*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30*" MinHeight="130" />
+                        <RowDefinition Height="30*" MinHeight="130" />
+                        <RowDefinition Height="30*" MinHeight="130" />
+                        <RowDefinition Height="10*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Memberships  -->
+
+                    <!--  Year membership  -->
+                    <Border
+                        x:Name="bb_YearMembership"
+                        Grid.Row="0"
+                        MouseLeftButtonDown="BorderYear_MouseLeftButtonDown"
+                        Style="{StaticResource bb_MembershipBorder}">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Opacity="0.2" Color="Gray" />
+                        </Border.BorderBrush>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="25"
+                                FontWeight="SemiBold"
+                                Text="Årskort" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontWeight="SemiBold"
+                                Text="4.000,-" />
+                        </StackPanel>
+
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                <GradientStop Offset="0.0" Color="#FFFF00" />
+                                <GradientStop Offset="1.2" Color="#FFA500" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <!--  Quater membership  -->
+                    <Border
+                        x:Name="bb_QuaterMembership"
+                        Grid.Row="1"
+                        MouseLeftButtonDown="BorderQuarter_MouseLeftButtonDown"
+                        Style="{StaticResource bb_MembershipBorder}">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Opacity="0.2" Color="Gray" />
+                        </Border.BorderBrush>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="25"
+                                FontWeight="SemiBold"
+                                Text="Kvartalskort" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontWeight="SemiBold"
+                                Text="1.200,-" />
+                        </StackPanel>
+
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                <GradientStop Offset="0.0" Color="#2E8B57" />
+                                <GradientStop Offset="1" Color="#ADEE2F" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <!--  Month Membership  -->
+                    <Border
+                        x:Name="bb_MonthMembership"
+                        Grid.Row="2"
+                        MouseLeftButtonDown="BorderMonth_MouseLeftButtonDown"
+                        Style="{StaticResource bb_MembershipBorder}">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Opacity="0.2" Color="Gray" />
+                        </Border.BorderBrush>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="25"
+                                FontWeight="SemiBold"
+                                Text="Månedskort" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontWeight="SemiBold"
+                                Text="500,-" />
+                        </StackPanel>
+
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                <GradientStop Offset="0.0" Color="#F08080" />
+                                <GradientStop Offset="1.2" Color="#ADEE2F" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+
+                    </Border>
+
+                </Grid>
+                <!--  Start Date  -->
+                <Grid Grid.Row="2">
+                    <TextBlock
+                        Margin="25,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Text="Start dato:" />
+
+                    <Grid
+                        Width="200"
+                        Margin="0,0,30,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            Margin="15,0"
+                            VerticalAlignment="Center"
+                            Panel.ZIndex="1"
+                            Foreground="#b0b9c6"
+                            IsHitTestVisible="False"
+                            Text="dd/mm/åååå"
+                            Visibility="{Binding ElementName=tb_TxtStartDate, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox x:Name="tb_TxtStartDate" Style="{StaticResource tb_TextBoxInput}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Border>
+        <!--#endregion-->
+
+
+        <!--#region DataTable section-->
+        <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Page Title  -->
+                <TextBlock
+                    Grid.Row="0"
+                    Style="{StaticResource tk_CustermerViewHeaders}"
+                    Text="Personoplysninger" />
+
+                <!--  PersonDetails  -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="10*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="1">
+                        <StackPanel>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Navn" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Fødselsdato" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Telefonnummer" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Fraskrivningserklæring" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Email" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Kvalifikationer" />
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,0">
+                        <StackPanel>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="{Binding InsertCustomer.Name, Mode=OneWay}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!--  MembershipDetails  -->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="10*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border
+                        Grid.Column="1"
+                        BorderBrush="Black"
+                        BorderThickness="1">
+                        <StackPanel>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Start dato" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Slut dato" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Aktiv" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Rabat" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Fordele" />
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Grid.Column="2"
+                        BorderBrush="Black"
+                        BorderThickness="0,1,1,0">
+                        <StackPanel>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+                            <Border BorderThickness="0,0,0,1">
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                            </Border>
+
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+
+
+
+                <!--  Page SubTitle  -->
+                <TextBlock
+                    Grid.Row="2"
+                    Style="{StaticResource tk_CustermerViewHeaders}"
+                    Text="Medlemskab" />
+
+
+                <!--  Add Member Button  -->
+                <Button
+                    Grid.Row="4"
+                    Command="{Binding AddCommand}"
+                    Style="{StaticResource bt_AddButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <!--<Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource ic_MenuButtonIcon}" />                        -->
+                        <TextBlock Text="Tilknyt medlemskab" />
+                    </StackPanel>
+                </Button>
+
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+
     </Grid>
 </UserControl>

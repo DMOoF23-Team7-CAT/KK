@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using KK.Models.Entities;
 using KK.Models.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -11,7 +13,7 @@ namespace KK.Models.Repositories
     public class EntryRepository : IEntryRepository
     {
         private readonly string _connectionString;
-
+        public ObservableCollection<Entry> Entries { get; set; }
         public EntryRepository()
         {
             IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
@@ -20,6 +22,7 @@ namespace KK.Models.Repositories
 
         public void Add(Entry entity)
         {
+            // Adds entity to database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -34,12 +37,15 @@ namespace KK.Models.Repositories
                     entity.Id = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            // Adds entity to Collection
+            if(!Entries.Contains(entity)) { Entries.Add(entity); }
         }
 
         public IEnumerable<Entry> GetAll()
         {
-            List<Entry> entries = new List<Entry>();
+            Entries = new ObservableCollection<Entry>();
 
+            // Get all entities from database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -50,19 +56,19 @@ namespace KK.Models.Repositories
                     {
                         while (reader.Read())
                         {
-                            entries.Add(MapDataToEntry(reader));
+                            Entries.Add(MapDataToEntry(reader));
                         }
                     }
                 }
             }
-
-            return entries;
+            return Entries;
         }
 
         public Entry GetById(int id)
         {
             Entry entry = null;
 
+            // Get entity from database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -86,6 +92,7 @@ namespace KK.Models.Repositories
 
         public void Remove(Entry entity)
         {
+            // Removes entity from databse
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -96,14 +103,16 @@ namespace KK.Models.Repositories
                     command.ExecuteNonQuery();
                 }
             }
+            // Removes entity from Collection
+            if (Entries.Contains(entity)) { Entries.Remove(entity); }
         }
 
         public void Update(Entry entity)
         {
+            // Updates database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-
                 using (SqlCommand command = new SqlCommand("UPDATE kk_ENTRY SET CheckInTime = @CheckInTime, Price = @Price, CustomerId = @CustomerId WHERE Id = @Id", connection))
                 {
                     command.Parameters.AddWithValue("@Id", entity.Id);
@@ -112,6 +121,20 @@ namespace KK.Models.Repositories
                     command.Parameters.AddWithValue("@CustomerId", entity.CustomerId);
 
                     command.ExecuteNonQuery();
+                }
+            }
+            // Adds entity To Collection or Updates it
+            if (!Entries.Contains(entity))
+            {
+                Entries.Add(entity);
+            }
+            else
+            {
+                var existingEntity = Entries.FirstOrDefault(e => e.Id == entity.Id);
+                if (existingEntity != null)
+                {
+                    int index = Entries.IndexOf(existingEntity);
+                    Entries[index] = entity;
                 }
             }
         }

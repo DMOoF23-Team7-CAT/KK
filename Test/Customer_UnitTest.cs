@@ -5,6 +5,7 @@ using KK.Models.Entities;
 using KK.Models.Repositories;
 using KK.Models.Interfaces;
 using KK.Models.Entities.Enum;
+using System.Collections.ObjectModel;
 
 namespace Test
 {
@@ -158,6 +159,10 @@ namespace Test
         {
             // Arrange
             ICustomerRepository customerRepository = new CustomerRepository();
+            IMembershipRepository membershipRepository = new MembershipRepository();
+            IEntryRepository entryRepository = new EntryRepository();
+            IServiceItemRepository serviceItemRepository = new ServiceItemRepository();
+
             Customer newCustomer = new Customer
             {
                 Name = "John Doe",
@@ -167,9 +172,34 @@ namespace Test
                 Qualification = Qualification.TopRope,
                 HasSignedDisclaimer = true
             };
+            customerRepository.Add(newCustomer); // add customer to repository have to do it to get the id
+
+            Membership membership = new Membership
+            {
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddMonths(1),
+                IsActive = true,
+                Customer = newCustomer,
+                CustomerId = newCustomer.Id
+            };
+            membershipRepository.Add(membership); // add membership to repository
+
+            Entry en = new Entry
+            {
+                Customer = newCustomer,
+                CustomerId = newCustomer.Id,
+                
+            };
+            entryRepository.Add(en); // add entry membership to repository
+
+            ServiceItem item = new ServiceItem 
+            {
+                Name = "month" ,
+                EntryId = en.Id
+            };
+            serviceItemRepository.Add(item); // add item membership to repository
 
             // Act
-            customerRepository.Add(newCustomer);
             Customer retrievedCustomer = customerRepository.GetCustomer(newCustomer.Id);
 
             // Assert
@@ -210,6 +240,9 @@ namespace Test
             }
 
             customerRepository.Remove(newCustomer);
+            membershipRepository.Remove(membership);
+            entryRepository.Remove(en);
+            serviceItemRepository.Remove(item);
         }
 
         

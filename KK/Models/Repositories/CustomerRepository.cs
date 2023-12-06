@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using KK.Models.Entities;
 using KK.Models.Entities.Enum;
 using KK.Models.Interfaces;
@@ -12,6 +14,7 @@ namespace KK.Models.Repositories
     public class CustomerRepository : ICustomerRepository
     {
         private readonly string _connectionString;
+        public ObservableCollection<Customer> Customers { get; set; }
 
         public CustomerRepository()
         {
@@ -22,6 +25,7 @@ namespace KK.Models.Repositories
         // CRUD Methods
         public void Add(Customer entity)
         {
+            // Adds entity to Database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -39,12 +43,15 @@ namespace KK.Models.Repositories
                     entity.Id = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            // Adds Entity to Collection
+            if (!Customers.Contains(entity)) { Customers.Add(entity); }
         }
 
         public IEnumerable<Customer> GetAll()
         {
-            List<Customer> customers = new List<Customer>();
+            Customers = new ObservableCollection<Customer>();
 
+            // Retreives all entities from database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -55,13 +62,13 @@ namespace KK.Models.Repositories
                     {
                         while (reader.Read())
                         {
-                            customers.Add(MapCustomer(reader));
+                            Customers.Add(MapCustomer(reader));
                         }
                     }
                 }
             }
 
-            return customers;
+            return Customers;
         }
 
         public Customer GetById(int id)
@@ -91,6 +98,7 @@ namespace KK.Models.Repositories
 
         public void Remove(Customer entity)
         {
+            // Removes entity from Database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -101,10 +109,13 @@ namespace KK.Models.Repositories
                     command.ExecuteNonQuery();
                 }
             }
+            // Removes entity from Collection
+            if (Customers.Contains(entity)) { Customers.Remove(entity); }
         }
 
         public void Update(Customer entity)
         {
+            // Updates Databse
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -120,6 +131,20 @@ namespace KK.Models.Repositories
                     command.Parameters.AddWithValue("@HasSignedDisclaimer", entity.HasSignedDisclaimer);
 
                     command.ExecuteNonQuery();
+                }
+            }
+            // Adds entity To Collection or Updates it
+            if (!Customers.Contains(entity))
+            {
+                Customers.Add(entity);
+            }
+            else
+            {
+                var existingEntity = Customers.FirstOrDefault(e => e.Id == entity.Id);
+                if (existingEntity != null)
+                {
+                    int index = Customers.IndexOf(existingEntity);
+                    Customers[index] = entity;
                 }
             }
         }
@@ -176,7 +201,7 @@ namespace KK.Models.Repositories
                 Phone = reader["Phone"] as string,
                 Email = reader["Email"] as string,
                 HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"]),
-                Qualification = (Qualification)Enum.Parse(typeof(Qualification), reader["Qualifications"].ToString()),
+                Qualification = (Qualification)Convert.ToInt32(reader["Qualification"]),
                 Membership = MapDataToMembership(reader),
                 Entries = MapDataToEntries(reader)
             };
