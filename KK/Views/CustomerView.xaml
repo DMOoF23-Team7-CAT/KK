@@ -58,7 +58,7 @@
                             HorizontalAlignment="Right"
                             Style="{StaticResource tk_CustomerDetailsTextBlocks}"
                             Text="Navn . . ."
-                            Visibility="{Binding ElementName=tb_TxtName, Path=Text,  Converter={StaticResource TextToVisibilityConverter}}" />
+                            Visibility="{Binding ElementName=tb_TxtName, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
                         <TextBox
                             x:Name="tb_TxtName"
                             Foreground="Black"
@@ -90,7 +90,7 @@
                         <TextBlock
                             Style="{StaticResource tk_CustomerDetailsTextBlocks}"
                             Text="+45 12 34 56 78"
-                            Visibility="{Binding ElementName=tb_TxtPhone, Path=Text,  Converter={StaticResource TextToVisibilityConverter}}" />
+                            Visibility="{Binding ElementName=tb_TxtPhone, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
                         <TextBox
                             x:Name="tb_TxtPhone"
                             Foreground="Black"
@@ -106,7 +106,7 @@
                         <TextBlock
                             Style="{StaticResource tk_CustomerDetailsTextBlocks}"
                             Text="mail@mail.com"
-                            Visibility="{Binding ElementName=tb_TxtMail, Path=Text,  Converter={StaticResource TextToVisibilityConverter}}" />
+                            Visibility="{Binding ElementName=tb_TxtMail, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
                         <TextBox
                             x:Name="tb_TxtMail"
                             Foreground="Black"
@@ -310,7 +310,7 @@
                             Foreground="#b0b9c6"
                             IsHitTestVisible="False"
                             Text="dd/mm/åååå"
-                            Visibility="{Binding ElementName=tb_TxtStartDate, Path=Text,  Converter={StaticResource TextToVisibilityConverter}}" />
+                            Visibility="{Binding ElementName=tb_TxtStartDate, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
                         <TextBox x:Name="tb_TxtStartDate" Style="{StaticResource tb_TextBoxInput}" />
                     </Grid>
                 </Grid>

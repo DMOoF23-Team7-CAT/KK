@@ -71,7 +71,7 @@
                         <DataGridTextColumn Binding="{Binding MembershipEndDate, StringFormat=dd/MM/yyyy}" Header="Slut Dato" />
                         <DataGridTextColumn Binding="{Binding MembershipType}" Header="Medlemskab" />
                     </DataGrid.Columns>
-
+                    
                 </DataGrid>
 
             </StackPanel>
