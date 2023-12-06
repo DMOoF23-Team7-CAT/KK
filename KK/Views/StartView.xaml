@@ -4,9 +4,77 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KK.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:ViewModel="clr-namespace:KK.ViewModels"
+             d:DesignHeight="704"
+ d:DesignWidth="1346"
+ mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <ViewModel:StartViewModel />
+    </UserControl.DataContext>
+
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}" />
+
+        <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}" />
+
+        <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
+
+            <StackPanel
+             x:Name="sp_CheckIn"
+             Grid.Column="2"
+             Margin="0,20">
+
+                <Button
+                 x:Name="bt_CheckIn"
+                 Width="250"
+                 Height="40"
+                 Content="Checkind" />
+
+                <TextBox
+                 x:Name="tb_CheckIn"
+                 Width="400"
+                 Height="30"
+                 Margin="20"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 TextChanged="TextBox_TextChanged" />
+
+                <DataGrid
+                 x:Name="dg_CheckIn"
+                 Width="422"
+                 Height="550"
+                 AutoGenerateColumns="False"
+                 Background="Transparent"
+                 HorizontalScrollBarVisibility="Hidden"
+                 IsTextSearchEnabled="True"
+                 ItemsSource="{Binding Memberships}"
+                 VerticalScrollBarVisibility="Auto">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                         Width="30"
+                         Binding="{Binding CustomerId}"
+                         Header="Id" />
+                        <DataGridTextColumn
+                         Width="100"
+                         Binding="{Binding CustomerName}"
+                         Header="Navn" />
+                        <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" Header="Fødselsdag" />
+                        <DataGridTextColumn Binding="{Binding MembershipStartDate, StringFormat=dd/MM/yyyy}" Header="Start Dato" />
+                        <DataGridTextColumn Binding="{Binding MembershipEndDate, StringFormat=dd/MM/yyyy}" Header="Slut Dato" />
+                        <DataGridTextColumn Binding="{Binding MembershipType}" Header="Medlemskab" />
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

@@ -6,94 +6,119 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:KK.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
-    Width="800"
-    Height="450"
+    Title="Klatrongen"
+    MinWidth="1366"
+    MinHeight="784"
+    d:DesignHeight="784"
+    d:DesignWidth="1366"
+    AllowsTransparency="True"
+    Background="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
 
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="0"
+            CornerRadius="0"
+            GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>
+    <!--  Height and Width is set to the standard sizes for a browser window  -->
 
-    <Grid>
-        <TextBox
-            x:Name="tb_Search"
-            Width="120"
-            Margin="90,71,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
-        <Button
-            x:Name="SearchButton"
-            Width="65"
-            Height="25"
-            Margin="215,71,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="SearchButton_Click"
-            Content="Search" />
+    <Window.DataContext>
+        <ViewModel:MainViewModel />
+    </Window.DataContext>
 
-        <ListView
-            Width="295"
-            Height="266"
-            Margin="365,140,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            ItemsSource="{Binding Customers}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                    <GridViewColumn DisplayMemberBinding="{Binding DateOfBirth}" Header="DateOfBirth" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email" />
-                    <GridViewColumn DisplayMemberBinding="{Binding HasSignedDisclaimer}" Header="disclaimer" />
-                    <!--  Add other columns as needed  -->
-                </GridView>
-            </ListView.View>
-        </ListView>
 
-        <Button
-            x:Name="CreateButton"
-            Width="65"
-            Height="25"
-            Margin="685,156,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="CreateButton_Click"
-            Content="Create" />
-        <Button
-            x:Name="UpdateButton"
-            Width="65"
-            Height="25"
-            Margin="685,214,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="UpdateButton_Click"
-            Content="Update" />
-        <Button
-            x:Name="DeleteButton"
-            Width="65"
-            Height="24"
-            Margin="685,269,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="DeleteButton_Click"
-            Content="Delete" />
-        <ListView
-            Width="295"
-            Height="266"
-            Margin="30,140,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            ItemsSource="{Binding SelectedCustomer}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                    <GridViewColumn DisplayMemberBinding="{Binding DateOfBirth}" Header="DateOfBirth" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email" />
-                    <GridViewColumn DisplayMemberBinding="{Binding HasSignedDisclaimer}" Header="disclaimer" />
-                    <!--  Add other columns as needed  -->
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+
+    <Border
+        Background="#272537"
+        CornerRadius="10"
+        MouseDown="Border_MouseDown"
+        MouseLeftButtonDown="Border_DoubleMouseLeftButtonClick">
+
+        <Grid x:Name="gr_Main">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="60" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <!--#region Controlbar-->
+
+            <Border BorderBrush="#22202f" BorderThickness="0,0,0,1" />
+            <StackPanel>
+                <TextBlock
+                    Margin="20,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="Gray"
+                    Text="KlatreKongen" />
+            </StackPanel>
+            <StackPanel
+                Grid.Row="0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    Click="btn_Minimize_Click"
+                    Content="⨀"
+                    Style="{StaticResource bt_ControlbarButton}" />
+                <Button
+                    Click="btn_Maximize_Click"
+                    Content="⨁"
+                    Style="{StaticResource bt_ControlbarButton}" />
+                <Button
+                    Click="btn_Close_Click"
+                    Content="⨂"
+                    Style="{StaticResource bt_ControlbarButton}" />
+            </StackPanel>
+            <!--#endregion-->
+
+
+            <Grid x:Name="gr_Controlbar" Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <RadioButton
+                    Grid.Column="0"
+                    Height="50"
+                    Command="{Binding StartViewCommand}"
+                    Content="Startside"
+                    FontSize="15"
+                    Foreground="White"
+                    IsChecked="True"
+                    Style="{StaticResource MenuButtonTheme}" />
+
+                <RadioButton
+                    Grid.Column="1"
+                    Height="50"
+                    Command="{Binding CustomerViewCommand}"
+                    Content="Ny Kunde"
+                    FontSize="15"
+                    Foreground="White"
+                    Style="{StaticResource MenuButtonTheme}" />
+
+                <RadioButton
+                    Grid.Column="2"
+                    Height="50"
+                    Command="{Binding OverviewViewCommand}"
+                    Content="Oversigt"
+                    FontSize="15"
+                    Foreground="White"
+                    Style="{StaticResource MenuButtonTheme}" />
+
+            </Grid>
+
+            <ContentControl
+                Grid.Row="2"
+                Margin="10"
+                Content="{Binding CurrentView}" />
+
+        </Grid>
+    </Border>
 </Window>
