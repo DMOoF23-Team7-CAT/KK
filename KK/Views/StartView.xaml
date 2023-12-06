@@ -64,11 +64,11 @@
                          Header="Id" />
                         <DataGridTextColumn
                          Width="100"
-                         Binding="{Binding CustomerName}"
+                         Binding="{Binding Customer.Name}"
                          Header="Navn" />
-                        <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}" Header="Fødselsdag" />
-                        <DataGridTextColumn Binding="{Binding MembershipStartDate, StringFormat=dd/MM/yyyy}" Header="Start Dato" />
-                        <DataGridTextColumn Binding="{Binding MembershipEndDate, StringFormat=dd/MM/yyyy}" Header="Slut Dato" />
+                        <DataGridTextColumn Binding="{Binding Customer.DateOfBirth, StringFormat=dd/MM/yyyy}" Header="Fødselsdag" />
+                        <DataGridTextColumn Binding="{Binding StartDate, StringFormat=dd/MM/yyyy}" Header="Start Dato" />
+                        <DataGridTextColumn Binding="{Binding EndDate, StringFormat=dd/MM/yyyy}" Header="Slut Dato" />
                         <DataGridTextColumn Binding="{Binding MembershipType}" Header="Medlemskab" />
                     </DataGrid.Columns>
                     

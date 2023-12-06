@@ -51,8 +51,8 @@ namespace KK.ViewModels
         {
             _membershipRepo = new MembershipRepository();
             _customerRepo = new CustomerRepository();
-
-            Memberships = (ObservableCollection<Membership>)_membershipRepo.GetAllWithCustomers();
+            _membershipRepo.GetAllWithCustomers();
+            Memberships = _membershipRepo.Memberships;
         }
 
         public void GetCustomerDetails(int id)
