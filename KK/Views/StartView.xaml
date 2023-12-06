@@ -54,7 +54,7 @@
                  Background="Transparent"
                  HorizontalScrollBarVisibility="Hidden"
                  IsTextSearchEnabled="True"
-                 ItemsSource="{Binding CustomerMembershipTable}"
+                 ItemsSource="{Binding Memberships}"
                  VerticalScrollBarVisibility="Auto">
 
                     <DataGrid.Columns>

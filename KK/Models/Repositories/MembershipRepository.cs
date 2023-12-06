@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using KK.Models.Entities;
+using KK.Models.Entities.Enum;
 using KK.Models.Interfaces;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +14,7 @@ namespace KK.Models.Repositories
     public class MembershipRepository : IMembershipRepository
     {
         private readonly string _connectionString;
+        public ObservableCollection<Membership> Memberships { get; set; }
 
         public MembershipRepository()
         {
@@ -20,6 +24,7 @@ namespace KK.Models.Repositories
 
         public void Add(Membership entity)
         {
+            // Adds the entity to the Database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -35,11 +40,13 @@ namespace KK.Models.Repositories
                     entity.Id = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            // Adds the entity to the ObservableCollection
+            if (!Memberships.Contains(entity)) { Memberships.Add(entity); };
         }
 
         public IEnumerable<Membership> GetAll()
         {
-            List<Membership> memberships = new List<Membership>();
+            Memberships = new ObservableCollection<Membership>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -51,13 +58,13 @@ namespace KK.Models.Repositories
                     {
                         while (reader.Read())
                         {
-                            memberships.Add(MapDataToMembership(reader));
+                            Memberships.Add(MapDataToMembership(reader));
                         }
                     }
                 }
             }
 
-            return memberships;
+            return Memberships;
         }
 
         public Membership GetById(int id)
@@ -87,6 +94,7 @@ namespace KK.Models.Repositories
 
         public void Remove(Membership entity)
         {
+            // Removes entity from Database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -97,10 +105,13 @@ namespace KK.Models.Repositories
                     command.ExecuteNonQuery();
                 }
             }
+            // Removes entity from Collection
+            if (Memberships.Contains(entity)) { Memberships.Remove(entity); };
         }
 
         public void Update(Membership entity)
         {
+            // Updates Database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -116,7 +127,47 @@ namespace KK.Models.Repositories
                     command.ExecuteNonQuery();
                 }
             }
+            // Adds entity To Collection or Updates it
+            if (!Memberships.Contains(entity))
+            {
+                Memberships.Add(entity);
+            }
+            else
+            {
+                var existingEntity = Memberships.FirstOrDefault(e => e.Id == entity.Id);
+                if (existingEntity != null)
+                {
+                    int index = Memberships.IndexOf(existingEntity);
+                    Memberships[index] = entity;
+                }
+            }
         }
+
+        public IEnumerable<Membership> GetAllWithCustomers()
+        {
+            Memberships = new ObservableCollection<Membership>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("kk_spGetMembershipsWithCustomerDetails", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Memberships.Add(MapDataToMembershipWithCustomer(reader));
+                        }
+                    }
+                }
+            }
+            
+            return Memberships;
+        }
+
 
         private static Membership MapDataToMembership(SqlDataReader reader)
         {
@@ -130,6 +181,30 @@ namespace KK.Models.Repositories
                 Customer = null // Set Customer property if needed
                 // Add other mapping as needed
             };
+        }
+
+        private static Membership MapDataToMembershipWithCustomer(SqlDataReader reader)
+        {
+            Membership membership = new Membership
+            {
+                Id = Convert.ToInt32(reader["MembershipId"]),
+                StartDate = Convert.ToDateTime(reader["MembershipStartDate"]),
+                EndDate = Convert.ToDateTime(reader["MembershipEndDate"]),
+                IsActive = Convert.ToBoolean(reader["IsActive"]),
+                CustomerId = Convert.ToInt32(reader["CustomerId"]),
+                Customer = new Customer
+                {
+                    Id = Convert.ToInt32(reader["CustomerId"]),
+                    Name = Convert.ToString(reader["CustomerName"]),
+                    DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
+                    Phone = Convert.ToString(reader["Phone"]),
+                    Email = Convert.ToString(reader["Email"]),
+                    Qualification = (Qualification)Convert.ToInt32(reader["Qualification"]),
+                    HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"]),
+                }
+            };
+
+            return membership;
         }
     }
 }
