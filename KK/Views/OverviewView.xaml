@@ -6,77 +6,106 @@
              xmlns:local="clr-namespace:KK.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="CustomersView" Source="{Binding Customers}" />
+    </UserControl.Resources>
+    
     <Grid>
-
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Margin="10" Background="LightGray" CornerRadius="20">
+        
             <Grid>
-                <StackPanel>
-                    <ListView x:Name="lv_Overview" ItemsSource="{Binding Customers}">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+            <Border Grid.Row="0" Margin="10" CornerRadius="10"                       
+            BorderThickness="1"
+            Opacity="0.9" Style="{StaticResource BorderGradientStyle}"/>
+                
+                <!--Search Box-->
+                
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,0,0,0"  >
+                <Rectangle StrokeThickness="1"/>
+                <TextBlock x:Name="tl_Search" Text="Søg" VerticalAlignment="Center"  FontSize="15" Foreground="White" Margin="0,0,10,0">
+                </TextBlock>
+                <TextBox Margin="0,0,10,0" BorderThickness="1" FontSize="15" Background="Transparent" Padding="5" Width="200" HorizontalAlignment="Right" Height="30" Foreground="White" Text="" x:Name="tb_SearchBox" TextChanged="tb_SearchBox_TextChanged"    >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </StackPanel>
 
-                    </ListView>
-
-                </StackPanel>
-            </Grid>            
-        </Border>
+            <StackPanel Grid.Row="1">
+                <Border Grid.Column="0" Margin="10" Style="{StaticResource BorderGradientStyle}" CornerRadius="20">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <DataGrid 
+                        x:Name="dg_Overview" Height="570" HorizontalAlignment="center" ItemsSource="{Binding Source={StaticResource CustomersView}}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectionChanged="dg_Overview_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id}" Width="30" Header="Id" />
+                                <DataGridTextColumn Binding="{Binding Name}" Width="100" Header="Navn" />
+                                <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat=d}" Header="Fødselsdag" />
+                                <DataGridTextColumn Binding="{Binding Phone}" Header="Telefon" />
+                                <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
+                                <DataGridTextColumn Binding="{Binding Qualification}" Header="Kvalifikationer" Width="110" />
+                                <DataGridCheckBoxColumn Binding="{Binding HasSignedDisclaimer}" Header="Fraskrivningserklæring" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>                       
+                    </Border>
+            </StackPanel>
+            </Grid>         
+       
         <Border Grid.Column="1" Margin="10" CornerRadius="10"                       
             BorderThickness="1"
-            Opacity="0.9">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#426AD8" Offset="0"/>
-                    <GradientStop Color="#DA34AE" Offset="0.75"/>
-                    <GradientStop Color="#8A16C1" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="#060531" Offset="0"/>
-                    <GradientStop Color="#1B1448" Offset="0.75"/>
-                </LinearGradientBrush>
-            </Border.Background>
+            Opacity="0.9" Style="{StaticResource BorderGradientStyle}">            
             <Grid>
-                <Grid.RowDefinitions>
+                <Grid.RowDefinitions>                                       
                     <RowDefinition/>                    
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
 
-                <!-- Grid Row 0 -->
+                
+                <!-- Grid Column 1 includes fields for Kundeoplysninger-->
 
                 <StackPanel Grid.Row="0" >
                     <DockPanel>
-                        <TextBlock Text="Kundeoplysninger" FontSize="15" Foreground="White" FontWeight="Bold" Margin="0,20,0,20" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Kundeoplysninger" FontSize="15" Foreground="White" FontWeight="Bold" Margin="0,30,0,20" HorizontalAlignment="Center"/>
                     </DockPanel>
                     <DockPanel Margin="20,0,0,3">
                         <TextBlock Text="Navn" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <TextBox x:Name="tb_Name" BorderThickness="0,0,0,1" Width="120" Margin="0,0,30,0" Foreground="White" HorizontalAlignment="Right" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBox x:Name="tb_Name" BorderThickness="0,0,0,1" Width="120" Margin="0,0,30,0" Foreground="White" HorizontalAlignment="Right" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Text="{Binding SelectedCustomer.Name, Mode=TwoWay}"  Background="Transparent"/>
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
                         <TextBlock Text="Fødselsdato" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <TextBox x:Name="tb_DOB" Width="120" Margin="0,0,30,0" HorizontalAlignment="Right" Foreground="White"  BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBox x:Name="tb_DOB" Width="120" Margin="0,0,30,0" HorizontalAlignment="Right" Foreground="White" Text="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=dd/mm/yyyy}" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
                         <TextBlock Text="Telefonnummer" DockPanel.Dock="Left" Foreground="White" FontSize="12" FontWeight="DemiBold" />
-                        <TextBox x:Name="tb_Phone" Width="120" Foreground="White" Margin="0,0,30,0" HorizontalAlignment="Right" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBox x:Name="tb_Phone" Width="120" Foreground="White" Margin="0,0,30,0" HorizontalAlignment="Right" Text="{Binding SelectedCustomer.Phone, Mode=TwoWay}" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
                         <TextBlock Text="Email" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <TextBox x:Name="tb_Email" Width="120" Margin="0,0,30,0" Foreground="White" HorizontalAlignment="Right" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBox x:Name="tb_Email" Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" Width="120" Margin="0,0,30,0" Foreground="White" HorizontalAlignment="Right" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
                         <TextBlock Text="Kvalifikationer" Foreground="White" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold"/>
-                        <TextBox x:Name="tb_Qualifications" Width="120" Foreground="White" Margin="0,0,30,0" HorizontalAlignment="Right" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBox x:Name="tb_Qualification" Width="120" Text="{Binding SelectedCustomer.Qualification, Mode=TwoWay}" Foreground="White" Margin="0,0,30,0" HorizontalAlignment="Right" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
                         <TextBlock Text="Fraskrivningserklæring signeret?" Foreground="White" DockPanel.Dock="Left" FontSize="10" FontWeight="DemiBold"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,25,0">
                             <TextBlock Text="Ja" Margin="0,0,5,0" FontSize="10" Foreground="White"/>
-                            <RadioButton x:Name="rb_Signed" Margin="0,0,5,0" IsChecked="True"/>
+                            <RadioButton x:Name="rb_Signed" Margin="0,0,5,0" IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Mode=TwoWay}"/>
                             <TextBlock Text="Nej" Margin="0,0,5,0" FontSize="10" Foreground="White" />
-                            <RadioButton  Margin="0,0,5,0" IsChecked="False"/>
+                            <RadioButton  Margin="0,0,5,0"  IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Mode=TwoWay}"/>
                         </StackPanel>
                     </DockPanel>
                 </StackPanel>
@@ -85,7 +114,7 @@
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Height="50">
                     <Button x:Name="bt_Update" BorderThickness="0" Content="Opdater" Foreground="White"
-                            FontSize="12" FontFamily="Montserrat" FontWeight="Bold" Cursor="Hand" Margin="0,0,10,0" >
+                            FontSize="12" FontFamily="Montserrat" FontWeight="Bold" Cursor="Hand" Margin="0,0,10,0" Click="bt_Update_Click" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#462AD8" />
@@ -105,7 +134,7 @@
                         </Button.Template>
                     </Button>
                     <Button x:Name="bt_Delete" BorderThickness="0" Content="Slet" Foreground="White"
-                            FontSize="12" FontFamily="Montserrat" FontWeight="Bold" Cursor="Hand" Margin="0,0,0,0" >
+                            FontSize="12" FontFamily="Montserrat" FontWeight="Bold" Cursor="Hand" Margin="0,0,0,0" Click="bt_Delete_Click" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#ffcd5c5c" />
@@ -125,10 +154,7 @@
                         </Button.Template>
                     </Button>
                 </StackPanel>
-
             </Grid>
-
         </Border>
-
     </Grid>
 </UserControl>

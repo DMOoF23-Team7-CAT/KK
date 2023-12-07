@@ -13,7 +13,8 @@ namespace KK.ViewModels
     public class OverviewViewModel : ObservableObject
     {
         private readonly CustomerRepository _customerRepo;
-        private ObservableCollection<Customer> _customers;
+        internal Customer customer = new Customer();
+        private ObservableCollection<Customer> _customers;        
         private Customer _selectedCustomer;
 
         public Customer SelectedCustomer
@@ -44,10 +45,21 @@ namespace KK.ViewModels
             Customers = new ObservableCollection<Customer>(_customerRepo.GetAll());
         }
 
-        public void GetCustomer(int id)
+        public void UpdateCustomer()
         {
-            SelectedCustomer = _customerRepo.GetCustomer(id);
-
+            _customerRepo.Update(SelectedCustomer);
         }
+
+        public void DeleteCustomer()
+        {
+            _customerRepo.Remove(SelectedCustomer);            
+            Customers = new ObservableCollection<Customer>(_customerRepo.GetAll());
+        }
+
+        //public void Getcustomers()
+        //{
+        //    _customerRepo.GetAll();
+
+        //}
     }
 }
