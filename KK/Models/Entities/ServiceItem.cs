@@ -23,6 +23,8 @@ namespace KK.Models.Entities
         // Foreign Key
         public int EntryId { get; set; }
 
+
+
         // Method to set Price in accordance with the corresponding name
         private static decimal GetItemPrice(string name)
         {

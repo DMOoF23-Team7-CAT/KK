@@ -14,7 +14,7 @@ namespace KK.Models.Repositories
     public class MembershipRepository : IMembershipRepository
     {
         private readonly string _connectionString;
-        public ObservableCollection<Membership> Memberships { get; set; }
+        public ObservableCollection<Membership> Memberships = new ObservableCollection<Membership>();
 
         public MembershipRepository()
         {
