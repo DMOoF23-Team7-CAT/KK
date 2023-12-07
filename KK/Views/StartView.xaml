@@ -23,7 +23,13 @@
 
         <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}" />
 
-        <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}" />
+        <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
+            <TextBox
+                x:Name="tb_SelectedCustomerName"
+                Width="200"
+                Height="30"
+                Text="{Binding SelectedMembership.Id, Mode=TwoWay}" />
+        </Border>
 
         <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
 
@@ -36,6 +42,7 @@
                     x:Name="bt_CheckIn"
                     Width="250"
                     Height="40"
+                    Click="bt_CheckIn_Click"
                     Content="Checkind" />
 
                 <TextBox
@@ -49,21 +56,24 @@
 
                 <DataGrid
                     x:Name="dg_CheckIn"
-                    Height="535"
                     Width="380"
-                    BorderThickness="0"
+                    Height="535"
+                    AlternatingRowBackground="LightGray"
                     AutoGenerateColumns="False"
                     Background="Transparent"
-                    HorizontalScrollBarVisibility="Hidden"
-                    IsTextSearchEnabled="True"
-                    ItemsSource="{Binding Memberships}"
-                    VerticalScrollBarVisibility="Auto"
+                    BorderThickness="0"
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
                     CanUserSortColumns="True"
-                    RowHeaderWidth="0"
                     GridLinesVisibility="None"
-                    AlternatingRowBackground="LightGray">
+                    HorizontalScrollBarVisibility="Hidden"
+                    IsTextSearchEnabled="True"
+                    ItemsSource="{Binding Memberships, Mode=TwoWay}"
+                    RowHeaderWidth="0"
+                    SelectionChanged="dg_CheckIn_SelectionChanged"
+                    VerticalScrollBarVisibility="Auto"
+                    IsReadOnly="True"
+                    >
 
                     <DataGrid.Columns>
                         <DataGridTextColumn

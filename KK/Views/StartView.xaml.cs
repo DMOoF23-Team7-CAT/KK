@@ -53,7 +53,18 @@ namespace KK.Views
             }
         }
 
+        private void dg_CheckIn_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dg_CheckIn.SelectedItem != null)
+            {
+                startVM.SelectedMembership = (Membership)dg_CheckIn.SelectedItem;
+            }
+        }
 
+        private void bt_CheckIn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
