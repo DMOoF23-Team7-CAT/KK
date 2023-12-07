@@ -1,13 +1,14 @@
-﻿<UserControl x:Class="KK.Views.StartView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KK.Views"
-             xmlns:ViewModel="clr-namespace:KK.ViewModels"
-             d:DesignHeight="704"
- d:DesignWidth="1346"
- mc:Ignorable="d">
+﻿<UserControl
+    x:Class="KK.Views.StartView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModel="clr-namespace:KK.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:KK.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="704"
+    d:DesignWidth="1346"
+    mc:Ignorable="d">
 
     <UserControl.DataContext>
         <ViewModel:StartViewModel />
@@ -27,51 +28,66 @@
         <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
 
             <StackPanel
-             x:Name="sp_CheckIn"
-             Grid.Column="2"
-             Margin="0,20">
+                x:Name="sp_CheckIn"
+                Grid.Column="2"
+                Margin="0,20">
 
                 <Button
-                 x:Name="bt_CheckIn"
-                 Width="250"
-                 Height="40"
-                 Content="Checkind" />
+                    x:Name="bt_CheckIn"
+                    Width="250"
+                    Height="40"
+                    Content="Checkind" />
 
                 <TextBox
-                 x:Name="tb_CheckIn"
-                 Width="400"
-                 Height="30"
-                 Margin="20"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 TextChanged="TextBox_TextChanged" />
+                    x:Name="tb_CheckIn"
+                    Width="380"
+                    Height="30"
+                    Margin="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    TextChanged="TextBox_TextChanged" />
 
                 <DataGrid
-                 x:Name="dg_CheckIn"
-                 Width="422"
-                 Height="550"
-                 AutoGenerateColumns="False"
-                 Background="Transparent"
-                 HorizontalScrollBarVisibility="Hidden"
-                 IsTextSearchEnabled="True"
-                 ItemsSource="{Binding Memberships}"
-                 VerticalScrollBarVisibility="Auto">
+                    x:Name="dg_CheckIn"
+                    Height="535"
+                    Width="380"
+                    BorderThickness="0"
+                    AutoGenerateColumns="False"
+                    Background="Transparent"
+                    HorizontalScrollBarVisibility="Hidden"
+                    IsTextSearchEnabled="True"
+                    ItemsSource="{Binding Memberships}"
+                    VerticalScrollBarVisibility="Auto"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserSortColumns="True"
+                    RowHeaderWidth="0"
+                    GridLinesVisibility="None"
+                    AlternatingRowBackground="LightGray">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                         Width="30"
-                         Binding="{Binding CustomerId}"
-                         Header="Id" />
+                            Width="35"
+                            Binding="{Binding CustomerId}"
+                            Header="Id" />
                         <DataGridTextColumn
-                         Width="100"
-                         Binding="{Binding Customer.Name}"
-                         Header="Navn" />
-                        <DataGridTextColumn Binding="{Binding Customer.DateOfBirth, StringFormat=dd/MM/yyyy}" Header="Fødselsdag" />
-                        <DataGridTextColumn Binding="{Binding StartDate, StringFormat=dd/MM/yyyy}" Header="Start Dato" />
-                        <DataGridTextColumn Binding="{Binding EndDate, StringFormat=dd/MM/yyyy}" Header="Slut Dato" />
-                        <DataGridTextColumn Binding="{Binding MembershipType}" Header="Medlemskab" />
+                            Width="100"
+                            Binding="{Binding Customer.Name}"
+                            Header="Navn" />
+                        <DataGridTextColumn
+                            Width="83"
+                            Binding="{Binding Customer.DateOfBirth, StringFormat=dd/MM/yyyy}"
+                            Header="Fødselsdag" />
+                        <DataGridTextColumn
+                            Width="83"
+                            Binding="{Binding StartDate, StringFormat=dd/MM/yyyy}"
+                            Header="Start Dato" />
+                        <DataGridTextColumn
+                            Width="83"
+                            Binding="{Binding EndDate, StringFormat=dd/MM/yyyy}"
+                            Header="Slut Dato" />
                     </DataGrid.Columns>
-                    
+
                 </DataGrid>
 
             </StackPanel>
