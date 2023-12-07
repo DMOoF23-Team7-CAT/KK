@@ -13,7 +13,7 @@ namespace KK.Models.Repositories
     public class EntryRepository : IEntryRepository
     {
         private readonly string _connectionString;
-        public ObservableCollection<Entry> Entries { get; set; }
+        public ObservableCollection<Entry> Entries = new ObservableCollection<Entry>();
         public EntryRepository()
         {
             IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();

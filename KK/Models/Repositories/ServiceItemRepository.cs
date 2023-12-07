@@ -13,7 +13,7 @@ namespace KK.Models.Repositories
     public class ServiceItemRepository : IServiceItemRepository
     {
         private readonly string _connectionString;
-        public ObservableCollection<ServiceItem> ServiceItems { get; set; }
+        public ObservableCollection<ServiceItem> ServiceItems = new ObservableCollection<ServiceItem>();
         public ServiceItemRepository()
         {
             IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();

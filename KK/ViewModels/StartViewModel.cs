@@ -60,5 +60,6 @@ namespace KK.ViewModels
             SelectedCustomer = _customerRepo.GetCustomer(id);
         }
 
+
     }
 }

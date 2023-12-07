@@ -4,13 +4,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KK.Models.Entities;
 using KK.Models.Repositories;
 using KK.Models.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace Test
 {
     [TestClass]
     public class EntryRepository_UnitTest
     {
-        CustomerRepository customerRepo = new CustomerRepository();
+        ObservableCollection<Customer> Customers = new ObservableCollection<Customer>();
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            CustomerRepository customerRepo = new CustomerRepository();
+            customerRepo.GetAll();
+            Customers = customerRepo.Customers;
+        }
 
         [TestMethod]
         public void AddEntry_Test()
@@ -20,9 +29,9 @@ namespace Test
             Entry newEntry = new Entry
             {
                 CheckInTime = DateTime.Now,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newEntry.Customer = customerRepo.GetById(newEntry.CustomerId);
 
             // Act
             entryRepository.Add(newEntry);
@@ -42,9 +51,9 @@ namespace Test
             Entry newEntry = new Entry
             {
                 CheckInTime = DateTime.Now,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newEntry.Customer = customerRepo.GetById(newEntry.CustomerId);
 
             // Act
             entryRepository.Add(newEntry);
@@ -65,9 +74,9 @@ namespace Test
             Entry newEntry = new Entry
             {
                 CheckInTime = DateTime.Now,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newEntry.Customer = customerRepo.GetById(newEntry.CustomerId);
 
             // Act
             entryRepository.Add(newEntry);
@@ -90,9 +99,9 @@ namespace Test
             Entry newEntry = new Entry
             {
                 CheckInTime = DateTime.Now,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newEntry.Customer = customerRepo.GetById(newEntry.CustomerId);
 
             // Act
             entryRepository.Add(newEntry);
@@ -111,16 +120,16 @@ namespace Test
             Entry entry1 = new Entry
             {
                 CheckInTime = DateTime.Now,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            entry1.Customer = customerRepo.GetById(entry1.CustomerId);
 
             Entry entry2 = new Entry
             {
                 CheckInTime = DateTime.Now,
-                CustomerId = 3,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            entry2.Customer = customerRepo.GetById(entry2.CustomerId);
 
             // Act
             entryRepository.Add(entry1);

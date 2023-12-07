@@ -59,6 +59,7 @@ namespace Test
             // Assert
             Assert.IsNotNull(retrievedCustomer);
             Assert.AreEqual(newCustomer.Id, retrievedCustomer.Id);
+            Assert.AreEqual(newCustomer.Qualification, retrievedCustomer.Qualification);
 
             customerRepository.Remove(newCustomer);
         }

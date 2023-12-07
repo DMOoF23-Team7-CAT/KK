@@ -14,7 +14,7 @@ namespace KK.Models.Repositories
     public class CustomerRepository : ICustomerRepository
     {
         private readonly string _connectionString;
-        public ObservableCollection<Customer> Customers { get; set; }
+        public ObservableCollection<Customer> Customers = new ObservableCollection<Customer>();
 
         public CustomerRepository()
         {
@@ -201,13 +201,15 @@ namespace KK.Models.Repositories
                 Phone = reader["Phone"] as string,
                 Email = reader["Email"] as string,
                 HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"]),
-                Qualification = (Qualification)Convert.ToInt32(reader["Qualification"]),
+                Qualification = (Qualification)Convert.ToInt32(reader["Qualifications"]),
                 Membership = MapDataToMembership(reader),
                 Entries = MapDataToEntries(reader)
             };
 
             return customer;
         }
+
+
 
         private static Membership MapDataToMembership(SqlDataReader reader)
         {
