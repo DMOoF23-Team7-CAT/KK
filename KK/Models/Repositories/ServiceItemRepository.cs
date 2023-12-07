@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using KK.Models.Entities;
 using KK.Models.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -11,7 +13,7 @@ namespace KK.Models.Repositories
     public class ServiceItemRepository : IServiceItemRepository
     {
         private readonly string _connectionString;
-
+        public ObservableCollection<ServiceItem> ServiceItems { get; set; }
         public ServiceItemRepository()
         {
             IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
@@ -20,6 +22,7 @@ namespace KK.Models.Repositories
 
         public void Add(ServiceItem entity)
         {
+            // adds entity to database
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -33,11 +36,13 @@ namespace KK.Models.Repositories
                     entity.Id = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            // adds entity to collectiuon
+            if(!ServiceItems.Contains(entity)) { ServiceItems.Add(entity); }
         }
 
         public IEnumerable<ServiceItem> GetAll()
         {
-            List<ServiceItem> serviceItems = new List<ServiceItem>();
+            ServiceItems = new ObservableCollection<ServiceItem>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -49,13 +54,13 @@ namespace KK.Models.Repositories
                     {
                         while (reader.Read())
                         {
-                            serviceItems.Add(MapDataToServiceItem(reader));
+                            ServiceItems.Add(MapDataToServiceItem(reader));
                         }
                     }
                 }
             }
 
-            return serviceItems;
+            return ServiceItems;
         }
 
         public ServiceItem GetById(int id)
@@ -85,6 +90,7 @@ namespace KK.Models.Repositories
 
         public void Remove(ServiceItem entity)
         {
+            // Removes entity from databse
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -95,10 +101,13 @@ namespace KK.Models.Repositories
                     command.ExecuteNonQuery();
                 }
             }
+            // removes entity from Collection
+            if (ServiceItems.Contains(entity)) { ServiceItems.Add(entity); }
         }
 
         public void Update(ServiceItem entity)
         {
+            // updates databse
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -110,6 +119,20 @@ namespace KK.Models.Repositories
                     command.Parameters.AddWithValue("@EntryId", entity.EntryId);
 
                     command.ExecuteNonQuery();
+                }
+            }
+            // Adds entity To Collection or Updates it
+            if (!ServiceItems.Contains(entity))
+            {
+                ServiceItems.Add(entity);
+            }
+            else
+            {
+                var existingEntity = ServiceItems.FirstOrDefault(e => e.Id == entity.Id);
+                if (existingEntity != null)
+                {
+                    int index = ServiceItems.IndexOf(existingEntity);
+                    ServiceItems[index] = entity;
                 }
             }
         }

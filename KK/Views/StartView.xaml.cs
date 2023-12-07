@@ -1,5 +1,8 @@
-﻿using System;
+﻿using KK.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,24 @@ namespace KK.Views
     /// </summary>
     public partial class StartView : UserControl
     {
+        StartViewModel startVM;
         public StartView()
         {
+            startVM = new StartViewModel();
             InitializeComponent();
         }
+
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ICollectionView view = CollectionViewSource.GetDefaultView(dg_CheckIn.ItemsSource);
+
+            if (view is not null && view.SourceCollection is DataView dataView)
+            {
+                dataView.RowFilter = $"CustomerName LIKE '%{tb_CheckIn.Text}%'";
+            }
+        }
+
     }
 }
+

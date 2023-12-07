@@ -41,6 +41,11 @@ bld/
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
+# Test project dynamically changing files
+*.dll
+*.pdb
+*.cache
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*

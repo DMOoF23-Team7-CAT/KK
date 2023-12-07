@@ -25,7 +25,13 @@ namespace KK.Models.Entities
         // Constructor
         public Membership()
         {
-            
+            CheckMembershipStatus();
+        }
+
+        // Method to set the memberships active status
+        private void CheckMembershipStatus()
+        {
+            IsActive = EndDate >= DateTime.Now;
         }
     }
 }

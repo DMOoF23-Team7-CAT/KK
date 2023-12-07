@@ -35,7 +35,7 @@ namespace KK.Models.Entities
                 "DAY" => 120.00m,
                 "TENTIMES" => 1000.00m,
                 "HARNESS" => 25.00m,
-                "CLIMBINGSHOES" => 40.00m,
+                "SHOES" => 40.00m,
                 "ROPE" => 50.00m,
                 _ => throw new ArgumentOutOfRangeException(nameof(name), name, null),
             };
