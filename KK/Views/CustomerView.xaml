@@ -5,18 +5,26 @@
     xmlns:ViewModel="clr-namespace:KK.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:KK.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:themes="clr-namespace:KK.Views.Themes"
     d:DesignHeight="704"
     d:DesignWidth="1346"
     mc:Ignorable="d">
 
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>-->
+
+    <UserControl.Resources>
+        <themes:BooleanToValueConverter x:Key="BooleanToValueConverter" />
+        <themes:CheckBoxTextConverter x:Key="CheckBoxTextConverter"/>
+        <themes:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </UserControl.Resources>
 
     <UserControl.DataContext>
         <ViewModel:CustomerViewModel />
     </UserControl.DataContext>
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -63,7 +71,7 @@
                             x:Name="tb_TxtName"
                             Foreground="Black"
                             Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding InsertCustomer.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            Text="{Binding BoundCustomerName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
 
@@ -79,7 +87,7 @@
                             x:Name="tb_TxtBirthday"
                             Foreground="Black"
                             Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding InsertCustomer.DateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            Text="{Binding BoundCustomerDateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
 
@@ -95,7 +103,7 @@
                             x:Name="tb_TxtPhone"
                             Foreground="Black"
                             Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding InsertCustomer.Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            Text="{Binding BoundCustomerPhone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
 
@@ -111,7 +119,7 @@
                             x:Name="tb_TxtMail"
                             Foreground="Black"
                             Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding InsertCustomer.Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            Text="{Binding BoundCustomerEmail, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
 
@@ -119,7 +127,7 @@
                 <Grid Grid.Row="6" Margin="0,20,0,5">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Fraskrivningserklæring:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox HorizontalAlignment="Center" IsChecked="{Binding InsertCustomer.HasSignedDisclaimer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <CheckBox x:Name="cb_disclaimer" HorizontalAlignment="Center" IsChecked="{Binding BoundCustomerHasSignedDisclaimer, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
 
@@ -142,19 +150,25 @@
                         Text="Kvalifikationer:" />
                 </Grid>
 
-                <!--  Lead Qual  -->
+                <!-- Lead sikret CheckBox -->
                 <Grid Grid.Row="8" Margin="0,20,0,10">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Lead sikret:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox HorizontalAlignment="Center" />
+                        <CheckBox x:Name="cb_lead"
+                  HorizontalAlignment="Center"
+                  IsChecked="{Binding IsLeadSikretChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  IsEnabled="{Binding IsTopRebChecked, Converter={StaticResource InverseBooleanConverter}}"/>
                     </Grid>
                 </Grid>
 
-                <!--  Top Qual  -->
+                <!-- Top-reb CheckBox -->
                 <Grid Grid.Row="9" Margin="0,20,0,50">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Top-reb:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox HorizontalAlignment="Center" />
+                        <CheckBox x:Name="cb_top"
+                  HorizontalAlignment="Center"
+                  IsChecked="{Binding IsTopRebChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  IsEnabled="{Binding IsLeadSikretChecked, Converter={StaticResource InverseBooleanConverter}}"/>
                     </Grid>
                 </Grid>
 
@@ -288,7 +302,9 @@
 
                 </Grid>
                 <!--  Start Date  -->
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2"
+                      Margin="0 0 0 50"
+                      VerticalAlignment="Bottom">
                     <TextBlock
                         Margin="25,0,0,0"
                         HorizontalAlignment="Left"
@@ -311,7 +327,7 @@
                             IsHitTestVisible="False"
                             Text="dd/mm/åååå"
                             Visibility="{Binding ElementName=tb_TxtStartDate, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
-                        <TextBox x:Name="tb_TxtStartDate" Style="{StaticResource tb_TextBoxInput}" />
+                        <TextBox x:Name="tb_TxtStartDate" Style="{StaticResource tb_TextBoxInput}" Foreground="Black" />
                     </Grid>
                 </Grid>
             </Grid>
@@ -329,7 +345,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!--  Page Title  -->
@@ -362,10 +378,10 @@
                                 <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Telefonnummer" />
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Fraskrivningserklæring" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Email" />
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Email" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Fraskrivningserklæring" />
                             </Border>
                             <Border BorderThickness="0,0,0,1">
                                 <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Kvalifikationer" />
@@ -379,22 +395,37 @@
                         BorderThickness="0,1,1,0">
                         <StackPanel>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="{Binding InsertCustomer.Name, Mode=OneWay}" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="{Binding BoundCustomerName, Mode=OneWay}" />
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="{Binding BoundCustomerDateOfBirth, Mode=OneWay}"/>
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="{Binding BoundCustomerPhone, Mode=OneWay}"/>
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="{Binding BoundCustomerEmail, Mode=OneWay}"/>
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}">
+                                    <TextBlock.Text>
+                                        <Binding Path="IsChecked" ElementName="cb_disclaimer">
+                                            <Binding.Converter>
+                                                <themes:BooleanToValueConverter/>
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource CheckBoxTextConverter}">
+                                            <Binding Path="IsChecked" ElementName="cb_lead"/>
+                                            <Binding Path="IsChecked" ElementName="cb_top"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </Border>
                         </StackPanel>
                     </Border>
@@ -420,15 +451,7 @@
                             <Border BorderThickness="0,0,0,1">
                                 <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Slut dato" />
                             </Border>
-                            <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Aktiv" />
-                            </Border>
-                            <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Rabat" />
-                            </Border>
-                            <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" Text="Fordele" />
-                            </Border>
+
                         </StackPanel>
                     </Border>
 
@@ -438,19 +461,10 @@
                         BorderThickness="0,1,1,0">
                         <StackPanel>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                                <TextBlock x:Name="tb_txtMembershipStart" Style="{StaticResource tb_PersonDetailsTextBlock}" />
                             </Border>
                             <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
-                            </Border>
-                            <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
-                            </Border>
-                            <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
-                            </Border>
-                            <Border BorderThickness="0,0,0,1">
-                                <TextBlock Style="{StaticResource tb_PersonDetailsTextBlock}" />
+                                <TextBlock x:Name="tb_txtMembershipExpiry" Style="{StaticResource tb_PersonDetailsTextBlock}" />
                             </Border>
 
                         </StackPanel>
@@ -464,12 +478,15 @@
                 <TextBlock
                     Grid.Row="2"
                     Style="{StaticResource tk_CustermerViewHeaders}"
-                    Text="Medlemskab" />
+                    Text="Medlemskab" 
+                    Margin="0 50"/>
 
 
                 <!--  Add Member Button  -->
                 <Button
                     Grid.Row="4"
+                    VerticalAlignment="Bottom"
+                    Margin="0 0 0 50"
                     Command="{Binding AddCommand}"
                     Style="{StaticResource bt_AddButton}">
                     <StackPanel Orientation="Horizontal">

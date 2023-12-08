@@ -1,18 +1,9 @@
 ﻿using KK.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace KK.Views
 {
@@ -21,7 +12,7 @@ namespace KK.Views
     /// </summary>
     public partial class CustomerView : UserControl
     {
-        private CustomerViewModel customerVM = new CustomerViewModel();
+        private readonly CustomerViewModel customerVM = new();
 
         public CustomerView()
         {
@@ -33,6 +24,14 @@ namespace KK.Views
         // Think we should changes this to style triggers and move it into Themes and xaml
         private void BorderYear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
+            DateTime today = DateTime.Now;
+            DateTime expiryDate = today.AddDays(365);
+
+            tb_txtMembershipExpiry.Text = $"{expiryDate:dd/MM/yyyy}";
+            tb_TxtStartDate.Text = $"{today:dd/MM/yyyy}";
+            tb_txtMembershipStart.Text = $"{today:dd/MM/yyyy}";
+
             if (bb_YearMembership.BorderThickness == new Thickness(0, 0, 4, 4))
             {
                 bb_YearMembership.BorderThickness = new Thickness(3, 3, 3, 3);
@@ -48,6 +47,10 @@ namespace KK.Views
             }
             else
             {
+                tb_txtMembershipExpiry.Text = string.Empty;
+                tb_TxtStartDate.Text = string.Empty;
+                tb_txtMembershipStart.Text = string.Empty;
+
                 bb_YearMembership.BorderThickness = new Thickness(0, 0, 4, 4);
                 bb_YearMembership.BorderBrush = new SolidColorBrush(Colors.Gray);
                 (bb_YearMembership.BorderBrush as SolidColorBrush).Opacity = 0.2;
@@ -56,6 +59,17 @@ namespace KK.Views
 
         private void BorderQuarter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
+            DateTime today = DateTime.Now;
+
+
+            DateTime expiryDate = today.AddDays(90);
+
+
+            tb_txtMembershipExpiry.Text = $"{expiryDate:dd/MM/yyyy}";
+            tb_TxtStartDate.Text = $"{today:dd/MM/yyyy}";
+            tb_txtMembershipStart.Text = $"{today:dd/MM/yyyy}";
+
             if (bb_QuaterMembership.BorderThickness == new Thickness(0, 0, 4, 4))
             {
                 bb_QuaterMembership.BorderThickness = new Thickness(3, 3, 3, 3);
@@ -71,6 +85,10 @@ namespace KK.Views
             }
             else
             {
+                tb_txtMembershipExpiry.Text = string.Empty;
+                tb_TxtStartDate.Text = string.Empty;
+                tb_txtMembershipStart.Text = string.Empty;
+
                 bb_QuaterMembership.BorderThickness = new Thickness(0, 0, 4, 4);
                 bb_QuaterMembership.BorderBrush = new SolidColorBrush(Colors.Gray);
                 (bb_QuaterMembership.BorderBrush as SolidColorBrush).Opacity = 0.2;
@@ -79,6 +97,16 @@ namespace KK.Views
 
         private void BorderMonth_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            DateTime today = DateTime.Now;
+
+
+            DateTime expiryDate = today.AddDays(30);
+
+
+            tb_txtMembershipExpiry.Text = $"{expiryDate:dd/MM/yyyy}";
+            tb_TxtStartDate.Text = $"{today:dd/MM/yyyy}";
+            tb_txtMembershipStart.Text = $"{today:dd/MM/yyyy}";
+
             if (bb_MonthMembership.BorderThickness == new Thickness(0, 0, 4, 4))
             {
                 bb_MonthMembership.BorderThickness = new Thickness(3, 3, 3, 3);
@@ -94,6 +122,10 @@ namespace KK.Views
             }
             else
             {
+                tb_txtMembershipExpiry.Text = string.Empty;
+                tb_TxtStartDate.Text = string.Empty;
+                tb_txtMembershipStart.Text = string.Empty;
+
                 bb_MonthMembership.BorderThickness = new Thickness(0, 0, 4, 4);
                 bb_MonthMembership.BorderBrush = new SolidColorBrush(Colors.Gray);
                 (bb_MonthMembership.BorderBrush as SolidColorBrush).Opacity = 0.2;
