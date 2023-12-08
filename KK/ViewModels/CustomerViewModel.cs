@@ -1,9 +1,11 @@
-﻿using KK.Models.Helpers;
+﻿using KK.Models.Entities;
+using KK.Models.Helpers;
 
 namespace KK.ViewModels
 {
-    public class CustomerViewModel : ObservableObject
+    internal class CustomerViewModel : ObservableObject
     {
+
         private string _boundCustomerName;
 
         public string BoundCustomerName

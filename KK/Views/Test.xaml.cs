@@ -1,21 +1,31 @@
 ﻿using KK.ViewModels;
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace KK.Views
 {
     /// <summary>
-    /// Interaction logic for CustomerView.xaml
+    /// Interaction logic for Test.xaml
     /// </summary>
-    public partial class CustomerView : UserControl
+    public partial class Test : Window
     {
+        public string Name { get; set; }
+        public string DateOfBirth { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Disclaimer { get; set; }
+        public string Lead { get; set; }
+        public string Top { get; set; }
+
+
+
         private readonly CustomerViewModel customerVM = new();
 
-        public CustomerView()
+        public Test(Window parentWindow)
         {
+            Owner = parentWindow;
             DataContext = customerVM;
             InitializeComponent();
         }
@@ -132,9 +142,55 @@ namespace KK.Views
             }
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Name = tb_TxtName.Text;
+            DateOfBirth = tb_TxtBirthday.Text;
+            Phone = tb_TxtPhone.Text;
+            Email = tb_TxtMail.Text;
+        }
+
+
+        private void TopState()
+        {
+            if (cb_top.IsChecked == true)
+            {
+                Top = "Top-reb";
+            }
+            else
+            {
+                Top = string.Empty;
+            }
+        }
+
+        private void LeadState()
+        {
+            if (cb_lead.IsChecked == true)
+            {
+                Lead = "Lead sikret";
+            }
+            else
+            {
+                Lead = string.Empty;
+            }
+        }
+
+        private void DisclaimerState()
+        {
+            if (cb_disclaimer.IsChecked == true) 
+            {
+                Disclaimer = "Signeret";
+            }
+            else
+            {
+                Disclaimer = "Ikke Signeret";
+            }
         }
     }
 }
