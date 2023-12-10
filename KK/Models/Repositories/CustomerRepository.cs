@@ -71,6 +71,30 @@ namespace KK.Models.Repositories
             return Customers;
         }
 
+        public IEnumerable<Customer> GetCustomersWithMembershipsAndEntries()
+        {
+            Customers = new ObservableCollection<Customer>();
+            // Retreives all entities from database
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("kk_spGetCustomersAndMembershipsAndEntries", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Customers.Add(MapCustomerMembershipEntry(reader));
+                        }
+                    }
+                }
+            }
+
+            return Customers;
+        }
+
         public Customer GetById(int id)
         {
             Customer customer = null;
@@ -95,6 +119,7 @@ namespace KK.Models.Repositories
 
             return customer;
         }
+
 
         public void Remove(Customer entity)
         {
@@ -191,6 +216,31 @@ namespace KK.Models.Repositories
             };
         }
 
+        private static Customer MapCustomerMembershipEntry(SqlDataReader reader)
+        {
+            Customer customer = MapCustomer(reader);
+            customer.Entries = new List<Entry> // 
+                {
+                    new Entry
+                    {
+                        Id = Convert.ToInt32(reader["EntryId"]),
+                        CheckInTime = Convert.ToDateTime(reader["EntryCheckInTime"]),
+                        Price = Convert.ToDecimal(reader["EntryPrice"]),
+                        CustomerId = Convert.ToInt32(reader["CustomerId"]),
+                    }
+                };
+            customer.Membership = new Membership
+            {
+                Id = reader["MembershipId"] is DBNull ? 0 : Convert.ToInt32(reader["MembershipId"]),
+                StartDate = reader["MembershipStartDate"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(reader["MembershipStartDate"]),
+                EndDate = reader["MembershipEndDate"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(reader["MembershipEndDate"]),
+                IsActive = Convert.ToBoolean(reader["IsActive"]),
+            };
+
+            return customer;
+        }
+
+
         private static Customer MapDataToCustomer(SqlDataReader reader)
         {
             Customer customer = new Customer
@@ -254,7 +304,7 @@ namespace KK.Models.Repositories
 
                 return entries;
             }
-            
+
         }
 
         private static ICollection<ServiceItem> MapDataToServiceItems(SqlDataReader reader)
@@ -283,7 +333,9 @@ namespace KK.Models.Repositories
                 return serviceItems;
             }
         }
+
+
     }
-    
+
 }
 

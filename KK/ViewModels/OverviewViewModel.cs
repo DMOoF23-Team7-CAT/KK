@@ -12,10 +12,12 @@ namespace KK.ViewModels
 {
     public class OverviewViewModel : ObservableObject
     {
-        private readonly CustomerRepository _customerRepo;
-        internal Customer customer = new Customer();
-        private ObservableCollection<Customer> _customers;        
+        private readonly CustomerRepository _customerRepo;                
+        private readonly MembershipRepository _membershipRepo;                
+        private ObservableCollection<Customer> _customers;           
         private Customer _selectedCustomer;
+       
+        
 
         public Customer SelectedCustomer
         {
@@ -26,6 +28,7 @@ namespace KK.ViewModels
                 OnPropertyChanged(nameof(SelectedCustomer));
             }
         }
+      
 
         public ObservableCollection<Customer> Customers
         {
@@ -42,18 +45,19 @@ namespace KK.ViewModels
             _customerRepo = new CustomerRepository();
 
             // Create a new ObservableCollection and add items from the List
-            Customers = new ObservableCollection<Customer>(_customerRepo.GetAll());
+            Customers = new ObservableCollection<Customer>(_customerRepo.GetCustomersWithMembershipsAndEntries());
         }
 
         public void UpdateCustomer()
         {
             _customerRepo.Update(SelectedCustomer);
+            _membershipRepo.Update(SelectedCustomer.Membership);
         }
 
         public void DeleteCustomer()
         {
-            _customerRepo.Remove(SelectedCustomer);            
-            Customers = new ObservableCollection<Customer>(_customerRepo.GetAll());
+            _customerRepo.Remove(SelectedCustomer);
+            Customers = new ObservableCollection<Customer>(_customerRepo.GetCustomersWithMembershipsAndEntries());
         }
 
         //public void Getcustomers()

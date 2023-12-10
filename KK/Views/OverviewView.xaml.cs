@@ -30,17 +30,23 @@ namespace KK.Views
             overviewVM = new OverviewViewModel();
             DataContext = overviewVM;
             InitializeComponent();
-            ClearAllTextBoxes();
+            ClearAllTextBoxes();            
 
         }
 
-        private void dg_Overview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void lv_Overview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dg_Overview.SelectedItem != null)
+            if (lv_Overview.SelectedItem != null)
             {
-                overviewVM.SelectedCustomer = (Customer)dg_Overview.SelectedItem;
+                overviewVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
+
+                //Listview for entries is sat to selected item 
+                lv_ChekIn.ItemsSource = overviewVM.SelectedCustomer.Entries;
             }
-        }
+        }      
+
+
 
         private void bt_Update_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +56,7 @@ namespace KK.Views
             {
                 overviewVM.UpdateCustomer();
             }
-            
+
         }
 
         private void bt_Delete_Click(object sender, RoutedEventArgs e)
@@ -61,25 +67,19 @@ namespace KK.Views
             {
                 overviewVM.DeleteCustomer();
                 ClearAllTextBoxes();
-            }                         
+            }
+
         }
 
         private void tb_SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ICollectionView view = CollectionViewSource.GetDefaultView(dg_Overview.ItemsSource);
+            ICollectionView view = CollectionViewSource.GetDefaultView(lv_Overview.ItemsSource);
 
-            if (view is not null)
+            if (view != null)
             {
-                // If the search box is empty, show all items
-                if (string.IsNullOrWhiteSpace(tb_SearchBox.Text))
-                {
-                    view.Filter = null; // Show all items
-                }
-                else
-                {
-                    // Filters customers based on name
-                    view.Filter = item => ((Customer)item).Name.Contains(tb_SearchBox.Text, StringComparison.OrdinalIgnoreCase);
-                }
+                view.Filter = string.IsNullOrWhiteSpace(tb_SearchBox.Text)
+                    ? (Predicate<object>)null
+                    : item => (item is Customer customer) && customer.Name.Contains(tb_SearchBox.Text, StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -92,5 +92,8 @@ namespace KK.Views
             tb_Phone.Clear();
             tb_Qualification.Clear();
         }
+
+       
+     
     }
 }
