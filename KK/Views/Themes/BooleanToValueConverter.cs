@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows;
 
 namespace KK.Views.Themes
 {
-    internal class TextToVisibilityConverter : IValueConverter
+    public class BooleanToValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string text)
+            if (value is bool boolValue)
             {
-                return string.IsNullOrWhiteSpace(text) ? Visibility.Visible : Visibility.Collapsed;
+                return boolValue ? "✔" : string.Empty;
             }
-
-            return Visibility.Visible;
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

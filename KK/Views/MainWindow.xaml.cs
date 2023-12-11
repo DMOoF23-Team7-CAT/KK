@@ -75,5 +75,16 @@ namespace KK.Views
                 }
             }
         }
+
+
+        //--------------------------------------------------------------------------------TEST------------------------------------------------------------------------------
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            Test test = new Test(this);
+            Opacity = 0.8;
+            test.ShowDialog();
+            Opacity = 1;
+        }
     }
 }

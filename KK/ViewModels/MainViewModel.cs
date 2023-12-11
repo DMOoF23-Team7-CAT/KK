@@ -1,6 +1,7 @@
 ﻿using KK.Models.Entities;
 using KK.Models.Helpers;
 using KK.Models.Repositories;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -49,6 +50,7 @@ namespace KK.ViewModels
             {
                 CurrentView = CustomerVM;
             });
+
         }
 
     }

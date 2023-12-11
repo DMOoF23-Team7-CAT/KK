@@ -4,13 +4,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KK.Models.Entities;
 using KK.Models.Repositories;
 using KK.Models.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace Test
 {
     [TestClass]
     public class MembershipRepository_UnitTest
     {
-        CustomerRepository customerRepo = new CustomerRepository();
+        ObservableCollection<Customer> Customers = new ObservableCollection<Customer>();
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            CustomerRepository customerRepo = new CustomerRepository();
+            customerRepo.GetAll();
+            Customers = customerRepo.Customers;
+        }
 
         [TestMethod]
         public void AddMembership_Test()
@@ -22,9 +31,9 @@ namespace Test
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
                 IsActive = true,
-                CustomerId = 2,                
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newMembership.Customer = customerRepo.GetById(newMembership.CustomerId);
 
             // Act
             membershipRepository.Add(newMembership);
@@ -46,9 +55,9 @@ namespace Test
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
                 IsActive = true,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newMembership.Customer = customerRepo.GetById(newMembership.CustomerId);
 
             // Act
             membershipRepository.Add(newMembership);
@@ -71,19 +80,19 @@ namespace Test
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
                 IsActive = true,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newMembership.Customer = customerRepo.GetById(newMembership.CustomerId);
 
             // Act
             membershipRepository.Add(newMembership);
-            newMembership.IsActive = false;
+            newMembership.StartDate = new DateTime(2020, 11, 11);
             membershipRepository.Update(newMembership);
             Membership updatedMembership = membershipRepository.GetById(newMembership.Id);
 
             // Assert
             Assert.IsNotNull(updatedMembership);
-            Assert.IsFalse(updatedMembership.IsActive);
+            Assert.AreEqual(new DateTime(2020, 11, 11), updatedMembership.StartDate);
 
             membershipRepository.Remove(updatedMembership);
         }
@@ -98,9 +107,9 @@ namespace Test
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
                 IsActive = true,
-                CustomerId = 2,
+                CustomerId = Customers.FirstOrDefault().Id,
+                Customer = Customers.FirstOrDefault()
             };
-            newMembership.Customer = customerRepo.GetById(newMembership.CustomerId);
 
             // Act
             membershipRepository.Add(newMembership);
@@ -121,18 +130,18 @@ namespace Test
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
                 IsActive = true,
-                CustomerId = 2,
+                CustomerId = Customers[0].Id,
+                Customer = Customers[0]
             };
-            membership1.Customer = customerRepo.GetById(membership1.CustomerId);
 
             Membership membership2 = new Membership
             {
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
                 IsActive = true,
-                CustomerId = 3,
+                CustomerId = Customers[1].Id,
+                Customer = Customers[1]
             };
-            membership2.Customer = customerRepo.GetById(membership2.CustomerId);
 
             // Act
             membershipRepository.Add(membership1);

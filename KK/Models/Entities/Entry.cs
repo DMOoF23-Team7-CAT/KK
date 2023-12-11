@@ -30,7 +30,7 @@ namespace KK.Models.Entities
         }
 
         // Method to Add Equipment and make new list if the list is null
-        public void AddEquipment(ServiceItem item)
+        public void AddServiceItem(ServiceItem item)
         {
             if (Items == null)
             {

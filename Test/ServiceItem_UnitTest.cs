@@ -4,12 +4,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KK.Models.Entities;
 using KK.Models.Repositories;
 using KK.Models.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace Test
 {
     [TestClass]
     public class ServiceItemRepository_UnitTest
     {
+        ObservableCollection<Entry> Entries = new ObservableCollection<Entry>();
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            EntryRepository entryRepo = new EntryRepository();
+            entryRepo.GetAll();
+            Entries = entryRepo.Entries;
+        }
+
         [TestMethod]
         public void AddServiceItem_Test()
         {
@@ -18,7 +29,7 @@ namespace Test
             ServiceItem newServiceItem = new ServiceItem
             {
                 Name = "MONTH",
-                EntryId = 1 // Assuming Entry ID exists in your database
+                EntryId = Entries.FirstOrDefault().Id,
             };
 
             // Act
@@ -40,7 +51,7 @@ namespace Test
             ServiceItem newServiceItem = new ServiceItem
             {
                 Name = "MONTH",
-                EntryId = 1 // Assuming Entry ID exists in your database
+                EntryId = Entries.FirstOrDefault().Id,
             };
 
             // Act
@@ -63,7 +74,7 @@ namespace Test
             ServiceItem newServiceItem = new ServiceItem
             {
                 Name = "MONTH",
-                EntryId = 1 // Assuming Entry ID exists in your database
+                EntryId = Entries.FirstOrDefault().Id,
             };
 
             // Act
@@ -88,7 +99,7 @@ namespace Test
             ServiceItem newServiceItem = new ServiceItem
             {
                 Name = "MONTH",
-                EntryId = 1 // Assuming Entry ID exists in your database
+                EntryId = Entries.FirstOrDefault().Id,
             };
 
             // Act
@@ -108,13 +119,13 @@ namespace Test
             ServiceItem serviceItem1 = new ServiceItem
             {
                 Name = "MONTH",
-                EntryId = 1 // Assuming Entry ID exists in your database
+                EntryId = Entries[0].Id,
             };
 
             ServiceItem serviceItem2 = new ServiceItem
             {
                 Name = "QUARTER",
-                EntryId = 2 // Assuming Entry ID exists in your database
+                EntryId = Entries[1].Id,
             };
 
             // Act

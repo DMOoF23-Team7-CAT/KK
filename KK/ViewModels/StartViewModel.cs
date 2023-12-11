@@ -13,12 +13,34 @@ namespace KK.ViewModels
 {
     internal class StartViewModel : ObservableObject
     {
+
+        // Private backing fields
         private readonly MembershipRepository _membershipRepo;
         private readonly CustomerRepository _customerRepo;
-        private ObservableCollection<Membership> _memberships { get; set; }
+
         private Membership _SelectedMembership;
         private Customer _SelectedCustomer;
+        private Entry _selectedEntry;
+        private ServiceItem _selectedServiceItem;
 
+        public ServiceItem SelectedServiceItem
+        {
+            get { return _selectedServiceItem; }
+            set
+            {
+                _selectedServiceItem = value;
+                OnPropertyChanged(nameof(SelectedServiceItem));
+            }
+        }
+        public Entry SelectedEntry
+        {
+            get { return _selectedEntry; }
+            set
+            {
+                _selectedEntry = value;
+                OnPropertyChanged(nameof(SelectedEntry));
+            }
+        }
         public Customer SelectedCustomer
         {
             get { return _SelectedCustomer; }
@@ -47,17 +69,31 @@ namespace KK.ViewModels
             }
         }
 
+        private ObservableCollection<Membership> _memberships { get; set; }
+
+
         public StartViewModel()
         {
             _membershipRepo = new MembershipRepository();
             _customerRepo = new CustomerRepository();
-
-            Memberships = (ObservableCollection<Membership>)_membershipRepo.GetAllWithCustomers();
+            _membershipRepo.GetAllWithCustomers();
+            Memberships = _membershipRepo.Memberships;
         }
 
-        public void GetCustomerDetails(int id)
+        private void GetCustomerDetails()
         {
-            SelectedCustomer = _customerRepo.GetCustomer(id);
+            SelectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
+        }
+
+        public void AddServiceItem()
+        {
+            SelectedEntry.AddServiceItem(SelectedServiceItem);
+        }
+        public void CheckCustomerIn()
+        {
+            GetCustomerDetails();
+            SelectedCustomer.AddEntry(SelectedEntry);
+
         }
 
     }

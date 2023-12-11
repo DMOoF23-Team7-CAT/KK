@@ -1,4 +1,5 @@
-﻿using KK.ViewModels;
+﻿using KK.Models.Entities;
+using KK.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,12 +36,35 @@ namespace KK.Views
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(dg_CheckIn.ItemsSource);
 
-            if (view is not null && view.SourceCollection is DataView dataView)
+            if (view is not null)
             {
-                dataView.RowFilter = $"CustomerName LIKE '%{tb_CheckIn.Text}%'";
+                view.Filter = item =>
+                {
+                    if (item is Membership membership)
+                    {
+                        // Replace with the actual property path in your Membership class
+                        string customerName = membership.Customer?.Name ?? string.Empty;
+
+                        return customerName.IndexOf(tb_CheckIn.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+                    }
+
+                    return false;
+                };
             }
         }
 
+        private void dg_CheckIn_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dg_CheckIn.SelectedItem != null)
+            {
+                startVM.SelectedMembership = (Membership)dg_CheckIn.SelectedItem;
+            }
+        }
+
+        private void bt_CheckIn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
