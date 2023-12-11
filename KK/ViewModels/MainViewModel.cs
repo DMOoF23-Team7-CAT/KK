@@ -14,11 +14,9 @@ namespace KK.ViewModels
 
         public StartViewModel StartVM { get; set; }
         public OverviewViewModel OverviewVM { get; set; }
-        public CustomerViewModel CustomerVM { get; set; }
 
         public RelayCommand StartViewCommand { get; set; }
         public RelayCommand OverviewViewCommand { get; set; }
-        public RelayCommand CustomerViewCommand { get; set; }
 
         public object CurrentView
         {
@@ -34,7 +32,6 @@ namespace KK.ViewModels
         {
             StartVM = new StartViewModel();
             OverviewVM = new OverviewViewModel();
-            CustomerVM = new CustomerViewModel();
 
             CurrentView = StartVM;
 
@@ -45,10 +42,6 @@ namespace KK.ViewModels
             OverviewViewCommand = new RelayCommand(o =>
             {
                 CurrentView = OverviewVM;
-            });
-            CustomerViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = CustomerVM;
             });
 
         }

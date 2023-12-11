@@ -226,6 +226,17 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="MenuButtonThemeSecondary" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="50,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#22202f" />
+                <Setter Property="Foreground" Value="#ffffff" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--  OverViewThemes  -->
     <Style x:Key="bt_Update" TargetType="Button">
         <Setter Property="Background" Value="#462AD8" />
