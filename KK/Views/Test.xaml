@@ -1,29 +1,27 @@
-﻿<UserControl
-    x:Class="KK.Views.CustomerView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ViewModel="clr-namespace:KK.ViewModels"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:KK.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:themes="clr-namespace:KK.Views.Themes"
-    d:DesignHeight="704"
-    d:DesignWidth="1346"
-    mc:Ignorable="d">
+﻿<Window x:Class="KK.Views.Test"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KK.Views" xmlns:ViewModel="clr-namespace:KK.ViewModels" xmlns:themes="clr-namespace:KK.Views.Themes"
+        mc:Ignorable="d"
+        Title="Test"     MinWidth="1366"
+    MinHeight="784"
+        MaxWidth="1366"
+    MaxHeight="784"
+        WindowStartupLocation="CenterOwner"
+        Background="#272537"
+        WindowStyle="None">
 
-    <!--<UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
-    </UserControl.Resources>-->
-
-    <UserControl.Resources>
+    <Window.Resources>
         <themes:BooleanToValueConverter x:Key="BooleanToValueConverter" />
         <themes:CheckBoxTextConverter x:Key="CheckBoxTextConverter"/>
         <themes:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-    </UserControl.Resources>
+    </Window.Resources>
 
-    <UserControl.DataContext>
+    <Window.DataContext>
         <ViewModel:CustomerViewModel />
-    </UserControl.DataContext>
+    </Window.DataContext>
 
 
     <Grid>
@@ -431,6 +429,13 @@
                     </Border>
                 </Grid>
 
+                <!--  Page SubTitle  -->
+                <TextBlock
+                    Grid.Row="2"
+                    Style="{StaticResource tk_CustermerViewHeaders}"
+                    Text="Medlemskab" 
+                    Margin="0 50"/>
+
                 <!--  MembershipDetails  -->
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -471,34 +476,31 @@
                     </Border>
                 </Grid>
 
-
-
-
-                <!--  Page SubTitle  -->
-                <TextBlock
-                    Grid.Row="2"
-                    Style="{StaticResource tk_CustermerViewHeaders}"
-                    Text="Medlemskab" 
-                    Margin="0 50"/>
-
-
                 <!--  Add Member Button  -->
-                <Button
-                    Grid.Row="4"
-                    VerticalAlignment="Bottom"
-                    Margin="0 0 0 50"
-                    Command="{Binding StartViewCommand}"
-                    Style="{StaticResource bt_AddButton}" Click="Button_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <!--<Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource ic_MenuButtonIcon}" />                        -->
-                        <TextBlock Text="Tilknyt medlemskab" />
-                    </StackPanel>
-                </Button>
-
+                <StackPanel Grid.Row="4"                     
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            Margin="0 0 0 50" Orientation="Horizontal">
+                    <Button
+                        Margin="0 0 10 0"
+                    Style="{StaticResource bt_AddButton}" Click="AddButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <!--<Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource ic_MenuButtonIcon}" />                        -->
+                            <TextBlock Text="Tilknyt medlemskab" />
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="0 0"
+                    Style="{StaticResource bt_Update}" Click="Button_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <!--<Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource ic_MenuButtonIcon}" />                        -->
+                            <TextBlock Text="Fortryd" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Border>
         <!--#endregion-->
 
 
     </Grid>
-</UserControl>
+</Window>

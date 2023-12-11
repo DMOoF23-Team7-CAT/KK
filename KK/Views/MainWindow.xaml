@@ -101,7 +101,7 @@
                     Content="Ny Kunde"
                     FontSize="15"
                     Foreground="White"
-                    Style="{StaticResource MenuButtonTheme}" />
+                    Style="{StaticResource MenuButtonTheme}" Checked="RadioButton_Checked" />
 
                 <RadioButton
                     Grid.Column="2"

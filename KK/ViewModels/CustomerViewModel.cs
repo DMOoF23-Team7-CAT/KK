@@ -1,45 +1,81 @@
 ﻿using KK.Models.Entities;
 using KK.Models.Helpers;
-using KK.Models.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KK.ViewModels
 {
-    public class CustomerViewModel : ObservableObject
+    internal class CustomerViewModel : ObservableObject
     {
-        private readonly CustomerRepository _customerRepo;
-		private ObservableCollection<Customer> _customers;
-		private Customer _selectedCustomer;
 
-		public Customer SelectedCustomer
-		{
-			get { return _selectedCustomer; }
-			set 
-			{
-				_selectedCustomer = value;
-                OnPropertyChanged(nameof(SelectedCustomer));
+        private string _boundCustomerName;
+
+        public string BoundCustomerName
+        {
+            get { return _boundCustomerName; }
+            set
+            {
+                _boundCustomerName = value;
+                OnPropertyChanged();
             }
 		}
 
-		public ObservableCollection<Customer> Customers
-		{
-			get { return _customers; }
-			set 
-			{ 
-				_customers = value;
-				OnPropertyChanged(nameof(Customers));
-			}
-		}
+        private string _boundCustomerDateOfBirth;
 
-        public CustomerViewModel()
+        public string BoundCustomerDateOfBirth
         {
-			_customerRepo = new CustomerRepository();
-            Customers = new ObservableCollection<Customer>(_customerRepo.GetAll());
+            get { return _boundCustomerDateOfBirth; }
+            set
+            {
+                _boundCustomerDateOfBirth = value;
+                OnPropertyChanged();
+            }
         }
+
+        private string _boundCustomerPhone;
+
+        public string BoundCustomerPhone
+        {
+            get { return _boundCustomerPhone; }
+            set
+            {
+                _boundCustomerPhone = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _boundCustomerEmail;
+
+        public string BoundCustomerEmail
+        {
+            get { return _boundCustomerEmail; }
+            set
+            {
+                _boundCustomerEmail = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _boundCustomerHasSignedDisclaimer;
+
+        public bool BoundCustomerHasSignedDisclaimer
+        {
+            get { return _boundCustomerHasSignedDisclaimer; }
+            set
+            {
+                _boundCustomerHasSignedDisclaimer = value;
+                OnPropertyChanged(nameof(BoundCustomerHasSignedDisclaimer));
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
