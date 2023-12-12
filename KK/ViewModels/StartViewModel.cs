@@ -15,8 +15,8 @@ namespace KK.ViewModels
     {
 
         // Private backing fields
-        private readonly MembershipRepository _membershipRepo;
         private readonly CustomerRepository _customerRepo;
+
         private Membership _SelectedMembership;
         private Customer _SelectedCustomer;
         private Entry _selectedEntry;
@@ -73,7 +73,6 @@ namespace KK.ViewModels
 
         public StartViewModel()
         {
-            _membershipRepo = new MembershipRepository();
             _customerRepo = new CustomerRepository();
             _customerRepo.GetAll();
             Customers = _customerRepo.Customers;

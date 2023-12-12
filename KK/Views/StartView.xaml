@@ -322,9 +322,11 @@
                 <!--  Row 0  -->
                 <StackPanel HorizontalAlignment="Right" Margin="20">
                     <Button
+                        x:Name="bt_NewCustomer"
                     Width="180"
                     Margin="0,0"
-                    Style="{StaticResource bt_DarkThemedButton}">
+                    Style="{StaticResource bt_DarkThemedButton}"
+                        Click="bt_NewCustomer_Click">
                         <TextBlock Text="Ny Kunde" FontWeight="Bold"/>
                     </Button>
                 </StackPanel>

@@ -57,6 +57,13 @@ namespace KK.Views
         {
 
         }
+
+        private void bt_NewCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerView customerView = new CustomerView();
+            customerView.ShowDialog();
+
+        }
     }
 }
 
