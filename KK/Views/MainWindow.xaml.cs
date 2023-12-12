@@ -77,16 +77,5 @@ namespace KK.Views
             }
         }
 
-
-        //--------------------------------------------------------------------------------TEST------------------------------------------------------------------------------
-
-
-        private void NewCustomer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            CustomerView customerView = new CustomerView(this);
-            Opacity = 0.6;
-            customerView.ShowDialog();
-            Opacity = 1;
-        }
     }
 }
