@@ -53,6 +53,11 @@ namespace KK.Views
                     : item => (item is Customer customer) && customer.Name.Contains(tb_SearchBox.Text, StringComparison.OrdinalIgnoreCase);
             }
         }
+
+        private void bt_CheckIn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

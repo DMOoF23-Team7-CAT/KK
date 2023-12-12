@@ -39,44 +39,42 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <!--  Search Box  -->
-
+                <!--  CheckIn Button  -->
                 <StackPanel
                     Grid.Row="0"
-                    Margin="20,0,0,0"
+                    Margin="20"
                     HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
                     Orientation="Horizontal">
-                    <Rectangle StrokeThickness="1" />
-                    <TextBlock
-                        x:Name="tl_Search"
+                    <Button
                         Margin="0,0,10,0"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Foreground="White"
-                        Text="Søg" />
-                    <TextBox
-                        x:Name="tb_SearchBox"
-                        Width="200"
-                        Height="30"
-                        Margin="0,0,10,0"
-                        Padding="5"
-                        HorizontalAlignment="Right"
-                        Background="Transparent"
-                        BorderThickness="1"
-                        FontSize="15"
-                        Foreground="White"
-                        Text=""
-                        TextChanged="tb_SearchBox_TextChanged">
-                        <TextBox.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="10" />
-                            </Style>
-                        </TextBox.Resources>
-                    </TextBox>
+                        Click="bt_CheckIn_Click"
+                        Style="{StaticResource bt_AddButton}">
+                        <TextBlock Text="Check Ind" />
+                    </Button>
                 </StackPanel>
 
-                
-                
+                <!--  Search Box  -->
+                <Grid
+                    Grid.Row="1"
+                    Width="250"
+                    Margin="20,0"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                    <TextBlock
+                        Width="170"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                        Text="Søg på kunde navn"
+                        Visibility="{Binding ElementName=tb_SearchBox, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                    <TextBox
+                        x:Name="tb_SearchBox"
+                        Foreground="Black"
+                        Style="{StaticResource tb_TextBoxInput}"
+                        TextChanged="tb_SearchBox_TextChanged" />
+                </Grid>
+
+                <!--  Customer ListView  -->
                 <StackPanel Grid.Row="2">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ListView
@@ -92,7 +90,7 @@
                                         DisplayMemberBinding="{Binding Id}"
                                         Header="Id" />
                                     <GridViewColumn
-                                        Width="80"
+                                        Width="130"
                                         DisplayMemberBinding="{Binding Name}"
                                         Header="Navn" />
                                     <GridViewColumn
@@ -100,7 +98,7 @@
                                         DisplayMemberBinding="{Binding Phone}"
                                         Header="Telefon" />
                                     <GridViewColumn
-                                        Width="150"
+                                        Width="100"
                                         DisplayMemberBinding="{Binding Email}"
                                         Header="Email" />
                                 </GridView>
@@ -108,6 +106,7 @@
                         </ListView>
                     </ScrollViewer>
                 </StackPanel>
+
             </Grid>
         </Border>
 

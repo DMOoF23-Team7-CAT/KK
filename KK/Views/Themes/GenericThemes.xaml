@@ -6,8 +6,8 @@
     <!--  Converter  -->
     <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter" />
     <local:BooleanToValueConverter x:Key="BooleanToValueConverter" />
-    <local:CheckBoxTextConverter x:Key="CheckBoxTextConverter"/>
-    <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    <local:CheckBoxTextConverter x:Key="CheckBoxTextConverter" />
+    <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
     <!--  GenericThemes  -->
     <Style x:Key="BorderGradientStyle" TargetType="Border">
@@ -62,7 +62,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--DatePicker Style dosnt work-->
+    <!--  DatePicker Style dosnt work  -->
     <Style x:Key="DateickerStyle" TargetType="DatePickerTextBox">
         <Setter Property="Padding" Value="10,7" />
         <Setter Property="Background" Value="#ffffff" />
@@ -75,17 +75,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="DatePickerTextBox">
                     <Border
-                x:Name="border"
-                Background="{TemplateBinding Background}"
-                BorderBrush="#e0e6ed"
-                BorderThickness="1"
-                CornerRadius="5"
-                SnapsToDevicePixels="True">
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#e0e6ed"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        SnapsToDevicePixels="True">
                         <ScrollViewer
-                    x:Name="PART_ContentHost"
-                    Focusable="False"
-                    HorizontalScrollBarVisibility="Hidden"
-                    VerticalScrollBarVisibility="Hidden" />
+                            x:Name="PART_ContentHost"
+                            Focusable="False"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
