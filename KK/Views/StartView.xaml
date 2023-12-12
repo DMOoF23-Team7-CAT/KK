@@ -21,86 +21,392 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}" />
+        <!--  GridColumn 0  -->
+        <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
+                <!--  Header  -->
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="23"
+                    FontWeight="Bold"
+                    Foreground="#FFFFFF"
+                    Text="Oversigt" />
+
+                <!--  Row 2  -->
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Foreground="#FFFFFF"
+                    Text="Produkt" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Foreground="#FFFFFF"
+                    Text="Type" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Foreground="#FFFFFF"
+                    Text="Antal" />
+
+                <!--  Row 2  -->
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="12 Måneders" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Medlemskab" />
+
+                <!--  Row 3  -->
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="3 Måneders" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Medlemskab" />
+
+                <!--  Row 4  -->
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="1 Måned" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Medlemskab" />
+
+                <!--  Row 5  -->
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="10 Turs Billet" />
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Billet" />
+
+                <!--  Row 6  -->
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Voksen" />
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Billet" />
+
+                <!--  Row 7  -->
+                <TextBlock
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Barn" />
+                <TextBlock
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Billet" />
+
+                <!--  Row 8  -->
+                <TextBlock
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Klatresko" />
+                <TextBlock
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Udstyr" />
+
+                <!--  Row 9  -->
+                <TextBlock
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Klatresele" />
+                <TextBlock
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Udstyr" />
+
+                <!--  Row 10  -->
+                <TextBlock
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Klatrereb" />
+                <TextBlock
+                    Grid.Row="10"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="#FFFFFF"
+                    Text="Udstyr" />
+
+            </Grid>
+        </Border>
+
+        <!--  GridColumn 1  -->
         <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
-            <TextBox
-                x:Name="tb_SelectedCustomerName"
-                Width="200"
-                Height="30"
-                Text="{Binding SelectedMembership.Id, Mode=TwoWay}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="150" />
+                </Grid.RowDefinitions>
+
+                <!--  Header  -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="23"
+                    FontWeight="Bold"
+                    Foreground="#FFFFFF"
+                    Text="Betaling" />
+
+                <!--  Row 3  -->
+                <Grid
+                    Grid.Row="3"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid
+                        Grid.Row="0"
+                        Width="200"
+                        Margin="20,0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                        <TextBlock
+                            Width="170"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                            Text="Total"
+                            Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox
+                            x:Name="tb_Total"
+                            Foreground="Black"
+                            Style="{StaticResource tb_TextBoxInput}" />
+                    </Grid>
+
+                    <Button
+                        Grid.Row="1"
+                        Width="200"
+                        Margin="0,0,0,0"
+                        Click="bt_CheckIn_Click"
+                        Style="{StaticResource bt_AddButton}">
+                        <TextBlock Text="Beræft Betaling" />
+                    </Button>
+                </Grid>
+
+
+            </Grid>
+
         </Border>
 
+
+        <!--  GridColumn 2  -->
         <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <StackPanel
-                x:Name="sp_CheckIn"
-                Grid.Column="2"
-                Margin="0,20">
+                <!--  Row 0  -->
+                <StackPanel HorizontalAlignment="Right" Margin="20">
+                    <Button
+                        x:Name="bt_NewCustomer"
+                    Width="180"
+                    Margin="0,0"
+                    Style="{StaticResource bt_DarkThemedButton}"
+                        Click="bt_NewCustomer_Click">
+                        <TextBlock Text="Ny Kunde" FontWeight="Bold"/>
+                    </Button>
+                </StackPanel>
 
-                <Button
-                    x:Name="bt_CheckIn"
-                    Width="250"
-                    Height="40"
-                    Click="bt_CheckIn_Click"
-                    Content="Checkind" />
 
-                <TextBox
-                    x:Name="tb_CheckIn"
-                    Width="380"
-                    Height="30"
-                    Margin="20"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    TextChanged="TextBox_TextChanged" />
+                <!--  Row 1  -->
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <!--  Search Box  -->
+                    <Grid
+                        Grid.Row="1"
+                        Width="180"
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                        <TextBlock
+                            Width="170"
+                            Margin="0"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                            Text="Søg på kunde navn"
+                            Visibility="{Binding ElementName=tb_SearchBox, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox
+                            x:Name="tb_SearchBox"
+                            Margin="0"
+                            Foreground="Black"
+                            Style="{StaticResource tb_TextBoxInput}"
+                            TextChanged="tb_SearchBox_TextChanged" />
+                    </Grid>
+                    <!--  Cheeack In Button  -->
+                    <Button
+                        Width="180"
+                        Margin="0,0,10,0"
+                        Click="bt_CheckIn_Click"
+                        Style="{StaticResource bt_AddButton}">
+                        <TextBlock Margin="0" Text="Check Ind" />
+                    </Button>
+                </StackPanel>
 
-                <DataGrid
-                    x:Name="dg_CheckIn"
-                    Width="380"
-                    Height="535"
-                    AlternatingRowBackground="LightGray"
-                    AutoGenerateColumns="False"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    CanUserAddRows="False"
-                    CanUserReorderColumns="False"
-                    CanUserSortColumns="True"
-                    GridLinesVisibility="None"
-                    HorizontalScrollBarVisibility="Hidden"
-                    IsTextSearchEnabled="True"
-                    ItemsSource="{Binding Memberships, Mode=TwoWay}"
-                    RowHeaderWidth="0"
-                    SelectionChanged="dg_CheckIn_SelectionChanged"
-                    VerticalScrollBarVisibility="Auto"
-                    IsReadOnly="True"
-                    >
 
-                    <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="35"
-                            Binding="{Binding CustomerId}"
-                            Header="Id" />
-                        <DataGridTextColumn
-                            Width="100"
-                            Binding="{Binding Customer.Name}"
-                            Header="Navn" />
-                        <DataGridTextColumn
-                            Width="83"
-                            Binding="{Binding Customer.DateOfBirth, StringFormat=dd/MM/yyyy}"
-                            Header="Fødselsdag" />
-                        <DataGridTextColumn
-                            Width="83"
-                            Binding="{Binding StartDate, StringFormat=dd/MM/yyyy}"
-                            Header="Start Dato" />
-                        <DataGridTextColumn
-                            Width="83"
-                            Binding="{Binding EndDate, StringFormat=dd/MM/yyyy}"
-                            Header="Slut Dato" />
-                    </DataGrid.Columns>
 
-                </DataGrid>
+                <!--  Customer ListView  -->
+                <StackPanel Grid.Row="2">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView
+                            x:Name="lv_Overview"
+                            Height="480"
+                            HorizontalAlignment="center"
+                            ItemsSource="{Binding Customers, Mode=TwoWay}"
+                            SelectionChanged="lv_Overview_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn
+                                        Width="40"
+                                        DisplayMemberBinding="{Binding Id}"
+                                        Header="Id" />
+                                    <GridViewColumn
+                                        Width="130"
+                                        DisplayMemberBinding="{Binding Name}"
+                                        Header="Navn" />
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Phone}"
+                                        Header="Telefon" />
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Email}"
+                                        Header="Email" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </StackPanel>
 
-            </StackPanel>
+            </Grid>
         </Border>
+
     </Grid>
 </UserControl>

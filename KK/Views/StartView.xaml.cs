@@ -31,38 +31,37 @@ namespace KK.Views
             InitializeComponent();
         }
 
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        // Uses Model.Entity to set Customer
+        private void lv_Overview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ICollectionView view = CollectionViewSource.GetDefaultView(dg_CheckIn.ItemsSource);
-
-            if (view is not null)
+            if (lv_Overview.SelectedItem != null)
             {
-                view.Filter = item =>
-                {
-                    if (item is Membership membership)
-                    {
-                        // Replace with the actual property path in your Membership class
-                        string customerName = membership.Customer?.Name ?? string.Empty;
-
-                        return customerName.IndexOf(tb_CheckIn.Text, StringComparison.OrdinalIgnoreCase) >= 0;
-                    }
-
-                    return false;
-                };
+                startVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
             }
         }
 
-        private void dg_CheckIn_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        // Uses Model.Entity to set Customer
+        private void tb_SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (dg_CheckIn.SelectedItem != null)
+            ICollectionView view = CollectionViewSource.GetDefaultView(lv_Overview.ItemsSource);
+
+            if (view != null)
             {
-                startVM.SelectedMembership = (Membership)dg_CheckIn.SelectedItem;
+                view.Filter = string.IsNullOrWhiteSpace(tb_SearchBox.Text)
+                    ? (Predicate<object>)null
+                    : item => (item is Customer customer) && customer.Name.Contains(tb_SearchBox.Text, StringComparison.OrdinalIgnoreCase);
             }
         }
 
         private void bt_CheckIn_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void bt_NewCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerView customerView = new CustomerView();
+            customerView.ShowDialog();
 
         }
     }

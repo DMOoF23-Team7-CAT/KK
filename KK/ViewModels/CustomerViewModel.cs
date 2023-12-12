@@ -1,70 +1,146 @@
 ﻿using KK.Models.Entities;
+using KK.Models.Entities.Enum;
 using KK.Models.Helpers;
+using KK.Models.Repositories;
+using System;
 
 namespace KK.ViewModels
 {
     internal class CustomerViewModel : ObservableObject
     {
 
-        private string _boundCustomerName;
+        private readonly CustomerRepository _customerRepo;
+       
+/*        private Customer _newCustomer;
 
-        public string BoundCustomerName
+        public Customer NewCustomer
         {
-            get { return _boundCustomerName; }
+            get { return _newCustomer ?? (_newCustomer = new Customer()); }
             set
             {
-                _boundCustomerName = value;
-                OnPropertyChanged();
+                _newCustomer = value;
+                OnPropertyChanged(nameof(NewCustomer));
             }
-		}
+        }*/
 
-        private string _boundCustomerDateOfBirth;
+        public string NewCustomerName { get; set; }
+        public string NewCustomerPhone { get; set; }
+        public string NewCustomerEmail { get; set; }
+        public DateTime NewCustomerDateOfBirth { get; set; }
+        public bool NewCustomerHasSignedDisclaimer { get; set; }
+        public int NewCustomerQualification {  get; set; }
 
-        public string BoundCustomerDateOfBirth
+        public CustomerViewModel()
         {
-            get { return _boundCustomerDateOfBirth; }
-            set
-            {
-                _boundCustomerDateOfBirth = value;
-                OnPropertyChanged();
-            }
+            _customerRepo = new CustomerRepository();
         }
 
-        private string _boundCustomerPhone;
-
-        public string BoundCustomerPhone
+        public void Add()
         {
-            get { return _boundCustomerPhone; }
-            set
-            {
-                _boundCustomerPhone = value;
-                OnPropertyChanged();
-            }
+            _customerRepo.Add(SetNewCustomer());
         }
 
-        private string _boundCustomerEmail;
-
-        public string BoundCustomerEmail
+        private Customer SetNewCustomer()
         {
-            get { return _boundCustomerEmail; }
-            set
+            Qualification qualification = new Qualification();
+
+            if (Enum.TryParse(typeof(Qualification), NewCustomerQualification.ToString(), out var parsedQualification))
             {
-                _boundCustomerEmail = value;
-                OnPropertyChanged();
+                qualification = (Qualification)parsedQualification;
             }
+            else
+            {
+                qualification = Qualification.None;
+            }
+
+            Customer customer = new Customer
+            {
+                Name = NewCustomerName,
+                Phone = NewCustomerPhone,
+                Email = NewCustomerEmail,
+                DateOfBirth = NewCustomerDateOfBirth,
+                HasSignedDisclaimer = NewCustomerHasSignedDisclaimer,
+                Qualification = qualification
+            };
+
+            return customer;
         }
 
-        private bool _boundCustomerHasSignedDisclaimer;
+        
+        /*        public void Add(string name, DateTime dateOfBirth, string phone, string email, bool disclaimer, Qualification qualification)
+                {
+                    NewCustomer.Name = name;
+                    NewCustomer.Phone = phone;
+                    NewCustomer.Email = email;
+                    NewCustomer.HasSignedDisclaimer = disclaimer;
+                    NewCustomer.Qualification = qualification;
 
-        public bool BoundCustomerHasSignedDisclaimer
-        {
-            get { return _boundCustomerHasSignedDisclaimer; }
-            set
-            {
-                _boundCustomerHasSignedDisclaimer = value;
-                OnPropertyChanged(nameof(BoundCustomerHasSignedDisclaimer));
-            }
-        }
+                    _customerRepo.Add(NewCustomer);
+
+                }*/
+
+
+
+
+        //      private string _boundCustomerName;
+
+        //      public string BoundCustomerName
+        //      {
+        //          get { return _boundCustomerName; }
+        //          set
+        //          {
+        //              _boundCustomerName = value;
+        //              OnPropertyChanged();
+        //          }
+        //}
+
+        //      private string _boundCustomerDateOfBirth;
+
+        //      public string BoundCustomerDateOfBirth
+        //      {
+        //          get { return _boundCustomerDateOfBirth; }
+        //          set
+        //          {
+        //              _boundCustomerDateOfBirth = value;
+        //              OnPropertyChanged();
+        //          }
+        //      }
+
+        //      private string _boundCustomerPhone;
+
+        //      public string BoundCustomerPhone
+        //      {
+        //          get { return _boundCustomerPhone; }
+        //          set
+        //          {
+        //              _boundCustomerPhone = value;
+        //              OnPropertyChanged();
+        //          }
+        //      }
+
+        //      private string _boundCustomerEmail;
+
+        //      public string BoundCustomerEmail
+        //      {
+        //          get { return _boundCustomerEmail; }
+        //          set
+        //          {
+        //              _boundCustomerEmail = value;
+        //              OnPropertyChanged();
+        //          }
+        //      }
+
+        //      private bool _boundCustomerHasSignedDisclaimer;
+
+        //      public bool BoundCustomerHasSignedDisclaimer
+        //      {
+        //          get { return _boundCustomerHasSignedDisclaimer; }
+        //          set
+        //          {
+        //              _boundCustomerHasSignedDisclaimer = value;
+        //              OnPropertyChanged(nameof(BoundCustomerHasSignedDisclaimer));
+        //          }
+        //      }
 
 
 

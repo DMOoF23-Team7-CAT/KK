@@ -1,8 +1,5 @@
 ﻿using KK.ViewModels;
-using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace KK.Views
@@ -51,6 +48,10 @@ namespace KK.Views
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (e.LeftButton != MouseButtonState.Pressed)
+            {
+                return;
+            }
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
@@ -79,11 +80,12 @@ namespace KK.Views
 
         //--------------------------------------------------------------------------------TEST------------------------------------------------------------------------------
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+
+        private void NewCustomer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Test test = new Test(this);
-            Opacity = 0.8;
-            test.ShowDialog();
+            CustomerView customerView = new CustomerView(this);
+            Opacity = 0.6;
+            customerView.ShowDialog();
             Opacity = 1;
         }
     }

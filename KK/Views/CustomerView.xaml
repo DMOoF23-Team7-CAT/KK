@@ -1,37 +1,34 @@
-﻿<UserControl
+﻿<Window
     x:Class="KK.Views.CustomerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ViewModel="clr-namespace:KK.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:KK.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:themes="clr-namespace:KK.Views.Themes"
-    d:DesignHeight="704"
-    d:DesignWidth="1346"
+    Title="Test"
+    Width="456"
+    Height="784"
+    AllowsTransparency="True"
+    Background="#272537"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="None"
     mc:Ignorable="d">
 
-    <!--<UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
-    </UserControl.Resources>-->
-
-    <UserControl.Resources>
+    <Window.Resources>
         <themes:BooleanToValueConverter x:Key="BooleanToValueConverter" />
-        <themes:CheckBoxTextConverter x:Key="CheckBoxTextConverter"/>
-        <themes:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-    </UserControl.Resources>
+        <themes:CheckBoxTextConverter x:Key="CheckBoxTextConverter" />
+        <themes:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </Window.Resources>
 
-    <UserControl.DataContext>
+    <Window.DataContext>
         <ViewModel:CustomerViewModel />
-    </UserControl.DataContext>
+    </Window.DataContext>
 
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+
 
         <!--#region Customer details section-->
         <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}">
@@ -49,6 +46,7 @@
                     <RowDefinition Height="*" MinHeight="50" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!--  Page Title  -->
@@ -70,8 +68,7 @@
                         <TextBox
                             x:Name="tb_TxtName"
                             Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding BoundCustomerName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            Style="{StaticResource tb_TextBoxInput}"/>
                     </Grid>
                 </Grid>
 
@@ -79,15 +76,14 @@
                 <Grid Grid.Row="3">
                     <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Fødselsdato:" />
                     <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                        <TextBlock
-                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                            Text="dd/mm/åååå"
-                            Visibility="{Binding ElementName=tb_TxtBirthday, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
-                        <TextBox
-                            x:Name="tb_TxtBirthday"
-                            Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding BoundCustomerDateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        <DatePicker
+                            x:Name="dp_DateOfBirth"
+                            Margin="0,10"
+                            Padding="10,7"
+                            Background="#ffffff"
+                            BorderThickness="0"
+                            FontSize="12"
+                            Foreground="#b0b9c6"/>
                     </Grid>
                 </Grid>
 
@@ -102,8 +98,7 @@
                         <TextBox
                             x:Name="tb_TxtPhone"
                             Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding BoundCustomerPhone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            Style="{StaticResource tb_TextBoxInput}" />
                     </Grid>
                 </Grid>
 
@@ -118,8 +113,7 @@
                         <TextBox
                             x:Name="tb_TxtMail"
                             Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding BoundCustomerEmail, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            Style="{StaticResource tb_TextBoxInput}" />
                     </Grid>
                 </Grid>
 
@@ -127,7 +121,9 @@
                 <Grid Grid.Row="6" Margin="0,20,0,5">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Fraskrivningserklæring:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox x:Name="cb_disclaimer" HorizontalAlignment="Center" IsChecked="{Binding BoundCustomerHasSignedDisclaimer, Mode=TwoWay}" />
+                        <CheckBox
+                            x:Name="cb_disclaimer"
+                            HorizontalAlignment="Center" />
                     </Grid>
                 </Grid>
 
@@ -150,36 +146,57 @@
                         Text="Kvalifikationer:" />
                 </Grid>
 
-                <!-- Lead sikret CheckBox -->
+                <!--  Lead sikret CheckBox  -->
                 <Grid Grid.Row="8" Margin="0,20,0,10">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Lead sikret:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox x:Name="cb_lead"
-                  HorizontalAlignment="Center"
-                  IsChecked="{Binding IsLeadSikretChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  IsEnabled="{Binding IsTopRebChecked, Converter={StaticResource InverseBooleanConverter}}"/>
+                        <CheckBox
+                            x:Name="cb_lead"
+                            HorizontalAlignment="Center"/>
+                        <!--  IsEnabled="{Binding IsTopRopeChecked, Converter={StaticResource InverseBooleanConverter}}"  -->
                     </Grid>
                 </Grid>
 
-                <!-- Top-reb CheckBox -->
+                <!--  Top-reb CheckBox  -->
                 <Grid Grid.Row="9" Margin="0,20,0,50">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Top-reb:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox x:Name="cb_top"
-                  HorizontalAlignment="Center"
-                  IsChecked="{Binding IsTopRebChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  IsEnabled="{Binding IsLeadSikretChecked, Converter={StaticResource InverseBooleanConverter}}"/>
+                        <CheckBox
+                            x:Name="cb_top"
+                            HorizontalAlignment="Center"/>
+                        <!--  IsEnabled="{Binding cb_lead, Converter={StaticResource InverseBooleanConverter}}"  -->
                     </Grid>
                 </Grid>
 
 
+                <!--  Add Member Button  -->
+
+                <StackPanel
+                    Grid.Row="10"
+                    Margin="0,0,0,50"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="0,0,10,0"
+                        Click="bt_AddCustomer_Click"
+                        Style="{StaticResource bt_AddButton}">
+                        <TextBlock Text="Opret Ny Kunde" />
+                    </Button>
+                    <Button
+                        Margin="0,0"
+                        Click="Button_Click"
+                        Style="{StaticResource bt_Update}">
+                        <TextBlock Text="Fortryd" />
+                    </Button>
+                </StackPanel>
 
 
             </Grid>
         </Border>
-        <!--#endregion-->
 
         <!--#region Customer membership section-->
+        <!--
         <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
 
             <Grid>
@@ -189,7 +206,9 @@
                     <RowDefinition Height="20*" />
                 </Grid.RowDefinitions>
 
-                <!--  Page Title  -->
+        -->
+        <!--  Page Title  -->
+        <!--
                 <TextBlock
                     Grid.Row="0"
                     Style="{StaticResource tk_CustermerViewHeaders}"
@@ -209,9 +228,11 @@
                         <RowDefinition Height="10*" />
                     </Grid.RowDefinitions>
 
-                    <!--  Memberships  -->
+        -->
+        <!--  Memberships  -->
 
-                    <!--  Year membership  -->
+        <!--  Year membership  -->
+        <!--
                     <Border
                         x:Name="bb_YearMembership"
                         Grid.Row="0"
@@ -240,7 +261,9 @@
                         </Border.Background>
                     </Border>
 
-                    <!--  Quater membership  -->
+        -->
+        <!--  Quater membership  -->
+        <!--
                     <Border
                         x:Name="bb_QuaterMembership"
                         Grid.Row="1"
@@ -269,7 +292,9 @@
                         </Border.Background>
                     </Border>
 
-                    <!--  Month Membership  -->
+        -->
+        <!--  Month Membership  -->
+        <!--
                     <Border
                         x:Name="bb_MonthMembership"
                         Grid.Row="2"
@@ -301,7 +326,9 @@
                     </Border>
 
                 </Grid>
-                <!--  Start Date  -->
+        -->
+        <!--  Start Date  -->
+        <!--
                 <Grid Grid.Row="2"
                       Margin="0 0 0 50"
                       VerticalAlignment="Bottom">
@@ -333,10 +360,12 @@
             </Grid>
 
         </Border>
+        -->
         <!--#endregion-->
 
 
         <!--#region DataTable section-->
+        <!--
         <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
 
             <Grid>
@@ -348,13 +377,17 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!--  Page Title  -->
+        -->
+        <!--  Page Title  -->
+        <!--
                 <TextBlock
                     Grid.Row="0"
                     Style="{StaticResource tk_CustermerViewHeaders}"
                     Text="Personoplysninger" />
 
-                <!--  PersonDetails  -->
+        -->
+        <!--  PersonDetails  -->
+        <!--
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*" />
@@ -431,7 +464,18 @@
                     </Border>
                 </Grid>
 
-                <!--  MembershipDetails  -->
+        -->
+        <!--  Page SubTitle  -->
+        <!--
+                <TextBlock
+                    Grid.Row="2"
+                    Style="{StaticResource tk_CustermerViewHeaders}"
+                    Text="Medlemskab"
+                    Margin="0 50"/>
+
+        -->
+        <!--  MembershipDetails  -->
+        <!--
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*" />
@@ -471,34 +515,38 @@
                     </Border>
                 </Grid>
 
-
-
-
-                <!--  Page SubTitle  -->
-                <TextBlock
-                    Grid.Row="2"
-                    Style="{StaticResource tk_CustermerViewHeaders}"
-                    Text="Medlemskab" 
-                    Margin="0 50"/>
-
-
-                <!--  Add Member Button  -->
-                <Button
-                    Grid.Row="4"
-                    VerticalAlignment="Bottom"
-                    Margin="0 0 0 50"
-                    Command="{Binding StartViewCommand}"
-                    Style="{StaticResource bt_AddButton}" Click="Button_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <!--<Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource ic_MenuButtonIcon}" />                        -->
-                        <TextBlock Text="Tilknyt medlemskab" />
-                    </StackPanel>
-                </Button>
-
+        -->
+        <!--  Add Member Button  -->
+        <!--
+                <StackPanel Grid.Row="4"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            Margin="0 0 0 50" Orientation="Horizontal">
+                    <Button
+                        Margin="0 0 10 0"
+                    Style="{StaticResource bt_AddButton}" Click="AddButton_Click">
+                        <StackPanel Orientation="Horizontal">
+        -->
+        <!--<Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource ic_MenuButtonIcon}" />                        -->
+        <!--
+                            <TextBlock Text="Tilknyt medlemskab" />
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="0 0"
+                    Style="{StaticResource bt_Update}" Click="Button_Click">
+                        <StackPanel Orientation="Horizontal">
+        -->
+        <!--<Icon:PackIconMaterial Kind="AccountPlusOutline" Style="{StaticResource ic_MenuButtonIcon}" />                        -->
+        <!--
+                            <TextBlock Text="Fortryd" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Border>
+        -->
         <!--#endregion-->
 
 
     </Grid>
-</UserControl>
+</Window>

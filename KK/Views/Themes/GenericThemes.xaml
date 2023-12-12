@@ -6,9 +6,8 @@
     <!--  Converter  -->
     <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter" />
     <local:BooleanToValueConverter x:Key="BooleanToValueConverter" />
-    <local:CheckBoxTextConverter x:Key="CheckBoxTextConverter"/>
-    <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-   
+    <local:CheckBoxTextConverter x:Key="CheckBoxTextConverter" />
+    <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
     <!--  GenericThemes  -->
     <Style x:Key="BorderGradientStyle" TargetType="Border">
@@ -61,6 +60,45 @@
                 <Setter Property="Foreground" Value="#ffffff" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <!--  DatePicker Style dosnt work  -->
+    <Style x:Key="DateickerStyle" TargetType="DatePickerTextBox">
+        <Setter Property="Padding" Value="10,7" />
+        <Setter Property="Background" Value="#ffffff" />
+        <Setter Property="Foreground" Value="#b0b9c6" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePickerTextBox">
+                    <Border
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#e0e6ed"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        SnapsToDevicePixels="True">
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="False"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#d9d9d9" />
+                        </Trigger>
+
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="#d9d9d9" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="tb_TextBoxInput" TargetType="TextBox">
@@ -227,7 +265,18 @@
         </Style.Triggers>
     </Style>
 
-    <!--  OverViewThemes  -->
+    <Style x:Key="MenuButtonThemeSecondary" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="50,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#22202f" />
+                <Setter Property="Foreground" Value="#ffffff" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--  Button  -->
     <Style x:Key="bt_Update" TargetType="Button">
         <Setter Property="Background" Value="#462AD8" />
         <Setter Property="Template">
@@ -250,6 +299,27 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="bt_DarkThemedButton" TargetType="Button">
+        <Setter Property="Background" Value="#462AD8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        Width="{TemplateBinding Width}"
+                        Height="40"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#28AEED" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key="bt_Delete" TargetType="Button">
         <Setter Property="Background" Value="#ffcd5c5c" />

@@ -15,13 +15,13 @@ namespace KK.ViewModels
     {
 
         // Private backing fields
-        private readonly MembershipRepository _membershipRepo;
         private readonly CustomerRepository _customerRepo;
 
         private Membership _SelectedMembership;
         private Customer _SelectedCustomer;
         private Entry _selectedEntry;
         private ServiceItem _selectedServiceItem;
+        private ObservableCollection<Customer> _customers;
 
         public ServiceItem SelectedServiceItem
         {
@@ -59,25 +59,23 @@ namespace KK.ViewModels
                 OnPropertyChanged(nameof(SelectedMembership));
             }
         }
-        public ObservableCollection<Membership> Memberships
+        public ObservableCollection<Customer> Customers
         {
-            get { return _memberships; }
+            get { return _customers; }
             set 
             {
-                _memberships = value; 
-                OnPropertyChanged(nameof(Membership));
+                _customers = value; 
+                OnPropertyChanged(nameof(Customers));
             }
         }
 
-        private ObservableCollection<Membership> _memberships { get; set; }
 
 
         public StartViewModel()
         {
-            _membershipRepo = new MembershipRepository();
             _customerRepo = new CustomerRepository();
-            _membershipRepo.GetAllWithCustomers();
-            Memberships = _membershipRepo.Memberships;
+            _customerRepo.GetAll();
+            Customers = _customerRepo.Customers;
         }
 
         private void GetCustomerDetails()
