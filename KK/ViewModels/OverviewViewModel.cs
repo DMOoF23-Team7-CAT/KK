@@ -45,7 +45,7 @@ namespace KK.ViewModels
             _customerRepo = new CustomerRepository();
 
             // Create a new ObservableCollection and add items from the List
-            Customers = new ObservableCollection<Customer>(_customerRepo.GetCustomersWithMembershipsAndEntries());
+            //Customers = new ObservableCollection<Customer>(_customerRepo.GetCustomersWithMembershipsAndEntries());
         }
 
         public void UpdateCustomer()

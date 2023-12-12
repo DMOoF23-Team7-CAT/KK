@@ -3,6 +3,7 @@ using KK.Models.Entities.Enum;
 using KK.ViewModels;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace KK.Views
 {
@@ -140,14 +141,14 @@ namespace KK.Views
             Close();
         }
 
-/*        private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
-            if (result == MessageBoxResult.OK)
-            {
-                customerVM.Add();
-            }
-        }*/
+        /*        private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
+                {
+                    MessageBoxResult result = MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        customerVM.Add();
+                    }
+                }*/
 
         private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
         {
@@ -162,20 +163,39 @@ namespace KK.Views
                 qualification = 2;
             }
 
-            customerVM.NewCustomerName = tb_TxtName.Text;
-            customerVM.NewCustomerDateOfBirth = (System.DateTime)dp_DateOfBirth.SelectedDate;
-            customerVM.NewCustomerPhone = tb_TxtPhone.Text;
-            customerVM.NewCustomerEmail = tb_TxtMail.Text;
-            customerVM.NewCustomerHasSignedDisclaimer = (bool)cb_disclaimer.IsChecked;
-            customerVM.NewCustomerQualification = qualification;
-
-
-            MessageBoxResult result = MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
-            if (result == MessageBoxResult.OK)
+            try
             {
-                customerVM.Add();
+                if (string.IsNullOrWhiteSpace(tb_TxtName.Text))
+                {
+                    MessageBox.Show("Navn skal udfyldes", "Advarsel", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return; 
+                }
+                if (dp_DateOfBirth.SelectedDate == null)
+                {
+                    MessageBox.Show("Fødselsdato skal udfyldes", "Advarsel", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                customerVM.NewCustomerName = tb_TxtName.Text;
+                customerVM.NewCustomerDateOfBirth = (System.DateTime)dp_DateOfBirth.SelectedDate;
+                customerVM.NewCustomerPhone = tb_TxtPhone.Text;
+                customerVM.NewCustomerEmail = tb_TxtMail.Text;
+                customerVM.NewCustomerHasSignedDisclaimer = (bool)cb_disclaimer.IsChecked;
+                customerVM.NewCustomerQualification = qualification;
+
+                MessageBoxResult result = MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (result == MessageBoxResult.OK)
+                {
+                    customerVM.Add();
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fej ved oprettelse af ny kunde generede fejlkode \n\n\n{ex.Message}", "Fejl ved oprettelse", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
 
 
     }
