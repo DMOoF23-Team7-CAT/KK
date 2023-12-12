@@ -219,7 +219,7 @@ namespace KK.Models.Repositories
         private static Customer MapCustomerMembershipEntry(SqlDataReader reader)
         {
             Customer customer = MapCustomer(reader);
-            customer.Entries = new List<Entry> // 
+            customer.Entries = new List<Entry>  
                 {
                     new Entry
                     {

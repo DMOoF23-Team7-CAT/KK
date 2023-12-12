@@ -28,6 +28,7 @@ namespace KK.Models.Entities
         // Constructor
         public Customer()
         {
+
         }
 
         // Method to Add Entry to Entries
