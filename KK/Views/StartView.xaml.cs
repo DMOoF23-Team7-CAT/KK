@@ -37,7 +37,6 @@ namespace KK.Views
             if (lv_Overview.SelectedItem != null)
             {
                 startVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
-
             }
         }
 
