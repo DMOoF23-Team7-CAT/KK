@@ -10,18 +10,6 @@ namespace KK.ViewModels
     {
 
         private readonly CustomerRepository _customerRepo;
-       
-/*        private Customer _newCustomer;
-
-        public Customer NewCustomer
-        {
-            get { return _newCustomer ?? (_newCustomer = new Customer()); }
-            set
-            {
-                _newCustomer = value;
-                OnPropertyChanged(nameof(NewCustomer));
-            }
-        }*/
 
         public string NewCustomerName { get; set; }
         public string NewCustomerPhone { get; set; }
@@ -65,92 +53,6 @@ namespace KK.ViewModels
 
             return customer;
         }
-
-        
-        /*        public void Add(string name, DateTime dateOfBirth, string phone, string email, bool disclaimer, Qualification qualification)
-                {
-                    NewCustomer.Name = name;
-                    NewCustomer.Phone = phone;
-                    NewCustomer.Email = email;
-                    NewCustomer.HasSignedDisclaimer = disclaimer;
-                    NewCustomer.Qualification = qualification;
-
-                    _customerRepo.Add(NewCustomer);
-
-                }*/
-
-
-
-
-        //      private string _boundCustomerName;
-
-        //      public string BoundCustomerName
-        //      {
-        //          get { return _boundCustomerName; }
-        //          set
-        //          {
-        //              _boundCustomerName = value;
-        //              OnPropertyChanged();
-        //          }
-        //}
-
-        //      private string _boundCustomerDateOfBirth;
-
-        //      public string BoundCustomerDateOfBirth
-        //      {
-        //          get { return _boundCustomerDateOfBirth; }
-        //          set
-        //          {
-        //              _boundCustomerDateOfBirth = value;
-        //              OnPropertyChanged();
-        //          }
-        //      }
-
-        //      private string _boundCustomerPhone;
-
-        //      public string BoundCustomerPhone
-        //      {
-        //          get { return _boundCustomerPhone; }
-        //          set
-        //          {
-        //              _boundCustomerPhone = value;
-        //              OnPropertyChanged();
-        //          }
-        //      }
-
-        //      private string _boundCustomerEmail;
-
-        //      public string BoundCustomerEmail
-        //      {
-        //          get { return _boundCustomerEmail; }
-        //          set
-        //          {
-        //              _boundCustomerEmail = value;
-        //              OnPropertyChanged();
-        //          }
-        //      }
-
-        //      private bool _boundCustomerHasSignedDisclaimer;
-
-        //      public bool BoundCustomerHasSignedDisclaimer
-        //      {
-        //          get { return _boundCustomerHasSignedDisclaimer; }
-        //          set
-        //          {
-        //              _boundCustomerHasSignedDisclaimer = value;
-        //              OnPropertyChanged(nameof(BoundCustomerHasSignedDisclaimer));
-        //          }
-        //      }
-
-
-
-
-
-
-
-
-
-
 
 
     }
