@@ -268,14 +268,17 @@
                     Text="Betaling" />
 
                 <!--  Row 3  -->
-                <Grid Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,20,0">
+                <Grid
+                    Grid.Row="3"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid
-                        Width="200"
                         Grid.Row="0"
+                        Width="200"
                         Margin="20,0"
                         HorizontalAlignment="Center"
                         Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
@@ -288,12 +291,12 @@
                         <TextBox
                             x:Name="tb_Total"
                             Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"/>
+                            Style="{StaticResource tb_TextBoxInput}" />
                     </Grid>
-                    
+
                     <Button
-                        Width="200"
                         Grid.Row="1"
+                        Width="200"
                         Margin="0,0,0,0"
                         Click="bt_CheckIn_Click"
                         Style="{StaticResource bt_AddButton}">
@@ -316,40 +319,56 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <!--  CheckIn Button  -->
-                <StackPanel
-                    Grid.Row="0"
-                    Margin="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Orientation="Horizontal">
+                <!--  Row 0  -->
+                <StackPanel HorizontalAlignment="Right" Margin="20">
                     <Button
-                        Margin="0,0,10,0"
-                        Click="bt_CheckIn_Click"
-                        Style="{StaticResource bt_AddButton}">
-                        <TextBlock Text="Check Ind" />
+                    Width="180"
+                    Margin="0,0"
+                    Style="{StaticResource bt_DarkThemedButton}">
+                        <TextBlock Text="Ny Kunde" FontWeight="Bold"/>
                     </Button>
                 </StackPanel>
 
-                <!--  Search Box  -->
-                <Grid
+
+                <!--  Row 1  -->
+                <StackPanel
                     Grid.Row="1"
-                    Width="250"
-                    Margin="20,0"
+                    Margin="0,10"
                     HorizontalAlignment="Center"
-                    Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                    <TextBlock
-                        Width="170"
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                        Text="Søg på kunde navn"
-                        Visibility="{Binding ElementName=tb_SearchBox, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
-                    <TextBox
-                        x:Name="tb_SearchBox"
-                        Foreground="Black"
-                        Style="{StaticResource tb_TextBoxInput}"
-                        TextChanged="tb_SearchBox_TextChanged" />
-                </Grid>
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <!--  Search Box  -->
+                    <Grid
+                        Grid.Row="1"
+                        Width="180"
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                        <TextBlock
+                            Width="170"
+                            Margin="0"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                            Text="Søg på kunde navn"
+                            Visibility="{Binding ElementName=tb_SearchBox, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                        <TextBox
+                            x:Name="tb_SearchBox"
+                            Margin="0"
+                            Foreground="Black"
+                            Style="{StaticResource tb_TextBoxInput}"
+                            TextChanged="tb_SearchBox_TextChanged" />
+                    </Grid>
+                    <!--  Cheeack In Button  -->
+                    <Button
+                        Width="180"
+                        Margin="0,0,10,0"
+                        Click="bt_CheckIn_Click"
+                        Style="{StaticResource bt_AddButton}">
+                        <TextBlock Margin="0" Text="Check Ind" />
+                    </Button>
+                </StackPanel>
+
+
 
                 <!--  Customer ListView  -->
                 <StackPanel Grid.Row="2">
