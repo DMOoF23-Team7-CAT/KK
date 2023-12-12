@@ -1,4 +1,7 @@
-﻿using KK.ViewModels;
+﻿using KK.Models.Entities;
+using KK.Models.Entities.Enum;
+using KK.ViewModels;
+using System;
 using System.Windows;
 
 namespace KK.Views
@@ -137,14 +140,43 @@ namespace KK.Views
             Close();
         }
 
-        private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
+/*        private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
             if (result == MessageBoxResult.OK)
             {
                 customerVM.Add();
             }
+        }*/
+
+        private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            int qualification = 0;
+
+            if ((bool)cb_top.IsChecked)
+            {
+                qualification = 1;
+            }
+            else if ((bool)cb_lead.IsChecked)
+            {
+                qualification = 2;
+            }
+
+            customerVM.NewCustomerName = tb_TxtName.Text;
+            customerVM.NewCustomerDateOfBirth = (System.DateTime)dp_DateOfBirth.SelectedDate;
+            customerVM.NewCustomerPhone = tb_TxtPhone.Text;
+            customerVM.NewCustomerEmail = tb_TxtMail.Text;
+            customerVM.NewCustomerHasSignedDisclaimer = (bool)cb_disclaimer.IsChecked;
+            customerVM.NewCustomerQualification = qualification;
+
+
+            MessageBoxResult result = MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (result == MessageBoxResult.OK)
+            {
+                customerVM.Add();
+            }
         }
+
 
     }
 }
