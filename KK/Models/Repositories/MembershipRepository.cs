@@ -143,7 +143,8 @@ namespace KK.Models.Repositories
             }
         }
 
-        public IEnumerable<Membership> GetAllWithCustomers()
+        // should get deleted
+/*        public IEnumerable<Membership> GetAllWithCustomers()
         {
             Memberships = new ObservableCollection<Membership>();
 
@@ -166,7 +167,7 @@ namespace KK.Models.Repositories
             }
             
             return Memberships;
-        }
+        }*/
 
 
         private static Membership MapDataToMembership(SqlDataReader reader)
@@ -183,7 +184,7 @@ namespace KK.Models.Repositories
             };
         }
 
-        private static Membership MapDataToMembershipWithCustomer(SqlDataReader reader)
+/*        private static Membership MapDataToMembershipWithCustomer(SqlDataReader reader)
         {
             Membership membership = new Membership
             {
@@ -205,6 +206,6 @@ namespace KK.Models.Repositories
             };
 
             return membership;
-        }
+        }*/
     }
 }

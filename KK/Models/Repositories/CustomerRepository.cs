@@ -46,7 +46,6 @@ namespace KK.Models.Repositories
             // Adds Entity to Collection
             if (!Customers.Contains(entity)) { Customers.Add(entity); }
         }
-
         public IEnumerable<Customer> GetAll()
         {
             Customers = new ObservableCollection<Customer>();
@@ -70,31 +69,6 @@ namespace KK.Models.Repositories
 
             return Customers;
         }
-
-        public IEnumerable<Customer> GetCustomersWithMembershipsAndEntries()
-        {
-            Customers = new ObservableCollection<Customer>();
-            // Retreives all entities from database
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("kk_spGetCustomersAndMembershipsAndEntries", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Customers.Add(MapCustomerMembershipEntry(reader));
-                        }
-                    }
-                }
-            }
-
-            return Customers;
-        }
-
         public Customer GetById(int id)
         {
             Customer customer = null;
@@ -119,8 +93,29 @@ namespace KK.Models.Repositories
 
             return customer;
         }
+        public IEnumerable<Customer> GetCustomersWithMembershipsAndEntries()
+        {
+            Customers = new ObservableCollection<Customer>();
+            // Retreives all entities from database
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
 
+                using (SqlCommand command = new SqlCommand("kk_spGetCustomersAndMembershipsAndEntries", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Customers.Add(MapCustomerMembershipEntry(reader));
+                        }
+                    }
+                }
+            }
 
+            return Customers;
+        }
         public void Remove(Customer entity)
         {
             // Removes entity from Database
@@ -137,7 +132,6 @@ namespace KK.Models.Repositories
             // Removes entity from Collection
             if (Customers.Contains(entity)) { Customers.Remove(entity); }
         }
-
         public void Update(Customer entity)
         {
             // Updates Databse
@@ -219,7 +213,7 @@ namespace KK.Models.Repositories
         private static Customer MapCustomerMembershipEntry(SqlDataReader reader)
         {
             Customer customer = MapCustomer(reader);
-            customer.Entries = new List<Entry> // 
+            customer.Entries = new List<Entry> 
                 {
                     new Entry
                     {

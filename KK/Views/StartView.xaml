@@ -32,75 +32,84 @@
         </Border>
 
         <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <StackPanel
-                x:Name="sp_CheckIn"
-                Grid.Column="2"
-                Margin="0,20">
+                <!--  Search Box  -->
 
-                <Button
-                    x:Name="bt_CheckIn"
-                    Width="250"
-                    Height="40"
-                    Click="bt_CheckIn_Click"
-                    Content="Checkind" />
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Rectangle StrokeThickness="1" />
+                    <TextBlock
+                        x:Name="tl_Search"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="White"
+                        Text="Søg" />
+                    <TextBox
+                        x:Name="tb_SearchBox"
+                        Width="200"
+                        Height="30"
+                        Margin="0,0,10,0"
+                        Padding="5"
+                        HorizontalAlignment="Right"
+                        Background="Transparent"
+                        BorderThickness="1"
+                        FontSize="15"
+                        Foreground="White"
+                        Text=""
+                        TextChanged="tb_SearchBox_TextChanged">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10" />
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </StackPanel>
 
-                <TextBox
-                    x:Name="tb_CheckIn"
-                    Width="380"
-                    Height="30"
-                    Margin="20"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    TextChanged="TextBox_TextChanged" />
-
-                <DataGrid
-                    x:Name="dg_CheckIn"
-                    Width="380"
-                    Height="535"
-                    AlternatingRowBackground="LightGray"
-                    AutoGenerateColumns="False"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    CanUserAddRows="False"
-                    CanUserReorderColumns="False"
-                    CanUserSortColumns="True"
-                    GridLinesVisibility="None"
-                    HorizontalScrollBarVisibility="Hidden"
-                    IsTextSearchEnabled="True"
-                    ItemsSource="{Binding Memberships, Mode=TwoWay}"
-                    RowHeaderWidth="0"
-                    SelectionChanged="dg_CheckIn_SelectionChanged"
-                    VerticalScrollBarVisibility="Auto"
-                    IsReadOnly="True"
-                    >
-
-                    <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="35"
-                            Binding="{Binding CustomerId}"
-                            Header="Id" />
-                        <DataGridTextColumn
-                            Width="100"
-                            Binding="{Binding Customer.Name}"
-                            Header="Navn" />
-                        <DataGridTextColumn
-                            Width="83"
-                            Binding="{Binding Customer.DateOfBirth, StringFormat=dd/MM/yyyy}"
-                            Header="Fødselsdag" />
-                        <DataGridTextColumn
-                            Width="83"
-                            Binding="{Binding StartDate, StringFormat=dd/MM/yyyy}"
-                            Header="Start Dato" />
-                        <DataGridTextColumn
-                            Width="83"
-                            Binding="{Binding EndDate, StringFormat=dd/MM/yyyy}"
-                            Header="Slut Dato" />
-                    </DataGrid.Columns>
-
-                </DataGrid>
-
-            </StackPanel>
+                
+                
+                <StackPanel Grid.Row="2">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView
+                            x:Name="lv_Overview"
+                            Height="500"
+                            HorizontalAlignment="center"
+                            ItemsSource="{Binding Customers}"
+                            SelectionChanged="lv_Overview_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn
+                                        Width="40"
+                                        DisplayMemberBinding="{Binding Id}"
+                                        Header="Id" />
+                                    <GridViewColumn
+                                        Width="80"
+                                        DisplayMemberBinding="{Binding Name}"
+                                        Header="Navn" />
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Phone}"
+                                        Header="Telefon" />
+                                    <GridViewColumn
+                                        Width="150"
+                                        DisplayMemberBinding="{Binding Email}"
+                                        Header="Email" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </StackPanel>
+            </Grid>
         </Border>
+
     </Grid>
 </UserControl>
