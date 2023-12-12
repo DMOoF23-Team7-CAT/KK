@@ -10,17 +10,18 @@ namespace KK.ViewModels
     {
 
         private readonly CustomerRepository _customerRepo;
-        private Customer _newCustomer;
+       
+/*        private Customer _newCustomer;
 
         public Customer NewCustomer
         {
-            get { return _newCustomer; }
+            get { return _newCustomer ?? (_newCustomer = new Customer()); }
             set
             {
                 _newCustomer = value;
                 OnPropertyChanged(nameof(NewCustomer));
             }
-        }
+        }*/
 
         public string NewCustomerName { get; set; }
         public string NewCustomerPhone { get; set; }
@@ -36,26 +37,33 @@ namespace KK.ViewModels
 
         public void Add()
         {
-            SetNewCustomer();
-            _customerRepo.Add(NewCustomer);
+            _customerRepo.Add(SetNewCustomer());
         }
 
-        private void SetNewCustomer()
+        private Customer SetNewCustomer()
         {
-            _newCustomer.Name = NewCustomerName;
-            _newCustomer.Phone = NewCustomerPhone;
-            _newCustomer.Email = NewCustomerEmail;
-            _newCustomer.DateOfBirth = NewCustomerDateOfBirth;
-            _newCustomer.HasSignedDisclaimer = NewCustomerHasSignedDisclaimer;
+            Qualification qualification = new Qualification();
 
             if (Enum.TryParse(typeof(Qualification), NewCustomerQualification.ToString(), out var parsedQualification))
             {
-                NewCustomer.Qualification = (Qualification)parsedQualification;
+                qualification = (Qualification)parsedQualification;
             }
             else
             {
-                NewCustomer.Qualification = Qualification.None;
+                qualification = Qualification.None;
             }
+
+            Customer customer = new Customer
+            {
+                Name = NewCustomerName,
+                Phone = NewCustomerPhone,
+                Email = NewCustomerEmail,
+                DateOfBirth = NewCustomerDateOfBirth,
+                HasSignedDisclaimer = NewCustomerHasSignedDisclaimer,
+                Qualification = qualification
+            };
+
+            return customer;
         }
 
         
