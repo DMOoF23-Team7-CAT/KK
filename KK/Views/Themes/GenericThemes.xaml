@@ -101,6 +101,38 @@
         </Setter>
     </Style>
 
+    <Style x:Key="bb_DatePickerBorder" TargetType="Border">
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="Background" Value="#ffffff" />
+        <Setter Property="BorderBrush" Value="#e0e6ed" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Margin" Value="0,10" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#d9d9d9" />
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="BorderBrush" Value="#d9d9d9" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="dp_DatePickerInBorder" TargetType="DatePicker">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#d9d9d9" />
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="BorderBrush" Value="#d9d9d9" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
     <Style x:Key="tb_TextBoxInput" TargetType="TextBox">
         <Setter Property="Padding" Value="10,7" />
         <Setter Property="Background" Value="#ffffff" />
