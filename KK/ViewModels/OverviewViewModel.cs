@@ -54,7 +54,8 @@ namespace KK.ViewModels
         public void DeleteCustomer()
         {
             _customerRepo.Remove(SelectedCustomer);
-            Customers = new ObservableCollection<Customer>(_customerRepo.GetCustomersWithMembershipsAndEntries());
+            _customerRepo.GetAllCustomersMemberships();
+            Customers = _customerRepo.Customers;
         }
 
         public void GetDataForSelectedCustomer()

@@ -89,7 +89,7 @@ namespace KK.Views
         {
             tb_SearchBox.Clear();
             tb_Name.Clear();
-            tb_DOB.Clear();
+            //tb_DOB.Clear();
             tb_Email.Clear();
             tb_Phone.Clear();
             tb_Qualification.Clear();
