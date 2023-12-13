@@ -143,33 +143,6 @@ namespace KK.Models.Repositories
             }
         }
 
-        // should get deleted
-/*        public IEnumerable<Membership> GetAllWithCustomers()
-        {
-            Memberships = new ObservableCollection<Membership>();
-
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("kk_spGetMembershipsWithCustomerDetails", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Memberships.Add(MapDataToMembershipWithCustomer(reader));
-                        }
-                    }
-                }
-            }
-            
-            return Memberships;
-        }*/
-
-
         private static Membership MapDataToMembership(SqlDataReader reader)
         {
             return new Membership
@@ -179,33 +152,7 @@ namespace KK.Models.Repositories
                 EndDate = Convert.ToDateTime(reader["EndDate"]),
                 IsActive = Convert.ToBoolean(reader["IsActive"]),
                 CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                Customer = null // Set Customer property if needed
-                // Add other mapping as needed
             };
         }
-
-/*        private static Membership MapDataToMembershipWithCustomer(SqlDataReader reader)
-        {
-            Membership membership = new Membership
-            {
-                Id = Convert.ToInt32(reader["MembershipId"]),
-                StartDate = Convert.ToDateTime(reader["MembershipStartDate"]),
-                EndDate = Convert.ToDateTime(reader["MembershipEndDate"]),
-                IsActive = Convert.ToBoolean(reader["IsActive"]),
-                CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                Customer = new Customer
-                {
-                    Id = Convert.ToInt32(reader["CustomerId"]),
-                    Name = Convert.ToString(reader["CustomerName"]),
-                    DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
-                    Phone = Convert.ToString(reader["Phone"]),
-                    Email = Convert.ToString(reader["Email"]),
-                    Qualification = (Qualification)Convert.ToInt32(reader["Qualification"]),
-                    HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"]),
-                }
-            };
-
-            return membership;
-        }*/
     }
 }

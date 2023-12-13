@@ -145,7 +145,7 @@ namespace KK.Models.Repositories
             }
         }
 
-        // Get Customer and all the coresponding tables in the database usses mapping tables to set the data
+        // Get Customer by id and Membership, Entries, Serviceitem related to that customer
         public Customer GetCustomer(int customerId)
         {
             Customer customer = null;
@@ -163,37 +163,12 @@ namespace KK.Models.Repositories
                     {
                         if (reader.Read())
                         {
-                            customer = MapDataToCustomer(reader);
+                            customer = MapDataToCustomerWithMembershipEntriesServiceItem(reader);
                         }
                     }
                 }
             }
             return customer;
-        }
-
-        // Get List of customers with coresponding memberships and entries
-        public IEnumerable<Customer> GetCustomersWithMembershipsAndEntries()
-        {
-            Customers = new ObservableCollection<Customer>();
-            // Retreives all entities from database
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("kk_spGetCustomersAndMembershipsAndEntries", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Customers.Add(MapCustomerMembershipEntry(reader));
-                        }
-                    }
-                }
-            }
-
-            return Customers;
         }
 
         // Get List of Customers and memberships
@@ -235,33 +210,7 @@ namespace KK.Models.Repositories
                 HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"])
             };
         }
-
-        private static Customer MapCustomerMembershipEntry(SqlDataReader reader)
-        {
-            Customer customer = MapCustomer(reader);
-            customer.Entries = new List<Entry> 
-                {
-                    new Entry
-                    {
-                        Id = Convert.ToInt32(reader["EntryId"]),
-                        CheckInTime = Convert.ToDateTime(reader["EntryCheckInTime"]),
-                        Price = Convert.ToDecimal(reader["EntryPrice"]),
-                        CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                    }
-                };
-            customer.Membership = new Membership
-            {
-                Id = reader["MembershipId"] is DBNull ? 0 : Convert.ToInt32(reader["MembershipId"]),
-                StartDate = reader["MembershipStartDate"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(reader["MembershipStartDate"]),
-                EndDate = reader["MembershipEndDate"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(reader["MembershipEndDate"]),
-                IsActive = Convert.ToBoolean(reader["IsActive"]),
-            };
-
-            return customer;
-        }
-
-
-        private static Customer MapDataToCustomer(SqlDataReader reader)
+        private static Customer MapDataToCustomerWithMembershipEntriesServiceItem(SqlDataReader reader)
         {
             Customer customer = new Customer
             {
@@ -278,8 +227,6 @@ namespace KK.Models.Repositories
 
             return customer;
         }
-
-
 
         private static Membership MapDataToMembership(SqlDataReader reader)
         {

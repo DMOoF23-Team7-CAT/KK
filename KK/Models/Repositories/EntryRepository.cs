@@ -147,8 +147,6 @@ namespace KK.Models.Repositories
                 CheckInTime = Convert.ToDateTime(reader["CheckInTime"]),
                 Price = (decimal)reader["Price"],
                 CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                Customer = null // Set Customer property if needed
-                                // Add other mapping as needed
             };
         }
     }

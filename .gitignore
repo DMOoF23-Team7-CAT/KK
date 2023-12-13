@@ -4,3 +4,7 @@
 
 /Test/bin/Debug/net6.0-windows
 /Test/obj
+/Test/obj/Debug/net6.0-windows/Test.assets.cache
+/Test/obj/Debug/net6.0-windows/Test.csproj.AssemblyReference.cache
+/Test/obj/Debug/net6.0-windows/Test.GeneratedMSBuildEditorConfig.editorconfig
+/Test/bin/Debug/net6.0-windows/CoverletSourceRootsMapping
