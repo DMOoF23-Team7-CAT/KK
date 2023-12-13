@@ -5,7 +5,7 @@
     xmlns:ViewModel="clr-namespace:KK.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:KK.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
     d:DesignHeight="704"
     d:DesignWidth="1346"
     mc:Ignorable="d">
@@ -25,25 +25,174 @@
         <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition />                   
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition />                   
                 </Grid.RowDefinitions>
 
-                <!--  Header  -->
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0">
+                    <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="23"
+                    FontWeight="Bold"
+                    Foreground="#FFFFFF"
+                    Text="Oversigt" />
+                    
+                </StackPanel>
+                
+                <!--Expander Header Medlemskab-->
+                
+                <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" Background="Transparent">
+                    <Expander x:Name="ep_member" Foreground="White" Width="300" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Expander.Header >
+                            <Border Background="#7F7F7F" CornerRadius="10">
+                                <TextBlock Text="Medlemskab" FontSize="20" TextAlignment="Center" FontWeight="DemiBold" Width="273"/>
+                            </Border>
+                        </Expander.Header>
+                        <Expander.Content >
+                            <Border Style="{StaticResource BorderGradientStyle}" Margin="23,10,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="0">
+                                        <TextBlock Text="12 måneder" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1">
+                                        <TextBlock Text="3 måneder" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2">
+                                        <TextBlock Text="1 måned" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup"/>
+                                        <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup"/>
+                                        <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup"/>
+                                        <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            
+                        </Expander.Content>                   
+                    </Expander>
+                    
+                    <!--Expander Header Billet type-->
+                    
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="2"  HorizontalAlignment="Center">
+                    <Expander Foreground="White" Width="300" Margin="0,20,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Expander.Header >
+                            <Border Background="#7F7F7F" CornerRadius="10">
+                                <TextBlock Text="Billettype" FontSize="20" TextAlignment="Center" FontWeight="DemiBold" Width="273"/>                                
+                            </Border>
+                        </Expander.Header>
+                        <Expander.Content >
+                            <Border Style="{StaticResource BorderGradientStyle}" Margin="23,10,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="0">
+                                        <TextBlock Text="Titurskort" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1">
+                                        <TextBlock Text="Børnebillet" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2">
+                                        <TextBlock Text="Enkeltbillet" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0">
+                                        <Slider x:Name="sl_10turs" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                        <Label Content="{Binding Value, ElementName=sl_10turs}" Foreground="White"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1">
+                                        <Slider x:Name="sl_child" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                        <Label Content="{Binding Value, ElementName=sl_child}" Foreground="White"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2">
+                                        <Slider x:Name="sl_single" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                        <Label Content="{Binding Value, ElementName=sl_single}" Foreground="White"/>
+                                    </StackPanel>
+
+                                </Grid>
+                            </Border>
+                        </Expander.Content>
+                    </Expander>
+                    
+                    <!--Expander Header Udstyr-->
+
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Row="3"  HorizontalAlignment="Center">
+                    <Expander Foreground="White" Width="300" Margin="0,20,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Expander.Header >
+                            <Border Background="#7F7F7F" CornerRadius="10">
+                                <TextBlock Text="Udstyr" FontSize="20" TextAlignment="Center" FontWeight="DemiBold" Width="273"/>
+                            </Border>
+                        </Expander.Header>
+                        <Expander.Content >
+                            <Border Style="{StaticResource BorderGradientStyle}" Margin="23,10,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="0">
+                                        <TextBlock Text="Klatresko" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1">
+                                        <TextBlock Text="Klatrereb" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2">
+                                        <TextBlock Text="Klatresele" FontSize="15"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0">
+                                        <Slider x:Name="sl_shoe" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                        <Label Content="{Binding Value, ElementName=sl_shoe}" Foreground="White"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1">
+                                        <Slider x:Name="sl_rope" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                        <Label Content="{Binding Value, ElementName=sl_rope}" Foreground="White"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2">
+                                        <Slider x:Name="sl_belt" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                        <Label Content="{Binding Value, ElementName=sl_belt}" Foreground="White"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Expander.Content>
+                    </Expander>
+
+                </StackPanel>
+
+                <!--  Header  --><!--
                 <TextBlock
                     Grid.Row="0"
                     Grid.Column="1"
@@ -54,7 +203,7 @@
                     Foreground="#FFFFFF"
                     Text="Oversigt" />
 
-                <!--  Row 2  -->
+                --><!--  Row 2  --><!--
                 <TextBlock
                     Grid.Row="1"
                     Grid.Column="0"
@@ -83,7 +232,7 @@
                     Foreground="#FFFFFF"
                     Text="Antal" />
 
-                <!--  Row 2  -->
+                --><!--  Row 2  --><!--
                 <TextBlock
                     Grid.Row="2"
                     Grid.Column="0"
@@ -101,7 +250,7 @@
                     Foreground="#FFFFFF"
                     Text="Medlemskab" />
 
-                <!--  Row 3  -->
+                --><!--  Row 3  --><!--
                 <TextBlock
                     Grid.Row="3"
                     Grid.Column="0"
@@ -119,7 +268,7 @@
                     Foreground="#FFFFFF"
                     Text="Medlemskab" />
 
-                <!--  Row 4  -->
+                --><!--  Row 4  --><!--
                 <TextBlock
                     Grid.Row="4"
                     Grid.Column="0"
@@ -137,7 +286,7 @@
                     Foreground="#FFFFFF"
                     Text="Medlemskab" />
 
-                <!--  Row 5  -->
+                --><!--  Row 5  --><!--
                 <TextBlock
                     Grid.Row="5"
                     Grid.Column="0"
@@ -155,7 +304,7 @@
                     Foreground="#FFFFFF"
                     Text="Billet" />
 
-                <!--  Row 6  -->
+                --><!--  Row 6  --><!--
                 <TextBlock
                     Grid.Row="6"
                     Grid.Column="0"
@@ -173,7 +322,7 @@
                     Foreground="#FFFFFF"
                     Text="Billet" />
 
-                <!--  Row 7  -->
+                --><!--  Row 7  --><!--
                 <TextBlock
                     Grid.Row="7"
                     Grid.Column="0"
@@ -191,7 +340,7 @@
                     Foreground="#FFFFFF"
                     Text="Billet" />
 
-                <!--  Row 8  -->
+                --><!--  Row 8  --><!--
                 <TextBlock
                     Grid.Row="8"
                     Grid.Column="0"
@@ -209,7 +358,7 @@
                     Foreground="#FFFFFF"
                     Text="Udstyr" />
 
-                <!--  Row 9  -->
+                --><!--  Row 9  --><!--
                 <TextBlock
                     Grid.Row="9"
                     Grid.Column="0"
@@ -227,7 +376,7 @@
                     Foreground="#FFFFFF"
                     Text="Udstyr" />
 
-                <!--  Row 10  -->
+                --><!--  Row 10  --><!--
                 <TextBlock
                     Grid.Row="10"
                     Grid.Column="0"
@@ -243,7 +392,7 @@
                     VerticalAlignment="Center"
                     FontSize="18"
                     Foreground="#FFFFFF"
-                    Text="Udstyr" />
+                    Text="Udstyr" />-->
 
             </Grid>
         </Border>
@@ -300,7 +449,7 @@
                         Margin="0,0,0,0"
                         Click="bt_CheckIn_Click"
                         Style="{StaticResource bt_AddButton}">
-                        <TextBlock Text="Beræft Betaling" />
+                        <TextBlock Text="Bekræft Betaling" />
                     </Button>
                 </Grid>
 

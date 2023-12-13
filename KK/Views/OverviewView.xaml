@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KK.Views"
+             xmlns:local="clr-namespace:KK.Views" 
+             xmlns:Themes="clr-namespace:KK.Views.Themes" xmlns:viewmodels="clr-namespace:KK.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:OverviewViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <CollectionViewSource x:Key="CustomersView" Source="{Binding Customers}" />
+        <Themes:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     </UserControl.Resources>
 
     <Grid>
@@ -71,7 +73,7 @@
 
                 <!-- Grid.Row 0 Customer details-->
 
-                <StackPanel Grid.Row="0" >
+                <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
                     <DockPanel>
                         <TextBlock Text="Kundeoplysninger" FontSize="15" Foreground="White" FontWeight="Bold" Margin="0,10,0,20" HorizontalAlignment="Center"/>
                     </DockPanel>
@@ -97,26 +99,9 @@
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
                         <TextBlock Text="Fraskrivningserklæring signeret?" Foreground="White" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold"/>
-                        <DockPanel HorizontalAlignment="Center">
-                            <ComboBox Width="50" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer.HasSignedDisclaimer}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Style>
-                                                <Style TargetType="{x:Type TextBlock}">
-                                                    <Setter Property="Text" Value="Nej" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding SelectedCustomer.HasSignedDisclaimer}" Value="True">
-                                                            <Setter Property="Text" Value="Ja" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-
+                        <DockPanel HorizontalAlignment="Center" Margin="10,0,0,0">
+                            <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup" IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Mode=TwoWay}"/>
+                            <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}" />
                         </DockPanel>
                     </DockPanel>
                 </StackPanel>
@@ -135,11 +120,11 @@
                     </DockPanel>
                     <DockPanel Margin="20,0,0,3">
                         <TextBlock Text="Startdato" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <DatePicker x:Name="dp_StartDate"  HorizontalAlignment="Center" SelectedDate="{Binding SelectedCustomer.Membership.StartDate}"/>
+                        <DatePicker x:Name="dp_StartDate"  HorizontalAlignment="Center" SelectedDate="{Binding SelectedCustomer.Membership.StartDate}" IsHitTestVisible="False" />
                     </DockPanel>
                     <DockPanel Margin="20,10,-5,3">
                         <TextBlock Text="Slutdato" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <DatePicker x:Name="dp_EndDate"  HorizontalAlignment="Center" SelectedDate="{Binding SelectedCustomer.Membership.EndDate}"/>
+                        <DatePicker x:Name="dp_EndDate"  HorizontalAlignment="Center" SelectedDate="{Binding SelectedCustomer.Membership.EndDate}" IsHitTestVisible="False"/>
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
                         <TextBlock Text="Medlemskab status" Foreground="White" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold"/>
