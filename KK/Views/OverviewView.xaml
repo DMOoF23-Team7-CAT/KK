@@ -193,8 +193,7 @@
                                                 x:Name="tb_Qualification"
                                                 Margin="20,0"
                                                 Foreground="Black"
-                                                Style="{StaticResource tb_TextBoxInput}"
-                                                Text="{Binding SelectedCustomer.Qualification, Mode=TwoWay}" />
+                                                Style="{StaticResource tb_TextBoxInput}" />
                                         </Grid>
                                     </Expander.Header>
                                     <Expander.Content>
@@ -212,19 +211,22 @@
                                                 Grid.Row="0"
                                                 Content="Ingen"
                                                 FontSize="13"
-                                                FontWeight="DemiBold" />
+                                                FontWeight="DemiBold" 
+                                                Checked="cb_QualificationNone_Checked"/>
                                             <CheckBox
                                                 x:Name="cb_QualificationTop"
                                                 Grid.Row="1"
                                                 Content="Topreb"
                                                 FontSize="13"
-                                                FontWeight="DemiBold" />
+                                                FontWeight="DemiBold" 
+                                                Checked="cb_QualificationTop_Checked"/>
                                             <CheckBox
                                                 x:Name="cb_QualificationLead"
                                                 Grid.Row="2"
                                                 Content="Lead"
                                                 FontSize="13"
-                                                FontWeight="DemiBold" />
+                                                FontWeight="DemiBold" 
+                                                Checked="cb_QualificationLead_Checked"/>
 
                                         </Grid>
                                     </Expander.Content>

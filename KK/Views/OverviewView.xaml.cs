@@ -1,5 +1,6 @@
 ﻿using KK.Models.Entities;
 using KK.ViewModels;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,7 @@ namespace KK.Views
             if (lv_Overview.SelectedItem != null)
             {
                 overviewVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
+                SetQualificationCheckbox();
 
                 overviewVM.GetDataForSelectedCustomer();
 
@@ -48,24 +50,6 @@ namespace KK.Views
             
         }
 
-
-/*        private void bt_Update_Click(object sender, RoutedEventArgs e)
-        {
-            overviewVM.SelectedCustomer.Name = tb_Name.Text;
-            overviewVM.SelectedCustomer.DateOfBirth = Convert.ToDateTime(tb_DateOfBirth.Text);
-            overviewVM.SelectedCustomer.Phone = tb_Phone.Text;
-            overviewVM.SelectedCustomer.Email = tb_Email.Text;
-            overviewVM.SelectedCustomer.HasSignedDisclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
-
-            MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                overviewVM.UpdateCustomer();
-            }
-            return;
-
-        }*/
         private void bt_Update_Click(object sender, RoutedEventArgs e)
         {
             int qualification = 0;
@@ -83,7 +67,6 @@ namespace KK.Views
             DateTime dob = Convert.ToDateTime(tb_DateOfBirth.Text);
             string phone = tb_Phone.Text;
             string email = tb_Email.Text;
-            int qualificationType = qualification;
             bool disclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
 
             MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -120,7 +103,7 @@ namespace KK.Views
             }
         }
 
-        public void ClearAllTextBoxes()
+        private void ClearAllTextBoxes()
         {
             tb_SearchBox.Clear();
             tb_Name.Clear();
@@ -130,7 +113,43 @@ namespace KK.Views
             tb_Qualification.Clear();
         }
 
-       
-     
+
+        private void SetQualificationCheckbox()
+        {
+            int qualification = (int)overviewVM.SelectedCustomer.Qualification;
+
+            cb_QualificationNone.IsChecked = qualification == 0;
+            cb_QualificationTop.IsChecked = qualification == 1;
+            cb_QualificationLead.IsChecked = qualification == 2;
+
+            tb_Qualification.Text = qualification switch
+            {
+                0 => "Ingen",
+                1 => "TopReb",
+                2 => "Lead",
+                _ => throw new ArgumentOutOfRangeException(nameof(qualification), "Invalid qualification value"),
+            };
+        }
+
+        private void cb_QualificationNone_Checked(object sender, RoutedEventArgs e)
+        {
+            cb_QualificationTop.IsChecked = false;
+            cb_QualificationLead.IsChecked = false;
+            tb_Qualification.Text = "Ingen";
+        }
+
+        private void cb_QualificationTop_Checked(object sender, RoutedEventArgs e)
+        {
+            cb_QualificationNone.IsChecked = false;
+            cb_QualificationLead.IsChecked = false;
+            tb_Qualification.Text = "TopReb";
+        }
+
+        private void cb_QualificationLead_Checked(object sender, RoutedEventArgs e)
+        {
+            cb_QualificationNone.IsChecked = false;
+            cb_QualificationTop.IsChecked = false;
+            tb_Qualification.Text = "Lead";
+        }
     }
 }

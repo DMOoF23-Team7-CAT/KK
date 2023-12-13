@@ -63,6 +63,7 @@ namespace KK.ViewModels
         public void DeleteCustomer()
         {
             _customerRepo.Remove(SelectedCustomer);
+            SetCustomersList();
         }
 
         public void GetDataForSelectedCustomer()
