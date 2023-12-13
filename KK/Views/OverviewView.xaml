@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="clr-namespace:KK.ViewModels"
     d:DataContext="{d:DesignInstance Type=viewmodels:OverviewViewModel}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="704"
+    d:DesignWidth="1346"
     mc:Ignorable="d">
     <UserControl.Resources>
         <CollectionViewSource x:Key="CustomersView" Source="{Binding Customers}" />
@@ -24,61 +24,64 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Grid>
+        <!--  Column 0  -->
+        <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}" />
-
-            <!--  Search Box  -->
-
-            <StackPanel
-                Grid.Row="0"
-                Margin="20,0,0,0"
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <Rectangle StrokeThickness="1" />
-                <TextBlock
-                    x:Name="tl_Search"
-                    Margin="0,0,10,0"
-                    VerticalAlignment="Center"
-                    FontSize="15"
-                    Foreground="White"
-                    Text="Søg" />
-                <TextBox
-                    x:Name="tb_SearchBox"
-                    Width="200"
-                    Height="30"
-                    Margin="0,0,10,0"
-                    Padding="5"
-                    HorizontalAlignment="Right"
-                    Background="Transparent"
-                    BorderThickness="1"
-                    FontSize="15"
-                    Foreground="White"
-                    Text=""
-                    TextChanged="tb_SearchBox_TextChanged">
-                    <TextBox.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="10" />
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
-            </StackPanel>
-
-            <StackPanel Grid.Row="1">
                 <Border
-                    Grid.Column="0"
-                    Margin="10"
-                    CornerRadius="20"
+                    Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    Width="400"
                     Style="{StaticResource BorderGradientStyle}">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="20,10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <!--  Search Box  -->
+                        <Grid
+                            Grid.Row="1"
+                            Width="180"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                            <TextBlock
+                                Width="170"
+                                Margin="0"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                                Text="Søg på kunde navn"
+                                Visibility="{Binding ElementName=tb_SearchBox, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            <TextBox
+                                x:Name="tb_SearchBox"
+                                Margin="0"
+                                Foreground="Black"
+                                Style="{StaticResource tb_TextBoxInput}"
+                                TextChanged="tb_SearchBox_TextChanged" />
+                        </Grid>
+                        <TextBlock
+                            Margin="20,0,25,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="23"
+                            FontWeight="Bold"
+                            Foreground="#FFFFFF"
+                            Text="Kunder" />
+                    </StackPanel>
+                </Border>
+
+
+                <StackPanel Grid.Row="1">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <ListView
                             x:Name="lv_Overview"
-                            Height="570"
+                            Width="400"
+                            Height="550"
                             HorizontalAlignment="center"
                             ItemsSource="{Binding Source={StaticResource CustomersView}}"
                             SelectionChanged="lv_Overview_SelectionChanged">
@@ -104,9 +107,9 @@
                             </ListView.View>
                         </ListView>
                     </ScrollViewer>
-                </Border>
-            </StackPanel>
-        </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
 
         <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
             <Grid>
@@ -418,63 +421,63 @@
             </Grid>
         </Border>
 
-
         <!--  Grid.Column 2 Entries  -->
+        <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-
-        <Grid Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <Border
-                Grid.Row="0"
-                Grid.Column="2"
-                Style="{StaticResource BorderGradientStyle}" />
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    FontSize="15"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    Text="Indtjekninger" />
-            </StackPanel>
-            <StackPanel Grid.Row="1">
-                <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Width="400"
+                    Style="{StaticResource BorderGradientStyle}" />
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock
+                        Margin="20,0,25,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="23"
+                        FontWeight="Bold"
+                        Foreground="#FFFFFF"
+                        Text="Indtjekninger" />
+                </StackPanel>
+                <StackPanel Grid.Row="1">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ListView
                             x:Name="lv_ChekIn"
-                            Height="570"
+                            Width="400"
+                            Height="550"
                             HorizontalAlignment="center"
                             ItemsSource="{Binding SelectedCustomer.Entries, Mode=TwoWay}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn
-                                        Width="60"
+                                        Width="80"
                                         DisplayMemberBinding="{Binding CustomerId}"
                                         Header="Kunde Id" />
                                     <GridViewColumn
-                                        Width="150"
+                                        Width="130"
                                         DisplayMemberBinding="{Binding CheckInTime, StringFormat=dd/mm/yyyy HH:mm}"
                                         Header="Indtjekning" />
                                     <GridViewColumn
-                                        Width="60"
+                                        Width="80"
                                         DisplayMemberBinding="{Binding Price}"
                                         Header="Pris" />
                                     <GridViewColumn
-                                        Width="40"
+                                        Width="80"
                                         DisplayMemberBinding="{Binding Id}"
-                                        Header="Id" />
+                                        Header="IndgangsId" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
                     </ScrollViewer>
-                </Border>
-            </StackPanel>
+                </StackPanel>
 
-        </Grid>
-
+            </Grid>
+        </Border>
 
 
     </Grid>
