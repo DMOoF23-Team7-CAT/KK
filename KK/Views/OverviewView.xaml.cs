@@ -151,5 +151,10 @@ namespace KK.Views
             cb_QualificationTop.IsChecked = false;
             tb_Qualification.Text = "Lead";
         }
+
+        private void ep_Qualification_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ep_Qualification.IsExpanded = false;
+        }
     }
 }
