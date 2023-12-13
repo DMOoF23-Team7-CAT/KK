@@ -136,17 +136,17 @@
                                 x:Name="tb_Name"
                                 Foreground="Black"
                                 Style="{StaticResource tb_TextBoxInput}"
-                                Text="{Binding SelectedCustomer.Name, Mode=TwoWay}" />
+                                Text="{Binding SelectedCustomer.Name}" />
                         </Grid>
                     </Grid>
                     <Grid>
                         <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Fødselsdato:" />
                         <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
                             <TextBox
-                                x:Name="tb_DatefBirth"
+                                x:Name="tb_DateOfBirth"
                                 Foreground="Black"
                                 Style="{StaticResource tb_TextBoxInput}"
-                                Text="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=dd/mm/yyyy}" />
+                                Text="{Binding SelectedCustomer.DateOfBirth, StringFormat=d}" />
                         </Grid>
                     </Grid>
                     <Grid>

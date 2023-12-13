@@ -129,19 +129,12 @@ namespace KK.Models.Repositories
                     command.ExecuteNonQuery();
                 }
             }
-            // Adds entity To Collection or Updates it
-            if (!Customers.Contains(entity))
+            // Updates entity in collection
+            var existingEntity = Customers.FirstOrDefault(e => e.Id == entity.Id);
+            if (existingEntity != null)
             {
-                Customers.Add(entity);
-            }
-            else
-            {
-                var existingEntity = Customers.FirstOrDefault(e => e.Id == entity.Id);
-                if (existingEntity != null)
-                {
-                    int index = Customers.IndexOf(existingEntity);
-                    Customers[index] = entity;
-                }
+                int index = Customers.IndexOf(existingEntity);
+                Customers[index] = entity;
             }
         }
 

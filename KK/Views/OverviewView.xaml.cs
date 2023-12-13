@@ -42,35 +42,42 @@ namespace KK.Views
                 overviewVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
 
                 overviewVM.GetDataForSelectedCustomer();
-                //Listview for entries is sat to selected item 
+
                 lv_ChekIn.ItemsSource = overviewVM.SelectedCustomer.Entries;
             }
             
-        }      
+        }
 
 
 
         private void bt_Update_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Kunden blev opdateret", "Kunde opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
+            string name = tb_Name.Text;
+            DateTime dob = Convert.ToDateTime(tb_DateOfBirth.Text);
+            string phone = tb_Phone.Text;
+            string email = tb_Email.Text;
+            bool disclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
 
-            if (result == MessageBoxResult.OK)
+            MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
             {
-                overviewVM.UpdateCustomer();
+                overviewVM.UpdateCustomer(name, dob, phone, email, disclaimer);
             }
+            return;
 
         }
 
         private void bt_Delete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Denne handling kan ikke fortrydes. Er du sikker på du vil slette kunden?", "Slet kunden", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            MessageBoxResult result = MessageBox.Show("Denne handling kan ikke fortrydes. Er du sikker på du vil slette kunden?", "Slet Kunden", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
                 overviewVM.DeleteCustomer();
                 ClearAllTextBoxes();
             }
-
+            return; 
         }
 
         private void tb_SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -89,7 +96,7 @@ namespace KK.Views
         {
             tb_SearchBox.Clear();
             tb_Name.Clear();
-            //tb_DOB.Clear();
+            tb_DateOfBirth.Clear();
             tb_Email.Clear();
             tb_Phone.Clear();
             tb_Qualification.Clear();

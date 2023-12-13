@@ -15,8 +15,6 @@ namespace KK.ViewModels
         private readonly CustomerRepository _customerRepo;
         private ObservableCollection<Customer> _customers;           
         private Customer _selectedCustomer;
-       
-        
 
         public Customer SelectedCustomer
         {
@@ -27,8 +25,6 @@ namespace KK.ViewModels
                 OnPropertyChanged(nameof(SelectedCustomer));
             }
         }
-      
-
         public ObservableCollection<Customer> Customers
         {
             get { return _customers; }
@@ -42,25 +38,39 @@ namespace KK.ViewModels
         public OverviewViewModel()
         {
             _customerRepo = new CustomerRepository();
-            _customerRepo.GetAllCustomersMemberships();
-            Customers = _customerRepo.Customers;
+            SetCustomersList();
         }
 
-        public void UpdateCustomer()
+        public void UpdateCustomer(string name, DateTime dob, string phone, string email, bool disclaimer)
         {
-            _customerRepo.Update(SelectedCustomer);            
+            Customer customer = new Customer
+            {
+                Id = SelectedCustomer.Id,
+                Name = name,
+                DateOfBirth = dob,
+                Phone = phone,
+                Email = email,
+                HasSignedDisclaimer = disclaimer
+            };
+            _customerRepo.Update(customer);
+            //SetCustomersList();
         }
 
         public void DeleteCustomer()
         {
             _customerRepo.Remove(SelectedCustomer);
-            _customerRepo.GetAllCustomersMemberships();
-            Customers = _customerRepo.Customers;
+            //SetCustomersList();
         }
 
         public void GetDataForSelectedCustomer()
         {
             _selectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
+        }
+
+        private void SetCustomersList()
+        {
+            _customerRepo.GetAllCustomersMemberships();
+            Customers = _customerRepo.Customers;
         }
     }
 }
