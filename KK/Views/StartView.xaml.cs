@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace KK.Views
 {
@@ -18,6 +19,7 @@ namespace KK.Views
         {
             startVM = new StartViewModel();
             InitializeComponent();
+            ExpandersEnabled();
         }
 
         // Uses Model.Entity to set Customer
@@ -25,8 +27,30 @@ namespace KK.Views
         {
             if (lv_Overview.SelectedItem != null)
             {
-                startVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
+                Customer selectedCustomer = (Customer)lv_Overview.SelectedItem;
+
+                if (selectedCustomer.Membership == null)
+                {
+                    // If the customer does not have a membership, expand the expanders
+                    ExpandersEnabled();
+                }
+                else
+                {
+                    // If the customer has a membership, do not expand the expanders
+                    ep_Member.IsExpanded = false;
+                    ep_Ticket.IsExpanded = false;
+                    ep_Equipment.IsExpanded = false;
+                }
+
+                startVM.SelectedCustomer = selectedCustomer;
             }
+        }
+
+        private void ExpandersEnabled()
+        {
+            ep_Member.IsExpanded = true;
+            ep_Ticket.IsExpanded = true;
+            ep_Equipment.IsExpanded = true;
         }
 
         // Uses Model.Entity to set Customer
@@ -55,7 +79,23 @@ namespace KK.Views
             Opacity = 1;
         }
 
+        private void cb_12months_Checked(object sender, RoutedEventArgs e)
+        {
+            cb_3months.IsChecked = false;
+            cb_1month.IsChecked = false;
+        }
 
+        private void cb_3months_Checked(object sender, RoutedEventArgs e)
+        {
+            cb_12months.IsChecked = false;
+            cb_1month.IsChecked = false;
+        }
+
+        private void cb_1month_Checked(object sender, RoutedEventArgs e)
+        {
+            cb_12months.IsChecked = false;
+            cb_3months.IsChecked = false;
+        }
     }
 }
 

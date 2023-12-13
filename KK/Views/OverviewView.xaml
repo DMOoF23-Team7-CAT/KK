@@ -237,7 +237,7 @@
                     </StackPanel>
 
                     <Grid Grid.Row="1" Margin="0,0,0,5">
-                        <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Fraskrivningserklæring Undrskrevet:" />
+                        <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Fraskrivningserklæring Underskrevet:" />
                         <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
                             <CheckBox
                                 x:Name="cb_disclaimer"
@@ -278,7 +278,7 @@
                                     BorderThickness="0"
                                     FontSize="12"
                                     Foreground="Black"
-                                    IsEnabled="False"
+                                    IsHitTestVisible="False"
                                     SelectedDate="{Binding SelectedCustomer.Membership.StartDate}" />
                             </Border>
                         </Grid>
@@ -292,7 +292,7 @@
                                     BorderThickness="0"
                                     FontSize="12"
                                     Foreground="Black"
-                                    IsEnabled="False"
+                                    IsHitTestVisible="False"
                                     SelectedDate="{Binding SelectedCustomer.Membership.EndDate}" />
                             </Border>
                         </Grid>
