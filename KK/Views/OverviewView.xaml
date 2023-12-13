@@ -1,12 +1,16 @@
-﻿<UserControl x:Class="KK.Views.OverviewView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KK.Views" 
-             xmlns:Themes="clr-namespace:KK.Views.Themes" xmlns:viewmodels="clr-namespace:KK.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:OverviewViewModel}"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="KK.Views.OverviewView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Themes="clr-namespace:KK.Views.Themes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:KK.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:KK.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:OverviewViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <CollectionViewSource x:Key="CustomersView" Source="{Binding Customers}" />
         <Themes:InverseBooleanConverter x:Key="InverseBooleanConverter" />
@@ -23,38 +27,79 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition/>
+                <RowDefinition Height="80" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}"/>
+            <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}" />
 
-            <!--Search Box-->
+            <!--  Search Box  -->
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,0,0,0"  >
-                <Rectangle StrokeThickness="1"/>
-                <TextBlock x:Name="tl_Search" Text="Søg" VerticalAlignment="Center"  FontSize="15" Foreground="White" Margin="0,0,10,0">
-                </TextBlock>
-                <TextBox Margin="0,0,10,0" BorderThickness="1" FontSize="15" Background="Transparent" Padding="5" Width="200" HorizontalAlignment="Right" Height="30" Foreground="White" Text="" x:Name="tb_SearchBox"  TextChanged="tb_SearchBox_TextChanged"    >
+            <StackPanel
+                Grid.Row="0"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Rectangle StrokeThickness="1" />
+                <TextBlock
+                    x:Name="tl_Search"
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    Foreground="White"
+                    Text="Søg" />
+                <TextBox
+                    x:Name="tb_SearchBox"
+                    Width="200"
+                    Height="30"
+                    Margin="0,0,10,0"
+                    Padding="5"
+                    HorizontalAlignment="Right"
+                    Background="Transparent"
+                    BorderThickness="1"
+                    FontSize="15"
+                    Foreground="White"
+                    Text=""
+                    TextChanged="tb_SearchBox_TextChanged">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="10"/>
+                            <Setter Property="CornerRadius" Value="10" />
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
             </StackPanel>
 
             <StackPanel Grid.Row="1">
-                <Border Grid.Column="0" Margin="10" Style="{StaticResource BorderGradientStyle}" CornerRadius="20">
+                <Border
+                    Grid.Column="0"
+                    Margin="10"
+                    CornerRadius="20"
+                    Style="{StaticResource BorderGradientStyle}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ListView 
-                        x:Name="lv_Overview" Height="570" HorizontalAlignment="center" ItemsSource="{Binding Source={StaticResource CustomersView}}" SelectionChanged="lv_Overview_SelectionChanged"  >
+                        <ListView
+                            x:Name="lv_Overview"
+                            Height="570"
+                            HorizontalAlignment="center"
+                            ItemsSource="{Binding Source={StaticResource CustomersView}}"
+                            SelectionChanged="lv_Overview_SelectionChanged">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Id" Width="40" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Navn" Width="80" DisplayMemberBinding="{Binding Name}" />
-                                    <GridViewColumn Header="Telefon" Width="100" DisplayMemberBinding="{Binding Phone}" />
-                                    <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
+                                    <GridViewColumn
+                                        Width="40"
+                                        DisplayMemberBinding="{Binding Id}"
+                                        Header="Id" />
+                                    <GridViewColumn
+                                        Width="80"
+                                        DisplayMemberBinding="{Binding Name}"
+                                        Header="Navn" />
+                                    <GridViewColumn
+                                        Width="100"
+                                        DisplayMemberBinding="{Binding Phone}"
+                                        Header="Telefon" />
+                                    <GridViewColumn
+                                        Width="150"
+                                        DisplayMemberBinding="{Binding Email}"
+                                        Header="Email" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -66,69 +111,221 @@
         <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="40*"/>
-                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="40*" />
+                    <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
 
-                <!-- Grid.Row 0 Customer details-->
+                <!--  Grid.Row 0 Customer details  -->
 
-                <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical">
                     <DockPanel>
-                        <TextBlock Text="Kundeoplysninger" FontSize="15" Foreground="White" FontWeight="Bold" Margin="0,10,0,20" HorizontalAlignment="Center"/>
+                        <TextBlock
+                            Margin="0,10,0,20"
+                            HorizontalAlignment="Center"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Kundeoplysninger" />
                     </DockPanel>
                     <DockPanel Margin="20,0,0,3">
-                        <TextBlock Text="Navn" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <TextBox x:Name="tb_Name" BorderThickness="0,0,0,1" Width="120" Margin="0,0,30,0" Foreground="White" HorizontalAlignment="Right" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Text="{Binding SelectedCustomer.Name, Mode=TwoWay}"  Background="Transparent"/>
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Navn" />
+                        <TextBox
+                            x:Name="tb_Name"
+                            Width="120"
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderBrush="DarkGray"
+                            BorderThickness="0,0,0,1"
+                            CaretBrush="LightGray"
+                            FontSize="12"
+                            Foreground="White"
+                            Text="{Binding SelectedCustomer.Name, Mode=TwoWay}" />
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
-                        <TextBlock Text="Fødselsdato" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <TextBox x:Name="tb_DOB" Width="120" Margin="0,0,30,0" HorizontalAlignment="Right" Foreground="White" Text="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=dd/mm/yyyy}" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Fødselsdato" />
+                        <TextBox
+                            x:Name="tb_DOB"
+                            Width="120"
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderBrush="DarkGray"
+                            BorderThickness="0,0,0,1"
+                            CaretBrush="LightGray"
+                            FontSize="12"
+                            Foreground="White"
+                            Text="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=dd/mm/yyyy}" />
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
-                        <TextBlock Text="Telefonnummer" DockPanel.Dock="Left" Foreground="White" FontSize="12" FontWeight="DemiBold" />
-                        <TextBox x:Name="tb_Phone" Width="120" Foreground="White" Margin="0,0,30,0" HorizontalAlignment="Right" Text="{Binding SelectedCustomer.Phone, Mode=TwoWay}" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Telefonnummer" />
+                        <TextBox
+                            x:Name="tb_Phone"
+                            Width="120"
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderBrush="DarkGray"
+                            BorderThickness="0,0,0,1"
+                            CaretBrush="LightGray"
+                            FontSize="12"
+                            Foreground="White"
+                            Text="{Binding SelectedCustomer.Phone, Mode=TwoWay}" />
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
-                        <TextBlock Text="Email" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <TextBox x:Name="tb_Email" Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" Width="120" Margin="0,0,30,0" Foreground="White" HorizontalAlignment="Right" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Email" />
+                        <TextBox
+                            x:Name="tb_Email"
+                            Width="120"
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderBrush="DarkGray"
+                            BorderThickness="0,0,0,1"
+                            CaretBrush="LightGray"
+                            FontSize="12"
+                            Foreground="White"
+                            Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" />
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
-                        <TextBlock Text="Kvalifikationer" Foreground="White" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold"/>
-                        <TextBox x:Name="tb_Qualification" Width="120" Text="{Binding SelectedCustomer.Qualification, Mode=TwoWay}" Foreground="White" Margin="0,0,30,0" HorizontalAlignment="Right" BorderThickness="0,0,0,1" CaretBrush="LightGray" FontSize="12" BorderBrush="DarkGray" Background="Transparent"/>
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Kvalifikationer" />
+                        <TextBox
+                            x:Name="tb_Qualification"
+                            Width="120"
+                            Margin="0,0,30,0"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            BorderBrush="DarkGray"
+                            BorderThickness="0,0,0,1"
+                            CaretBrush="LightGray"
+                            FontSize="12"
+                            Foreground="White"
+                            Text="{Binding SelectedCustomer.Qualification, Mode=TwoWay}" />
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
-                        <TextBlock Text="Fraskrivningserklæring signeret?" Foreground="White" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold"/>
-                        <DockPanel HorizontalAlignment="Center" Margin="10,0,0,0">
-                            <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup" IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Mode=TwoWay}"/>
-                            <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Fraskrivningserklæring signeret?" />
+                        <DockPanel Margin="10,0,0,0" HorizontalAlignment="Center">
+                            <RadioButton
+                                Content="Ja"
+                                Foreground="White"
+                                GroupName="YesNoGroup"
+                                IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Mode=TwoWay}" />
+                            <RadioButton
+                                Margin="10,0,0,0"
+                                Content="Nej"
+                                Foreground="white"
+                                GroupName="YesNoGroup"
+                                IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Converter={StaticResource InverseBooleanConverter}, Mode=TwoWay}" />
                         </DockPanel>
                     </DockPanel>
                 </StackPanel>
 
-                <Border BorderBrush="White" BorderThickness="0.5" Margin="0,0,0,-20"  VerticalAlignment="Bottom"/>
+                <Border
+                    Margin="0,0,0,-20"
+                    VerticalAlignment="Bottom"
+                    BorderBrush="White"
+                    BorderThickness="0.5" />
 
-                <!-- Grid.Row 1 Membership details -->
+                <!--  Grid.Row 1 Membership details  -->
 
                 <StackPanel Grid.Row="1" Margin="0,10,0,0">
                     <DockPanel>
-                        <TextBlock Text="Medlemskabsoplysninger" FontSize="15" Foreground="White" FontWeight="Bold" Margin="0,20,0,20" HorizontalAlignment="Center"/>
-                    </DockPanel>
-                    <DockPanel Margin="20,10,0,3" >
-                        <TextBlock Text="Medlemskabs Id" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <TextBlock Text="{Binding SelectedCustomer.Membership.Id}" Margin="0,0,30,10" HorizontalAlignment="Center" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                    </DockPanel>
-                    <DockPanel Margin="20,0,0,3">
-                        <TextBlock Text="Startdato" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <DatePicker x:Name="dp_StartDate"  HorizontalAlignment="Center" SelectedDate="{Binding SelectedCustomer.Membership.StartDate}" IsHitTestVisible="False" />
-                    </DockPanel>
-                    <DockPanel Margin="20,10,-5,3">
-                        <TextBlock Text="Slutdato" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold" Foreground="White"/>
-                        <DatePicker x:Name="dp_EndDate"  HorizontalAlignment="Center" SelectedDate="{Binding SelectedCustomer.Membership.EndDate}" IsHitTestVisible="False"/>
+                        <TextBlock
+                            Margin="0,20,0,20"
+                            HorizontalAlignment="Center"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Medlemskabsoplysninger" />
                     </DockPanel>
                     <DockPanel Margin="20,10,0,3">
-                        <TextBlock Text="Medlemskab status" Foreground="White" DockPanel.Dock="Left" FontSize="12" FontWeight="DemiBold"/>
-                        <TextBlock Margin="0,0,30,10" HorizontalAlignment="Center" FontSize="12" FontWeight="DemiBold" Foreground="White">
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Medlemskabs Id" />
+                        <TextBlock
+                            Margin="0,0,30,10"
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="{Binding SelectedCustomer.Membership.Id}" />
+                    </DockPanel>
+                    <DockPanel Margin="20,0,0,3">
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Startdato" />
+                        <DatePicker
+                            x:Name="dp_StartDate"
+                            HorizontalAlignment="Center"
+                            IsHitTestVisible="False"
+                            SelectedDate="{Binding SelectedCustomer.Membership.StartDate}" />
+                    </DockPanel>
+                    <DockPanel Margin="20,10,-5,3">
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Slutdato" />
+                        <DatePicker
+                            x:Name="dp_EndDate"
+                            HorizontalAlignment="Center"
+                            IsHitTestVisible="False"
+                            SelectedDate="{Binding SelectedCustomer.Membership.EndDate}" />
+                    </DockPanel>
+                    <DockPanel Margin="20,10,0,3">
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White"
+                            Text="Medlemskab status" />
+                        <TextBlock
+                            Margin="0,0,30,10"
+                            HorizontalAlignment="Center"
+                            FontSize="12"
+                            FontWeight="DemiBold"
+                            Foreground="White">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Text" Value="Inaktiv" />
@@ -144,45 +341,75 @@
                     </DockPanel>
                 </StackPanel>
 
-                <!-- Grid.Row 2 Buttons for Update and Delete -->
+                <!--  Grid.Row 2 Buttons for Update and Delete  -->
 
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
-                    <Button x:Name="bt_Update" BorderThickness="0" Content="Opdater" Foreground="White"
-                            FontSize="12" FontFamily="Montserrat" FontWeight="Bold" Cursor="Hand" Margin="0,0,10,0" Click="bt_Update_Click" >
+                <StackPanel
+                    Grid.Row="2"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="bt_Update"
+                        Margin="0,0,10,0"
+                        BorderThickness="0"
+                        Click="bt_Update_Click"
+                        Content="Opdater"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="White">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#462AD8" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#28AEED"/>
+                                        <Setter Property="Background" Value="#28AEED" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="100" Height="30" CornerRadius="10"                                 Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"                                              HorizontalAlignment="Center"/>
+                                <Border
+                                    Width="100"
+                                    Height="30"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button x:Name="bt_Delete" BorderThickness="0" Content="Slet" Foreground="White"
-                            FontSize="12" FontFamily="Montserrat" FontWeight="Bold" Cursor="Hand" Margin="0,0,0,0" Click="bt_Delete_Click" >
+                    <Button
+                        x:Name="bt_Delete"
+                        Margin="0,0,0,0"
+                        BorderThickness="0"
+                        Click="bt_Delete_Click"
+                        Content="Slet"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="White">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#ffcd5c5c" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#ffdc143c"/>
+                                        <Setter Property="Background" Value="#ffdc143c" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="100" Height="30" CornerRadius="10"                                 Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"                                              HorizontalAlignment="Center"/>
+                                <Border
+                                    Width="100"
+                                    Height="30"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
@@ -192,29 +419,53 @@
         </Border>
 
 
-        <!--Grid.Column 2 Entries-->
+        <!--  Grid.Column 2 Entries  -->
 
 
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
-                <RowDefinition/>
+                <RowDefinition Height="80" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Border Grid.Column="2" Grid.Row="0" Style="{StaticResource BorderGradientStyle}"/>
+            <Border
+                Grid.Row="0"
+                Grid.Column="2"
+                Style="{StaticResource BorderGradientStyle}" />
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Indtjekninger" FontSize="15" Foreground="White" FontWeight="Bold"  HorizontalAlignment="Center"/>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Indtjekninger" />
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <Border Grid.Column="2" Style="{StaticResource BorderGradientStyle}">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ListView x:Name="lv_ChekIn" Height="570" HorizontalAlignment="center" ItemsSource="{Binding SelectedCustomer.Entries}" >
+                        <ListView
+                            x:Name="lv_ChekIn"
+                            Height="570"
+                            HorizontalAlignment="center"
+                            ItemsSource="{Binding SelectedCustomer.Entries, Mode=TwoWay}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Kunde Id" Width="60" DisplayMemberBinding="{Binding CustomerId}" />
-                                    <GridViewColumn Header="Indtjekning" Width="150" DisplayMemberBinding="{Binding CheckInTime, StringFormat=dd/mm/yyyy HH:mm}" />
-                                    <GridViewColumn Header="Pris" Width="60" DisplayMemberBinding="{Binding Price}" />
-                                    <GridViewColumn Header="Id" Width="40" DisplayMemberBinding="{Binding Id}" />
+                                    <GridViewColumn
+                                        Width="60"
+                                        DisplayMemberBinding="{Binding CustomerId}"
+                                        Header="Kunde Id" />
+                                    <GridViewColumn
+                                        Width="150"
+                                        DisplayMemberBinding="{Binding CheckInTime, StringFormat=dd/mm/yyyy HH:mm}"
+                                        Header="Indtjekning" />
+                                    <GridViewColumn
+                                        Width="60"
+                                        DisplayMemberBinding="{Binding Price}"
+                                        Header="Pris" />
+                                    <GridViewColumn
+                                        Width="40"
+                                        DisplayMemberBinding="{Binding Id}"
+                                        Header="Id" />
                                 </GridView>
                             </ListView.View>
                         </ListView>

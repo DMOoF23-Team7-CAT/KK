@@ -74,7 +74,7 @@ namespace KK.ViewModels
         public StartViewModel()
         {
             _customerRepo = new CustomerRepository();
-            _customerRepo.GetAll();
+            _customerRepo.GetAllCustomersMemberships();
             Customers = _customerRepo.Customers;
         }
 

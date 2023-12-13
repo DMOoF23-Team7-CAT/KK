@@ -93,29 +93,6 @@ namespace KK.Models.Repositories
 
             return customer;
         }
-        public IEnumerable<Customer> GetCustomersWithMembershipsAndEntries()
-        {
-            Customers = new ObservableCollection<Customer>();
-            // Retreives all entities from database
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand("kk_spGetCustomersAndMembershipsAndEntries", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Customers.Add(MapCustomerMembershipEntry(reader));
-                        }
-                    }
-                }
-            }
-
-            return Customers;
-        }
         public void Remove(Customer entity)
         {
             // Removes entity from Database
@@ -194,6 +171,55 @@ namespace KK.Models.Repositories
             return customer;
         }
 
+        // Get List of customers with coresponding memberships and entries
+        public IEnumerable<Customer> GetCustomersWithMembershipsAndEntries()
+        {
+            Customers = new ObservableCollection<Customer>();
+            // Retreives all entities from database
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("kk_spGetCustomersAndMembershipsAndEntries", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Customers.Add(MapCustomerMembershipEntry(reader));
+                        }
+                    }
+                }
+            }
+
+            return Customers;
+        }
+
+        // Get List of Customers and memberships
+        public IEnumerable<Customer> GetAllCustomersMemberships()
+        {
+            Customers = new ObservableCollection<Customer>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("kk_spGetAllCustomersMemberships", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Customers.Add(MapDataToCustomerWithMembership(reader));
+                        }
+                    }
+                }
+            }
+
+            return Customers;
+        }
 
         // Mapping Profiles
         private static Customer MapCustomer(SqlDataReader reader)
@@ -330,7 +356,22 @@ namespace KK.Models.Repositories
             }
         }
 
+        private static Customer MapDataToCustomerWithMembership(SqlDataReader reader)
+        {
+            Customer customer = new Customer
+            {
+                Id = Convert.ToInt32(reader["CustomerId"]),
+                Name = Convert.ToString(reader["CustomerName"]),
+                DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
+                Phone = reader["Phone"] as string,
+                Email = reader["Email"] as string,
+                HasSignedDisclaimer = Convert.ToBoolean(reader["HasSignedDisclaimer"]),
+                Qualification = (Qualification)Convert.ToInt32(reader["Qualifications"]),
+                Membership = MapDataToMembership(reader),
+            };
 
+            return customer;
+        }
     }
 
 }

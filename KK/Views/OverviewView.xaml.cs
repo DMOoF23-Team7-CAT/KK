@@ -41,9 +41,11 @@ namespace KK.Views
             {
                 overviewVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
 
+                overviewVM.GetDataForSelectedCustomer();
                 //Listview for entries is sat to selected item 
                 lv_ChekIn.ItemsSource = overviewVM.SelectedCustomer.Entries;
             }
+            
         }      
 
 
