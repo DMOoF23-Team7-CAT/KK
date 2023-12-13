@@ -41,7 +41,7 @@ namespace KK.ViewModels
             SetCustomersList();
         }
 
-        public void UpdateCustomer(string name, DateTime dob, string phone, string email, bool disclaimer)
+        public void UpdateCustomer(string name, DateTime dob, string phone, string email, int qualification, bool disclaimer)
         {
             Customer customer = new Customer
             {
@@ -50,16 +50,19 @@ namespace KK.ViewModels
                 DateOfBirth = dob,
                 Phone = phone,
                 Email = email,
+                Qualification = (Models.Entities.Enum.Qualification)qualification,
                 HasSignedDisclaimer = disclaimer
             };
             _customerRepo.Update(customer);
-            //SetCustomersList();
         }
+/*        public void UpdateCustomer()
+        {
+            _customerRepo.Update(SelectedCustomer);
+        }*/
 
         public void DeleteCustomer()
         {
             _customerRepo.Remove(SelectedCustomer);
-            //SetCustomersList();
         }
 
         public void GetDataForSelectedCustomer()

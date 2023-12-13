@@ -49,20 +49,48 @@ namespace KK.Views
         }
 
 
+/*        private void bt_Update_Click(object sender, RoutedEventArgs e)
+        {
+            overviewVM.SelectedCustomer.Name = tb_Name.Text;
+            overviewVM.SelectedCustomer.DateOfBirth = Convert.ToDateTime(tb_DateOfBirth.Text);
+            overviewVM.SelectedCustomer.Phone = tb_Phone.Text;
+            overviewVM.SelectedCustomer.Email = tb_Email.Text;
+            overviewVM.SelectedCustomer.HasSignedDisclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
 
+            MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                overviewVM.UpdateCustomer();
+            }
+            return;
+
+        }*/
         private void bt_Update_Click(object sender, RoutedEventArgs e)
         {
+            int qualification = 0;
+
+            if (cb_QualificationTop.IsChecked == true)
+            {
+                qualification = 1;
+            }
+            else if (cb_QualificationLead.IsChecked == true)
+            {
+                qualification = 2;
+            }
+
             string name = tb_Name.Text;
             DateTime dob = Convert.ToDateTime(tb_DateOfBirth.Text);
             string phone = tb_Phone.Text;
             string email = tb_Email.Text;
+            int qualificationType = qualification;
             bool disclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
 
             MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
-                overviewVM.UpdateCustomer(name, dob, phone, email, disclaimer);
+                overviewVM.UpdateCustomer(name, dob, phone, email, qualification, disclaimer);
             }
             return;
 

@@ -112,74 +112,129 @@
         </Border>
 
         <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
-            <Grid>
+            <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="380" />
+                    <RowDefinition Height="420" />
                     <RowDefinition />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
                 <!--  Grid.Row 0 Customer details  -->
-                <StackPanel Grid.Row="0">
-                    <TextBlock
-                        Margin="0,30,0,10"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="23"
-                        FontWeight="Bold"
-                        Foreground="#FFFFFF"
-                        Text="Kundeoplysninger" />
-                    <Grid>
-                        <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Navn:" />
-                        <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBox
-                                x:Name="tb_Name"
-                                Foreground="Black"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                Text="{Binding SelectedCustomer.Name}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="390" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock
+                            Margin="0,30,0,10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="23"
+                            FontWeight="Bold"
+                            Foreground="#FFFFFF"
+                            Text="Kundeoplysninger" />
+                        <Grid>
+                            <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Navn:" />
+                            <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                                <TextBox
+                                    x:Name="tb_Name"
+                                    Foreground="Black"
+                                    Style="{StaticResource tb_TextBoxInput}"
+                                    Text="{Binding SelectedCustomer.Name, Mode=TwoWay}" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Fødselsdato:" />
-                        <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBox
-                                x:Name="tb_DateOfBirth"
-                                Foreground="Black"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                Text="{Binding SelectedCustomer.DateOfBirth, StringFormat=d}" />
+                        <Grid>
+                            <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Fødselsdato:" />
+                            <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                                <TextBox
+                                    x:Name="tb_DateOfBirth"
+                                    Foreground="Black"
+                                    Style="{StaticResource tb_TextBoxInput}"
+                                    Text="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=d}" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Telefon Nummer:" />
-                        <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBox
-                                x:Name="tb_Phone"
-                                Foreground="Black"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                Text="{Binding SelectedCustomer.Phone, Mode=TwoWay}" />
+                        <Grid>
+                            <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Telefon Nummer:" />
+                            <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                                <TextBox
+                                    x:Name="tb_Phone"
+                                    Foreground="Black"
+                                    Style="{StaticResource tb_TextBoxInput}"
+                                    Text="{Binding SelectedCustomer.Phone, Mode=TwoWay}" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Email:" />
-                        <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBox
-                                x:Name="tb_Email"
-                                Foreground="Black"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" />
+                        <Grid>
+                            <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Email:" />
+                            <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                                <TextBox
+                                    x:Name="tb_Email"
+                                    Foreground="Black"
+                                    Style="{StaticResource tb_TextBoxInput}"
+                                    Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Kvalifikation:" />
-                        <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBox
-                                x:Name="tb_Qualification"
-                                Foreground="Black"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                Text="{Binding SelectedCustomer.Qualification, Mode=TwoWay}" />
+                        <!--  Qualification Expander  -->
+                        <Grid>
+                            <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Kvalifikation:" />
+                            <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+
+                                <Expander
+                                    x:Name="ep_member"
+                                    Width="200"
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="White"
+                                    Foreground="Black">
+                                    <Expander.Header>
+                                        <Grid Margin="0" Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                                            <TextBox
+                                                x:Name="tb_Qualification"
+                                                Margin="20,0"
+                                                Foreground="Black"
+                                                Style="{StaticResource tb_TextBoxInput}"
+                                                Text="{Binding SelectedCustomer.Qualification, Mode=TwoWay}" />
+                                        </Grid>
+                                    </Expander.Header>
+                                    <Expander.Content>
+                                        <Grid HorizontalAlignment="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20" />
+                                                <RowDefinition Height="20" />
+                                                <RowDefinition Height="20" />
+                                            </Grid.RowDefinitions>
+                                            <CheckBox
+                                                x:Name="cb_QualificationNone"
+                                                Grid.Row="0"
+                                                Content="Ingen"
+                                                FontSize="13"
+                                                FontWeight="DemiBold" />
+                                            <CheckBox
+                                                x:Name="cb_QualificationTop"
+                                                Grid.Row="1"
+                                                Content="Topreb"
+                                                FontSize="13"
+                                                FontWeight="DemiBold" />
+                                            <CheckBox
+                                                x:Name="cb_QualificationLead"
+                                                Grid.Row="2"
+                                                Content="Lead"
+                                                FontSize="13"
+                                                FontWeight="DemiBold" />
+
+                                        </Grid>
+                                    </Expander.Content>
+                                </Expander>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid Grid.Row="6" Margin="0,20,0,5">
+
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Margin="0,0,0,5">
                         <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Fraskrivningserklæring Undrskrevet:" />
                         <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
                             <CheckBox
@@ -188,12 +243,10 @@
                                 IsChecked="{Binding SelectedCustomer.HasSignedDisclaimer, Mode=TwoWay}" />
                         </Grid>
                     </Grid>
-
-                </StackPanel>
-
+                </Grid>
 
                 <!--  Grid.Row 1 Membership details  -->
-                <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                <StackPanel Grid.Row="1">
                     <TextBlock
                         Margin="0"
                         HorizontalAlignment="Center"
@@ -242,7 +295,7 @@
                             </Border>
                         </Grid>
                     </Grid>
-                    <Grid Margin="0,10">
+                    <Grid>
                         <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Medlemskab status:" />
                         <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
                             <TextBlock
