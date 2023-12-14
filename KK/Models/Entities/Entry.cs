@@ -36,8 +36,16 @@ namespace KK.Models.Entities
             {
                 Items = new List<ServiceItem>();
             }
-
             Items.Add(item);
+            CalculateTotalPrice();
+        }
+        public void RemoveServiceItem(ServiceItem item)
+        {
+            var existingItem = Items.FirstOrDefault(i => i.Id == item.Id);
+            if (existingItem != null)
+            {
+                Items.Remove(existingItem);
+            }
             CalculateTotalPrice();
         }
 
@@ -54,8 +62,6 @@ namespace KK.Models.Entities
                     Price += i.Price;
                 }
             }
-
-
         }
     }   
 }

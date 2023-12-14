@@ -17,8 +17,8 @@ namespace KK.ViewModels
         // Private backing fields
         private readonly CustomerRepository _customerRepo;
 
-        private Membership _SelectedMembership;
-        private Customer _SelectedCustomer;
+        private Membership _selectedMembership;
+        private Customer _selectedCustomer;
         private Entry _selectedEntry;
         private ServiceItem _selectedServiceItem;
         private ObservableCollection<Customer> _customers;
@@ -43,19 +43,19 @@ namespace KK.ViewModels
         }
         public Customer SelectedCustomer
         {
-            get { return _SelectedCustomer; }
+            get { return _selectedCustomer; }
             set
             {
-                _SelectedCustomer = value; 
+                _selectedCustomer = value; 
                 OnPropertyChanged(nameof(SelectedCustomer));
             }
         }
         public Membership SelectedMembership
         {
-            get { return _SelectedMembership; }
+            get { return _selectedMembership; }
             set
             {
-                _SelectedMembership = value; 
+                _selectedMembership = value; 
                 OnPropertyChanged(nameof(SelectedMembership));
             }
         }
@@ -83,15 +83,24 @@ namespace KK.ViewModels
             SelectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
         }
 
-        public void AddServiceItem()
+        public void AddServiceItem(string name)
         {
             SelectedEntry.AddServiceItem(SelectedServiceItem);
+        }
+        public void RemoveServiceItem(string name)
+        {
+            var item = SelectedEntry.Items.FirstOrDefault(x => x.Name == name);
+            SelectedEntry.RemoveServiceItem(item);
         }
         public void CheckCustomerIn()
         {
             GetCustomerDetails();
             SelectedCustomer.AddEntry(SelectedEntry);
+        }
 
+        public void GetDataForSelectedCustomer()
+        {
+            _selectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
         }
 
     }

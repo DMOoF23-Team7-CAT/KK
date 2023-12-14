@@ -25,11 +25,12 @@ namespace KK.Views
         // Uses Model.Entity to set Customer
         private void lv_Overview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lv_Overview.SelectedItem != null)
+            if (lv_Customers.SelectedItem != null)
             {
-                Customer selectedCustomer = (Customer)lv_Overview.SelectedItem;
+                startVM.SelectedCustomer = (Customer)lv_Customers.SelectedItem;
+                startVM.GetDataForSelectedCustomer();
 
-                if (selectedCustomer.Membership == null)
+                if (startVM.SelectedCustomer.Membership == null)
                 {
                     // If the customer does not have a membership, expand the expanders
                     ExpandersEnabled();
@@ -42,7 +43,7 @@ namespace KK.Views
                     ep_Equipment.IsExpanded = false;
                 }
 
-                startVM.SelectedCustomer = selectedCustomer;
+                
             }
         }
 
@@ -56,7 +57,7 @@ namespace KK.Views
         // Uses Model.Entity to set Customer
         private void tb_SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ICollectionView view = CollectionViewSource.GetDefaultView(lv_Overview.ItemsSource);
+            ICollectionView view = CollectionViewSource.GetDefaultView(lv_Customers.ItemsSource);
 
             if (view != null)
             {
@@ -83,19 +84,40 @@ namespace KK.Views
         {
             cb_3months.IsChecked = false;
             cb_1month.IsChecked = false;
+            startVM.AddServiceItem("YEAR");
         }
 
         private void cb_3months_Checked(object sender, RoutedEventArgs e)
         {
             cb_12months.IsChecked = false;
             cb_1month.IsChecked = false;
+            startVM.AddServiceItem("QUARTER");
         }
 
         private void cb_1month_Checked(object sender, RoutedEventArgs e)
         {
             cb_12months.IsChecked = false;
             cb_3months.IsChecked = false;
+            startVM.AddServiceItem("MONTH");
         }
+
+        private void cb_12months_Unchecked(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("YEAR");
+        }
+
+        private void cb_3months_Unchecked(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("QUARTER");
+        }
+
+        private void cb_1month_Unchecked(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("MONTH");
+        }
+
+
+
     }
 }
 
