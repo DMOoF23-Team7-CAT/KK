@@ -41,6 +41,7 @@ namespace KK.Views
             if (lv_Overview.SelectedItem != null)
             {
                 overviewVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
+
                 SetQualificationCheckbox(); 
 
                 overviewVM.GetDataForSelectedCustomer();

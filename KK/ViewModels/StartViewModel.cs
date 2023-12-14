@@ -18,6 +18,7 @@ namespace KK.ViewModels
         private readonly CustomerRepository _customerRepo;
 
         private Membership _selectedMembership;
+
         private Customer _selectedCustomer;
         private Entry _selectedEntry;
         private ServiceItem _selectedServiceItem;
@@ -49,7 +50,7 @@ namespace KK.ViewModels
                 _selectedCustomer = value; 
                 OnPropertyChanged(nameof(SelectedCustomer));
             }
-        }
+        } //
         public Membership SelectedMembership
         {
             get { return _selectedMembership; }
@@ -69,7 +70,9 @@ namespace KK.ViewModels
             }
         }
 
-
+        //
+        //
+        //
         private ObservableCollection<ServiceItem> _entryItemsList;
         public ObservableCollection<ServiceItem> EntryItemsList
         {
@@ -83,10 +86,18 @@ namespace KK.ViewModels
 
         private void SetEntryItemsList()
         {
-            //EntryItemsList = new ObservableCollection<ServiceItem>();
+            if(SelectedEntry.Items == null)
+            {
+                EntryItemsList = new ObservableCollection<ServiceItem>();
+                return;
+            }
             EntryItemsList = new ObservableCollection<ServiceItem>(SelectedEntry.Items);
-            OnPropertyChanged(nameof(EntryItemsList));
         }
+
+
+        //
+        //
+        //
 
         public StartViewModel()
         {
@@ -120,10 +131,13 @@ namespace KK.ViewModels
 
         public void GetDataForSelectedCustomer()
         {
-            _selectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
-            SelectedEntry = new Entry { CustomerId = SelectedCustomer.Id };
-            //_selectedCustomer.AddEntry(SelectedEntry);
-            //SetEntryItemsList();
+            SelectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
+            SelectedEntry = new Entry
+            {
+                CustomerId = SelectedCustomer.Id,
+                Customer = SelectedCustomer,
+            };
+            SetEntryItemsList();
         }
 
     }

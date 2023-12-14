@@ -18,18 +18,22 @@ namespace KK.Views
         public StartView()
         {
             startVM = new StartViewModel();
+            DataContext = startVM;
             InitializeComponent();
             ExpandersDisabled();
+            ResetValues();
         }
 
         // Uses Model.Entity to set Customer
-        private void lv_Overview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lv_Customers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lv_Customers.SelectedItem != null)
             {
+                ResetValues();
                 startVM.SelectedCustomer = (Customer)lv_Customers.SelectedItem;
                 startVM.GetDataForSelectedCustomer();
 
+                // Opens and closes expanders
                 if (startVM.SelectedCustomer.Membership == null)
                 {
                     // If the customer does not have a membership, expand the expanders
@@ -40,11 +44,10 @@ namespace KK.Views
                     // If the customer has a membership, do not expand the expanders
                     ExpandersDisabled();
                 }
-
-                
             }
         }
 
+        // Expander methods
         private void ExpandersEnabled()
         {
             ep_Member.IsExpanded = true;
@@ -58,7 +61,7 @@ namespace KK.Views
             ep_Equipment.IsExpanded = false;
         }
 
-        // Uses Model.Entity to set Customer
+        // Search method for the Customers listview
         private void tb_SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(lv_Customers.ItemsSource);
@@ -78,6 +81,20 @@ namespace KK.Views
 
         }
 
+        // Resets all gui values
+        private void ResetValues()
+        {
+            cb_12months.IsChecked = false;
+            cb_3months.IsChecked = false;
+            cb_1month.IsChecked = false;
+            lbl_Tentimes.Content = 0;
+            lbl_Child.Content = 0;
+            lbl_Day.Content = 0;
+            lbl_Shoes.Content = 0;
+            lbl_Rope.Content = 0;
+            lbl_Harness.Content = 0;
+        }
+
         // Click event to open new customer dialog
         private void bt_NewCustomer_Click(object sender, RoutedEventArgs e)
         {
@@ -94,19 +111,18 @@ namespace KK.Views
             cb_1month.IsChecked = false;
             startVM.AddServiceItem("YEAR");
         }
-
         private void cb_3months_Checked(object sender, RoutedEventArgs e)
         {
             cb_12months.IsChecked = false;
             cb_1month.IsChecked = false;
             startVM.AddServiceItem("QUARTER");
         }
-
         private void cb_1month_Checked(object sender, RoutedEventArgs e)
         {
             cb_12months.IsChecked = false;
             cb_3months.IsChecked = false;
             startVM.AddServiceItem("MONTH");
+
         }
 
         // Remove membership
@@ -114,12 +130,10 @@ namespace KK.Views
         {
             startVM.RemoveServiceItem("YEAR");
         }
-
         private void cb_3months_Unchecked(object sender, RoutedEventArgs e)
         {
             startVM.RemoveServiceItem("QUARTER");
         }
-
         private void cb_1month_Unchecked(object sender, RoutedEventArgs e)
         {
             startVM.RemoveServiceItem("MONTH");
@@ -193,6 +207,7 @@ namespace KK.Views
             lbl_Harness.Content = MinusCount(lbl_Harness.Content.ToString());
         }
 
+        // count methods
         private string MinusCount(string labelCount)
         {
             int count = Convert.ToInt32(labelCount);
@@ -211,6 +226,8 @@ namespace KK.Views
             
             return count.ToString();
         }
+
+
     }
 }
 

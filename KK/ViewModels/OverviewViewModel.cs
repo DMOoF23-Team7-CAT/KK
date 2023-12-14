@@ -13,7 +13,8 @@ namespace KK.ViewModels
     public class OverviewViewModel : ObservableObject
     {
         private readonly CustomerRepository _customerRepo;
-        private ObservableCollection<Customer> _customers;           
+        private ObservableCollection<Customer> _customers;        
+        
         private Customer _selectedCustomer;
 
         public Customer SelectedCustomer

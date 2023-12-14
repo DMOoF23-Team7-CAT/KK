@@ -5,15 +5,10 @@
     xmlns:ViewModel="clr-namespace:KK.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:KK.Views"
-    xmlns:locals="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="704"
     d:DesignWidth="1346"
     mc:Ignorable="d">
-
-    <UserControl.DataContext>
-        <ViewModel:StartViewModel />
-    </UserControl.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -444,7 +439,7 @@
                                 x:Name="lv_Items"
                                 Width="200"
                                 Height="250"
-                                HorizontalAlignment="center"
+                                HorizontalAlignment="center"          
                                 ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
                                 <ListView.View>
                                     <GridView>
@@ -462,7 +457,9 @@
                         </ScrollViewer>
                     </Grid>
 
-                    <TextBox Text="{Binding EntryItemsList.Count, Mode=TwoWay}" Margin="20" Width="50" Height="50"/>
+                    <!-- Test -->
+                    <TextBlock Text="{Binding SelectedCustomer.Name}" Margin="20" Width="200" Height="50" Foreground="White"/>
+                    <!-- Test -->
                 </StackPanel>
 
 
@@ -470,13 +467,8 @@
                     Grid.Row="2"
                     Margin="0,0,20,0"
                     HorizontalAlignment="Right">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                    <StackPanel>
                     <Grid
-                        Grid.Row="0"
                         Width="200"
                         Margin="20,0"
                         HorizontalAlignment="Center"
@@ -485,17 +477,16 @@
                             Width="170"
                             HorizontalAlignment="Right"
                             Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                            Text="Subtoal"
-                            Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            Text="Subtoal" />
                         <TextBox
                             x:Name="tb_SubTotal"
                             Foreground="Black"
+                            TextAlignment="Right"
                             Style="{StaticResource tb_TextBoxInput}"
                             Text="{Binding SelectedEntry.Price}" />
                     </Grid>
 
                     <Grid
-                        Grid.Row="1"
                         Width="200"
                         Margin="20,0"
                         HorizontalAlignment="Center"
@@ -513,7 +504,6 @@
                             Text="{Binding SelectedEntry.Price}" />
                     </Grid>
                     <Grid
-                        Grid.Row="2"
                         Width="200"
                         Margin="20,0"
                         HorizontalAlignment="Center"
@@ -530,6 +520,7 @@
                             Style="{StaticResource tb_TextBoxInput}"
                             Text="{Binding SelectedEntry.Price}" />
                     </Grid>
+                    </StackPanel>
                 </Grid>
 
                 <!--  Row 3  -->
@@ -647,7 +638,7 @@
                             Height="480"
                             HorizontalAlignment="center"
                             ItemsSource="{Binding Customers, Mode=TwoWay}"
-                            SelectionChanged="lv_Overview_SelectionChanged">
+                            SelectionChanged="lv_Customers_SelectionChanged">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn
