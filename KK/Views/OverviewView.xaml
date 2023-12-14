@@ -209,24 +209,24 @@
                                             <CheckBox
                                                 x:Name="cb_QualificationNone"
                                                 Grid.Row="0"
+                                                Checked="cb_QualificationNone_Checked"
                                                 Content="Ingen"
                                                 FontSize="13"
-                                                FontWeight="DemiBold" 
-                                                Checked="cb_QualificationNone_Checked"/>
+                                                FontWeight="DemiBold" />
                                             <CheckBox
                                                 x:Name="cb_QualificationTop"
                                                 Grid.Row="1"
+                                                Checked="cb_QualificationTop_Checked"
                                                 Content="Topreb"
                                                 FontSize="13"
-                                                FontWeight="DemiBold" 
-                                                Checked="cb_QualificationTop_Checked"/>
+                                                FontWeight="DemiBold" />
                                             <CheckBox
                                                 x:Name="cb_QualificationLead"
                                                 Grid.Row="2"
+                                                Checked="cb_QualificationLead_Checked"
                                                 Content="Lead"
                                                 FontSize="13"
-                                                FontWeight="DemiBold" 
-                                                Checked="cb_QualificationLead_Checked"/>
+                                                FontWeight="DemiBold" />
 
                                         </Grid>
                                     </Expander.Content>

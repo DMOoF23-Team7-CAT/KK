@@ -70,6 +70,23 @@ namespace KK.ViewModels
         }
 
 
+        private ObservableCollection<ServiceItem> _entryItemsList;
+        public ObservableCollection<ServiceItem> EntryItemsList
+        {
+            get { return _entryItemsList; }
+            set
+            {
+                _entryItemsList = value;
+                OnPropertyChanged(nameof(EntryItemsList));
+            }
+        }
+
+        private void SetEntryItemsList()
+        {
+            //EntryItemsList = new ObservableCollection<ServiceItem>();
+            EntryItemsList = new ObservableCollection<ServiceItem>(SelectedEntry.Items);
+            OnPropertyChanged(nameof(EntryItemsList));
+        }
 
         public StartViewModel()
         {
@@ -85,12 +102,15 @@ namespace KK.ViewModels
 
         public void AddServiceItem(string name)
         {
-            SelectedEntry.AddServiceItem(SelectedServiceItem);
+            ServiceItem item = new ServiceItem(name, SelectedEntry.Id);
+            SelectedEntry.AddServiceItem(item);
+            SetEntryItemsList();
         }
         public void RemoveServiceItem(string name)
         {
             var item = SelectedEntry.Items.FirstOrDefault(x => x.Name == name);
             SelectedEntry.RemoveServiceItem(item);
+            SetEntryItemsList();
         }
         public void CheckCustomerIn()
         {
@@ -101,6 +121,9 @@ namespace KK.ViewModels
         public void GetDataForSelectedCustomer()
         {
             _selectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
+            SelectedEntry = new Entry { CustomerId = SelectedCustomer.Id };
+            //_selectedCustomer.AddEntry(SelectedEntry);
+            //SetEntryItemsList();
         }
 
     }

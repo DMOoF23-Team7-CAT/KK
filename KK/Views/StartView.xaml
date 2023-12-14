@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ViewModel="clr-namespace:KK.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:locals="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
     xmlns:local="clr-namespace:KK.Views"
+    xmlns:locals="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="704"
     d:DesignWidth="1346"
@@ -117,7 +117,10 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                        <CheckBox x:Name="cb_12months" Checked="cb_12months_Checked" Unchecked="cb_12months_Unchecked" />
+                                        <CheckBox
+                                            x:Name="cb_12months"
+                                            Checked="cb_12months_Checked"
+                                            Unchecked="cb_12months_Unchecked" />
                                     </StackPanel>
                                     <StackPanel
                                         Grid.Row="1"
@@ -125,7 +128,10 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                        <CheckBox x:Name="cb_3months" Checked="cb_3months_Checked" Unchecked="cb_3months_Unchecked"/>
+                                        <CheckBox
+                                            x:Name="cb_3months"
+                                            Checked="cb_3months_Checked"
+                                            Unchecked="cb_3months_Unchecked" />
                                     </StackPanel>
                                     <StackPanel
                                         Grid.Row="2"
@@ -133,7 +139,10 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                        <CheckBox x:Name="cb_1month" Checked="cb_1month_Checked" Unchecked="cb_1month_Unchecked"/>
+                                        <CheckBox
+                                            x:Name="cb_1month"
+                                            Checked="cb_1month_Checked"
+                                            Unchecked="cb_1month_Unchecked" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -201,33 +210,77 @@
                                         <TextBlock FontSize="15" Text="Enkeltbillet" />
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                                        <RadioButton Content="-" x:Name="rb_TentimesMinus" Checked="RadioButton_Checked" Style="{StaticResource PlusMinusRadioButtonStyle}"/>
-                                        <Label Content="0" x:Name="lbl_Tentimes" Foreground="White" />
-                                        <RadioButton Content="+" x:Name="rb_TentimesPlus" Checked="RadioButton_Checked" Style="{StaticResource PlusMinusRadioButtonStyle}"/>
+                                    <!--  Plus Minus buttons  -->
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_TentimesMinus"
+                                            Click="rb_TentimesMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Tentimes"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_TentimesPlus"
+                                            Click="rb_TentimesPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
                                     </StackPanel>
-
-                                    <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                                        <RadioButton Content="-" x:Name="rb_ChildMinus" Checked="RadioButton_Checked" Style="{StaticResource PlusMinusRadioButtonStyle}"/>
-                                        <Label Content="0" x:Name="lbl_Child" Foreground="White" />
-                                        <RadioButton Content="+" x:Name="rb_ChildPlus" Checked="RadioButton_Checked" Style="{StaticResource PlusMinusRadioButtonStyle}"/>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_ChildMinus"
+                                            Click="rb_ChildMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Child"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_ChildPlus"
+                                            Click="rb_ChildPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
                                     </StackPanel>
-
-                                    <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                                        <RadioButton Content="-" x:Name="rb_DayMinus" Checked="RadioButton_Checked" Style="{StaticResource PlusMinusRadioButtonStyle}"/>
-                                        <Label Content="0" x:Name="lbl_Day" Foreground="White" />
-                                        <RadioButton Content="+" x:Name="rb_DayPlus" Checked="RadioButton_Checked" Style="{StaticResource PlusMinusRadioButtonStyle}"/>
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_DayMinus"
+                                            Click="rb_DayMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Day"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_DayPlus"
+                                            Click="rb_DayPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
                                     </StackPanel>
-
-
-
+                                    
                                 </Grid>
                             </Border>
                         </Expander.Content>
                     </Expander>
 
                     <!--  Expander Header Udstyr  -->
-
                 </StackPanel>
                 <StackPanel
                     Grid.Row="3"
@@ -286,22 +339,28 @@
                                         Orientation="Vertical">
                                         <TextBlock FontSize="15" Text="Klatresele" />
                                     </StackPanel>
+
+                                    <!--  Plus Minus buttons  -->
                                     <StackPanel
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                        <Slider
-                                            x:Name="sl_Shoe"
-                                            Width="50"
-                                            Cursor="Hand"
-                                            IsSnapToTickEnabled="True"
-                                            Maximum="5"
-                                            Minimum="0"
-                                            TickFrequency="1"
-                                            TickPlacement="None" />
-                                        <Label Content="{Binding Value, ElementName=sl_shoe}" Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_ShoesMinus"
+                                            Click="rb_ShoesMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Shoes"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_ShoesPlus"
+                                            Click="rb_ShoesPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
                                     </StackPanel>
                                     <StackPanel
                                         Grid.Row="1"
@@ -309,16 +368,20 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                        <Slider
-                                            x:Name="sl_Rope"
-                                            Width="50"
-                                            Cursor="Hand"
-                                            IsSnapToTickEnabled="True"
-                                            Maximum="5"
-                                            Minimum="0"
-                                            TickFrequency="1"
-                                            TickPlacement="None" />
-                                        <Label Content="{Binding Value, ElementName=sl_rope}" Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_RopeMinus"
+                                            Click="rb_RopeMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Rope"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_RopePlus"
+                                            Click="rb_RopePlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
                                     </StackPanel>
                                     <StackPanel
                                         Grid.Row="2"
@@ -326,17 +389,23 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                        <Slider
-                                            x:Name="sl_Harness"
-                                            Width="50"
-                                            Cursor="Hand"
-                                            IsSnapToTickEnabled="True"
-                                            Maximum="5"
-                                            Minimum="0"
-                                            TickFrequency="1"
-                                            TickPlacement="None" />
-                                        <Label Content="{Binding Value, ElementName=sl_belt}" Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_HarnessMinus"
+                                            Click="rb_HarnessMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Harness"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_HarnessPlus"
+                                            Click="rb_HarnessPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
                                     </StackPanel>
+
+
                                 </Grid>
                             </Border>
                         </Expander.Content>
@@ -376,8 +445,7 @@
                                 Width="200"
                                 Height="250"
                                 HorizontalAlignment="center"
-                                ItemsSource="{Binding SelectedEntry.Items, Mode=TwoWay}"
-                                SelectionChanged="lv_Overview_SelectionChanged">
+                                ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn
@@ -393,6 +461,8 @@
                             </ListView>
                         </ScrollViewer>
                     </Grid>
+
+                    <TextBox Text="{Binding EntryItemsList.Count, Mode=TwoWay}" Margin="20" Width="50" Height="50"/>
                 </StackPanel>
 
 
@@ -480,9 +550,9 @@
                         <TextBlock
                             Width="170"
                             HorizontalAlignment="Right"
+                            Foreground="Black"
                             Style="{StaticResource tk_CustomerDetailsTextBlocks}"
                             Text="Total"
-                            Foreground="Black"
                             Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
                         <TextBox
                             x:Name="tb_Total"

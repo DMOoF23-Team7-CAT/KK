@@ -19,7 +19,7 @@ namespace KK.Views
         {
             startVM = new StartViewModel();
             InitializeComponent();
-            ExpandersEnabled();
+            ExpandersDisabled();
         }
 
         // Uses Model.Entity to set Customer
@@ -38,9 +38,7 @@ namespace KK.Views
                 else
                 {
                     // If the customer has a membership, do not expand the expanders
-                    ep_Member.IsExpanded = false;
-                    ep_Ticket.IsExpanded = false;
-                    ep_Equipment.IsExpanded = false;
+                    ExpandersDisabled();
                 }
 
                 
@@ -52,6 +50,12 @@ namespace KK.Views
             ep_Member.IsExpanded = true;
             ep_Ticket.IsExpanded = true;
             ep_Equipment.IsExpanded = true;
+        }
+        private void ExpandersDisabled()
+        {
+            ep_Member.IsExpanded = false;
+            ep_Ticket.IsExpanded = false;
+            ep_Equipment.IsExpanded = false;
         }
 
         // Uses Model.Entity to set Customer
@@ -67,11 +71,14 @@ namespace KK.Views
             }
         }
 
+
+        // Checkind
         private void bt_CheckIn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
+        // Click event to open new customer dialog
         private void bt_NewCustomer_Click(object sender, RoutedEventArgs e)
         {
             CustomerView customerView = new CustomerView((MainWindow)Application.Current.MainWindow);
@@ -80,6 +87,7 @@ namespace KK.Views
             Opacity = 1;
         }
 
+        // Add Membership
         private void cb_12months_Checked(object sender, RoutedEventArgs e)
         {
             cb_3months.IsChecked = false;
@@ -101,6 +109,7 @@ namespace KK.Views
             startVM.AddServiceItem("MONTH");
         }
 
+        // Remove membership
         private void cb_12months_Unchecked(object sender, RoutedEventArgs e)
         {
             startVM.RemoveServiceItem("YEAR");
@@ -116,8 +125,92 @@ namespace KK.Views
             startVM.RemoveServiceItem("MONTH");
         }
 
+        // Add Tickets
+        private void rb_TentimesPlus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.AddServiceItem("TENTIMES");
+            lbl_Tentimes.Content = PlusCount(lbl_Tentimes.Content.ToString());
+        }
+        private void rb_ChildPlus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.AddServiceItem("CHILD");
+            lbl_Child.Content = PlusCount(lbl_Child.Content.ToString());
+        }
+        private void rb_DayPlus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.AddServiceItem("DAY");
+            lbl_Day.Content = PlusCount(lbl_Day.Content.ToString());
+        }
 
+        // Remove Tickets
+        private void rb_TentimesMinus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("TENTIMES");
+            lbl_Tentimes.Content = MinusCount(lbl_Tentimes.Content.ToString());
+        }
+        private void rb_ChildMinus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("CHILD");
+            lbl_Child.Content = MinusCount(lbl_Child.Content.ToString());
+        }
+        private void rb_DayMinus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("DAY");
+            lbl_Day.Content = MinusCount(lbl_Day.Content.ToString());
+        }
 
+        // Add Equptment
+        private void rb_ShoesPlus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.AddServiceItem("SHOES");
+            lbl_Shoes.Content = PlusCount(lbl_Shoes.Content.ToString());
+        }
+        private void rb_RopePlus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.AddServiceItem("ROPE");
+            lbl_Rope.Content = PlusCount(lbl_Rope.Content.ToString());
+        }
+        private void rb_HarnessPlus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.AddServiceItem("HARNESS");
+            lbl_Harness.Content = PlusCount(lbl_Harness.Content.ToString());
+        }
+
+        // Remove Equipment
+        private void rb_ShoesMinus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("SHOES");
+            lbl_Shoes.Content = MinusCount(lbl_Shoes.Content.ToString());
+        }
+        private void rb_RopeMinus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("ROPE");
+            lbl_Rope.Content = MinusCount(lbl_Rope.Content.ToString());
+        }
+        private void rb_HarnessMinus_Click(object sender, RoutedEventArgs e)
+        {
+            startVM.RemoveServiceItem("HARNESS");
+            lbl_Harness.Content = MinusCount(lbl_Harness.Content.ToString());
+        }
+
+        private string MinusCount(string labelCount)
+        {
+            int count = Convert.ToInt32(labelCount);
+
+            if(count > 0)
+            {
+                count--;
+            }
+            return count.ToString();
+        }
+        private string PlusCount(string labelCount)
+        {
+            int count = Convert.ToInt32(labelCount);
+
+            count++;
+            
+            return count.ToString();
+        }
     }
 }
 
