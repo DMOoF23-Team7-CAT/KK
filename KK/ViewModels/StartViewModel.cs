@@ -106,11 +106,6 @@ namespace KK.ViewModels
             Customers = _customerRepo.Customers;
         }
 
-        private void GetCustomerDetails()
-        {
-            SelectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
-        }
-
         public void AddServiceItem(string name)
         {
             ServiceItem item = new ServiceItem(name, SelectedEntry.Id);
@@ -125,7 +120,6 @@ namespace KK.ViewModels
         }
         public void CheckCustomerIn()
         {
-            GetCustomerDetails();
             SelectedCustomer.AddEntry(SelectedEntry);
         }
 

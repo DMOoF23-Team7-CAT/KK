@@ -26,7 +26,7 @@ namespace KK.Models.Entities
         public Entry()
         {
             CheckInTime = DateTime.Now;
-            CalculateTotalPrice();
+            //CalculateTotalPrice();
         }
 
         // Method to Add Equipment and make new list if the list is null
@@ -41,17 +41,20 @@ namespace KK.Models.Entities
         }
         public void RemoveServiceItem(ServiceItem item)
         {
-            var existingItem = Items.FirstOrDefault(i => i.Id == item.Id);
-            if (existingItem != null)
+            if (Items != null)
             {
-                Items.Remove(existingItem);
+                var existingItem = Items.FirstOrDefault(i => i.Id == item.Id);
+                if (existingItem != null)
+                {
+                    Items.Remove(existingItem);
+                }
+                CalculateTotalPrice();
             }
-            CalculateTotalPrice();
         }
 
 
         // Method to calculate the Price from the two list, if both list are null the Price = 0
-        private void CalculateTotalPrice()
+        private decimal CalculateTotalPrice()
         {
             Price = 0;
 
@@ -62,6 +65,8 @@ namespace KK.Models.Entities
                     Price += i.Price;
                 }
             }
+
+            return Price;
         }
     }   
 }

@@ -269,7 +269,7 @@
                                             Content="+"
                                             Style="{StaticResource PlusMinusRadioButtonStyle}" />
                                     </StackPanel>
-                                    
+
                                 </Grid>
                             </Border>
                         </Expander.Content>
@@ -429,99 +429,103 @@
                     Text="Betaling" />
 
                 <!--  Row 1  -->
-                <StackPanel
+                <Grid
                     Grid.Row="1"
-                    Margin="20,0,0,0"
-                    Orientation="Horizontal">
-                    <Grid>
-                        <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ListView
-                                x:Name="lv_Items"
-                                Width="200"
-                                Height="250"
-                                HorizontalAlignment="center"          
-                                ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding Name}"
-                                            Header="Produkt" />
-                                        <GridViewColumn
-                                            Width="100"
-                                            DisplayMemberBinding="{Binding Price}"
-                                            Header="Pris" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </ScrollViewer>
-                    </Grid>
+                    HorizontalAlignment="Center">
+                    <StackPanel
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+                        <Grid>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ListView
+                                    x:Name="lv_Items"
+                                    Width="400"
+                                    Height="250"
+                                    HorizontalAlignment="center"
+                                    BorderThickness="0"
+                                    IsEnabled="False"
+                                    ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn
+                                                Width="200"
+                                                DisplayMemberBinding="{Binding Name}"
+                                                Header="Produkt" />
+                                            <GridViewColumn
+                                                Width="200"
+                                                DisplayMemberBinding="{Binding Price}"
+                                                Header="Pris" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </ScrollViewer>
+                        </Grid>
 
-                    <!-- Test -->
-                    <TextBlock Text="{Binding SelectedCustomer.Name}" Margin="20" Width="200" Height="50" Foreground="White"/>
-                    <!-- Test -->
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
 
-
+                <!--
                 <Grid
                     Grid.Row="2"
                     Margin="0,0,20,0"
                     HorizontalAlignment="Right">
                     <StackPanel>
-                    <Grid
-                        Width="200"
-                        Margin="20,0"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                        <TextBlock
-                            Width="170"
-                            HorizontalAlignment="Right"
-                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                            Text="Subtoal" />
-                        <TextBox
-                            x:Name="tb_SubTotal"
-                            Foreground="Black"
-                            TextAlignment="Right"
-                            Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding SelectedEntry.Price}" />
-                    </Grid>
+                        <Grid
+                            Width="200"
+                            Margin="20,0"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                            <TextBlock
+                                Width="170"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                                Text="Subtoal" />
+                            <TextBox
+                                x:Name="tb_SubTotal"
+                                Foreground="Black"
+                                IsReadOnly="True"
+                                Style="{StaticResource tb_TextBoxInput}"
+                                TextAlignment="Right" />
+                        </Grid>
 
-                    <Grid
-                        Width="200"
-                        Margin="20,0"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                        <TextBlock
-                            Width="170"
-                            HorizontalAlignment="Right"
-                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                            Text="Total ex moms"
-                            Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
-                        <TextBox
-                            x:Name="tb_ExcludeTaxTotal"
-                            Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding SelectedEntry.Price}" />
-                    </Grid>
-                    <Grid
-                        Width="200"
-                        Margin="20,0"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                        <TextBlock
-                            Width="170"
-                            HorizontalAlignment="Right"
-                            Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                            Text="Moms"
-                            Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
-                        <TextBox
-                            x:Name="tb_Tax"
-                            Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding SelectedEntry.Price}" />
-                    </Grid>
+                        <Grid
+                            Width="200"
+                            Margin="20,0"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                            <TextBlock
+                                Width="170"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                                Text="Total ex moms"
+                                Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            <TextBox
+                                x:Name="tb_ExcludeTaxTotal"
+                                Foreground="Black"
+                                IsReadOnly="True"
+                                Style="{StaticResource tb_TextBoxInput}"
+                                TextAlignment="Right" />
+                        </Grid>
+                        <Grid
+                            Width="200"
+                            Margin="20,0"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                            <TextBlock
+                                Width="170"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                                Text="Moms"
+                                Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            <TextBox
+                                x:Name="tb_Tax"
+                                Foreground="Black"
+                                IsReadOnly="True"
+                                Style="{StaticResource tb_TextBoxInput}"
+                                TextAlignment="Right" />
+                        </Grid>
                     </StackPanel>
-                </Grid>
+                </Grid>                -->
 
                 <!--  Row 3  -->
                 <Grid
@@ -543,13 +547,13 @@
                             HorizontalAlignment="Right"
                             Foreground="Black"
                             Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                            Text="Total"
-                            Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            Text="Total" />
                         <TextBox
                             x:Name="tb_Total"
                             Foreground="Black"
+                            IsReadOnly="True"
                             Style="{StaticResource tb_TextBoxInput}"
-                            Text="{Binding SelectedEntry.Price}" />
+                            TextAlignment="Right" />
                     </Grid>
 
                     <Button

@@ -93,6 +93,19 @@ namespace KK.Views
             lbl_Shoes.Content = 0;
             lbl_Rope.Content = 0;
             lbl_Harness.Content = 0;
+/*            tb_SubTotal.Text = string.Empty;
+            tb_ExcludeTaxTotal.Text = string.Empty;
+            tb_Tax.Text = string.Empty;*/
+            tb_Total.Text = string.Empty;
+        }
+
+        // Set PaymentFields
+        private void SetPaymentFields()
+        {
+/*            tb_SubTotal.Text = string.Empty;
+            tb_ExcludeTaxTotal.Text = string.Empty;
+            tb_Tax.Text = string.Empty;*/
+            tb_Total.Text = startVM.SelectedEntry.Price.ToString();
         }
 
         // Click event to open new customer dialog
@@ -210,6 +223,7 @@ namespace KK.Views
         // count methods
         private string MinusCount(string labelCount)
         {
+            SetPaymentFields();
             int count = Convert.ToInt32(labelCount);
 
             if(count > 0)
@@ -220,6 +234,7 @@ namespace KK.Views
         }
         private string PlusCount(string labelCount)
         {
+            SetPaymentFields();
             int count = Convert.ToInt32(labelCount);
 
             count++;
