@@ -180,13 +180,14 @@
                             <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
 
                                 <Expander
-                                    x:Name="ep_member"
+                                    x:Name="ep_Qualification"
                                     Width="200"
                                     Margin="0,10,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Background="White"
-                                    Foreground="Black">
+                                    Foreground="Black"
+                                    >
                                     <Expander.Header>
                                         <Grid Margin="0" Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
                                             <TextBox

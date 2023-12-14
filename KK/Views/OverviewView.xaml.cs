@@ -48,6 +48,7 @@ namespace KK.Views
 
                 lv_ChekIn.ItemsSource = overviewVM.SelectedCustomer.Entries;
             }
+            ep_Qualification.IsExpanded = false;
 
         }
 
@@ -161,9 +162,12 @@ namespace KK.Views
             tb_Qualification.Text = "Lead";
         }
 
+
+
         private void ep_Qualification_LostFocus(object sender, RoutedEventArgs e)
         {
             ep_Qualification.IsExpanded = false;
         }
+
     }
 }
