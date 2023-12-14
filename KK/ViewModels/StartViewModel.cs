@@ -17,8 +17,9 @@ namespace KK.ViewModels
         // Private backing fields
         private readonly CustomerRepository _customerRepo;
 
-        private Membership _SelectedMembership;
-        private Customer _SelectedCustomer;
+        private Membership _selectedMembership;
+
+        private Customer _selectedCustomer;
         private Entry _selectedEntry;
         private ServiceItem _selectedServiceItem;
         private ObservableCollection<Customer> _customers;
@@ -43,19 +44,19 @@ namespace KK.ViewModels
         }
         public Customer SelectedCustomer
         {
-            get { return _SelectedCustomer; }
+            get { return _selectedCustomer; }
             set
             {
-                _SelectedCustomer = value; 
+                _selectedCustomer = value; 
                 OnPropertyChanged(nameof(SelectedCustomer));
             }
-        }
+        } //
         public Membership SelectedMembership
         {
-            get { return _SelectedMembership; }
+            get { return _selectedMembership; }
             set
             {
-                _SelectedMembership = value; 
+                _selectedMembership = value; 
                 OnPropertyChanged(nameof(SelectedMembership));
             }
         }
@@ -69,7 +70,34 @@ namespace KK.ViewModels
             }
         }
 
+        //
+        //
+        //
+        private ObservableCollection<ServiceItem> _entryItemsList;
+        public ObservableCollection<ServiceItem> EntryItemsList
+        {
+            get { return _entryItemsList; }
+            set
+            {
+                _entryItemsList = value;
+                OnPropertyChanged(nameof(EntryItemsList));
+            }
+        }
 
+        private void SetEntryItemsList()
+        {
+            if(SelectedEntry.Items == null)
+            {
+                EntryItemsList = new ObservableCollection<ServiceItem>();
+                return;
+            }
+            EntryItemsList = new ObservableCollection<ServiceItem>(SelectedEntry.Items);
+        }
+
+
+        //
+        //
+        //
 
         public StartViewModel()
         {
@@ -78,20 +106,32 @@ namespace KK.ViewModels
             Customers = _customerRepo.Customers;
         }
 
-        private void GetCustomerDetails()
+        public void AddServiceItem(string name)
         {
-            SelectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
+            ServiceItem item = new ServiceItem(name, SelectedEntry.Id);
+            SelectedEntry.AddServiceItem(item);
+            SetEntryItemsList();
         }
-
-        public void AddServiceItem()
+        public void RemoveServiceItem(string name)
         {
-            SelectedEntry.AddServiceItem(SelectedServiceItem);
+            var item = SelectedEntry.Items.FirstOrDefault(x => x.Name == name);
+            SelectedEntry.RemoveServiceItem(item);
+            SetEntryItemsList();
         }
         public void CheckCustomerIn()
         {
-            GetCustomerDetails();
             SelectedCustomer.AddEntry(SelectedEntry);
+        }
 
+        public void GetDataForSelectedCustomer()
+        {
+            SelectedCustomer = _customerRepo.GetCustomer(SelectedCustomer.Id);
+            SelectedEntry = new Entry
+            {
+                CustomerId = SelectedCustomer.Id,
+                Customer = SelectedCustomer,
+            };
+            SetEntryItemsList();
         }
 
     }

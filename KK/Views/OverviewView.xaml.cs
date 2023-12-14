@@ -41,17 +41,19 @@ namespace KK.Views
             if (lv_Overview.SelectedItem != null)
             {
                 overviewVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
-                SetQualificationCheckbox();
+
+                SetQualificationCheckbox(); 
 
                 overviewVM.GetDataForSelectedCustomer();
 
                 lv_ChekIn.ItemsSource = overviewVM.SelectedCustomer.Entries;
             }
-            
+
         }
 
         private void bt_Update_Click(object sender, RoutedEventArgs e)
         {
+
             int qualification = 0;
 
             if (cb_QualificationTop.IsChecked == true)
@@ -76,6 +78,13 @@ namespace KK.Views
                 overviewVM.UpdateCustomer(name, dob, phone, email, qualification, disclaimer);
             }
             return;
+
+            //MessageBoxResult result = MessageBox.Show("Kunden blev opdateret", "Kunde opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            //if (result == MessageBoxResult.OK)
+            //{
+            //    overviewVM.UpdateCustomer();
+            //}
 
         }
 

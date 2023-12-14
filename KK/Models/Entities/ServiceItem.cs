@@ -49,5 +49,12 @@ namespace KK.Models.Entities
         public ServiceItem()
         {
         }
+
+        public ServiceItem(string name, int entryId)
+        {
+            Name = name;
+            EntryId = entryId;
+
+        }
     }
 }

@@ -67,10 +67,12 @@
                     Click="btn_Maximize_Click"
                     Content="⨁"
                     Style="{StaticResource bt_ControlbarButton}" />
-                <Button
-                    Click="btn_Close_Click"
+                <Button Click="btn_Close_Click"
                     Content="⨂"
-                    Style="{StaticResource bt_ControlbarButton}" />
+                    Style="{StaticResource bt_ControlbarButton}"/>
+
+
+
             </StackPanel>
             <!--#endregion-->
 

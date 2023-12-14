@@ -5,14 +5,10 @@
     xmlns:ViewModel="clr-namespace:KK.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:KK.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="704"
     d:DesignWidth="1346"
     mc:Ignorable="d">
-
-    <UserControl.DataContext>
-        <ViewModel:StartViewModel />
-    </UserControl.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,378 +18,394 @@
         </Grid.ColumnDefinitions>
 
         <!--  GridColumn 0  -->
+
         <Border Grid.Column="0" Style="{StaticResource BorderGradientStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />                   
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60" />
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition />                   
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0">
-                    <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="23"
-                    FontWeight="Bold"
-                    Foreground="#FFFFFF"
-                    Text="Oversigt" />
-                    
-                </StackPanel>
-                
-                <!--Expander Header Medlemskab-->
-                
-                <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" Background="Transparent">
-                    <Expander x:Name="ep_member" Foreground="White" Width="300" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Expander.Header >
-                            <Border Background="#7F7F7F" CornerRadius="10">
-                                <TextBlock Text="Medlemskab" FontSize="20" TextAlignment="Center" FontWeight="DemiBold" Width="273"/>
-                            </Border>
-                        </Expander.Header>
-                        <Expander.Content >
-                            <Border Style="{StaticResource BorderGradientStyle}" Margin="23,10,0,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="0">
-                                        <TextBlock Text="12 måneder" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1">
-                                        <TextBlock Text="3 måneder" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2">
-                                        <TextBlock Text="1 måned" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup"/>
-                                        <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" />
-                                    </StackPanel>
-                                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup"/>
-                                        <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" />
-                                    </StackPanel>
-                                    <StackPanel Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <RadioButton Content="Ja" Foreground="White" GroupName="YesNoGroup"/>
-                                        <RadioButton Content="Nej" Foreground="white" Margin="10,0,0,0" GroupName="YesNoGroup" />
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            
-                        </Expander.Content>                   
-                    </Expander>
-                    
-                    <!--Expander Header Billet type-->
-                    
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Grid.Row="2"  HorizontalAlignment="Center">
-                    <Expander Foreground="White" Width="300" Margin="0,20,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Expander.Header >
-                            <Border Background="#7F7F7F" CornerRadius="10">
-                                <TextBlock Text="Billettype" FontSize="20" TextAlignment="Center" FontWeight="DemiBold" Width="273"/>                                
-                            </Border>
-                        </Expander.Header>
-                        <Expander.Content >
-                            <Border Style="{StaticResource BorderGradientStyle}" Margin="23,10,0,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="0">
-                                        <TextBlock Text="Titurskort" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1">
-                                        <TextBlock Text="Børnebillet" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2">
-                                        <TextBlock Text="Enkeltbillet" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0">
-                                        <Slider x:Name="sl_10turs" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                        <Label Content="{Binding Value, ElementName=sl_10turs}" Foreground="White"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1">
-                                        <Slider x:Name="sl_child" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                        <Label Content="{Binding Value, ElementName=sl_child}" Foreground="White"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2">
-                                        <Slider x:Name="sl_single" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                        <Label Content="{Binding Value, ElementName=sl_single}" Foreground="White"/>
-                                    </StackPanel>
-
-                                </Grid>
-                            </Border>
-                        </Expander.Content>
-                    </Expander>
-                    
-                    <!--Expander Header Udstyr-->
-
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Grid.Row="3"  HorizontalAlignment="Center">
-                    <Expander Foreground="White" Width="300" Margin="0,20,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Expander.Header >
-                            <Border Background="#7F7F7F" CornerRadius="10">
-                                <TextBlock Text="Udstyr" FontSize="20" TextAlignment="Center" FontWeight="DemiBold" Width="273"/>
-                            </Border>
-                        </Expander.Header>
-                        <Expander.Content >
-                            <Border Style="{StaticResource BorderGradientStyle}" Margin="23,10,0,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
-                                        <RowDefinition Height="40"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="0">
-                                        <TextBlock Text="Klatresko" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1">
-                                        <TextBlock Text="Klatrereb" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="2">
-                                        <TextBlock Text="Klatresele" FontSize="15"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0">
-                                        <Slider x:Name="sl_shoe" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                        <Label Content="{Binding Value, ElementName=sl_shoe}" Foreground="White"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1">
-                                        <Slider x:Name="sl_rope" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                        <Label Content="{Binding Value, ElementName=sl_rope}" Foreground="White"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2">
-                                        <Slider x:Name="sl_belt" Maximum="5" Minimum="0" Width="50" Cursor="Hand" TickPlacement="None" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                        <Label Content="{Binding Value, ElementName=sl_belt}" Foreground="White"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </Expander.Content>
-                    </Expander>
-
-                </StackPanel>
-
-                <!--  Header  --><!--
-                <TextBlock
+                <StackPanel
                     Grid.Row="0"
-                    Grid.Column="1"
+                    Margin="20,0,0,0"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="23"
-                    FontWeight="Bold"
-                    Foreground="#FFFFFF"
-                    Text="Oversigt" />
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="23"
+                        FontWeight="Bold"
+                        Foreground="#FFFFFF"
+                        Text="Oversigt" />
 
-                --><!--  Row 2  --><!--
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    Foreground="#FFFFFF"
-                    Text="Produkt" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    Foreground="#FFFFFF"
-                    Text="Type" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    Foreground="#FFFFFF"
-                    Text="Antal" />
+                </StackPanel>
 
-                --><!--  Row 2  --><!--
-                <TextBlock
+                <!--  Expander Header Medlemskab  -->
+
+                <StackPanel
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    Orientation="Vertical">
+                    <Expander
+                        x:Name="ep_Member"
+                        Width="300"
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White">
+                        <Expander.Header>
+                            <Border Background="#7F7F7F" CornerRadius="10">
+                                <TextBlock
+                                    Width="273"
+                                    FontSize="20"
+                                    FontWeight="DemiBold"
+                                    Text="Medlemskab"
+                                    TextAlignment="Center" />
+                            </Border>
+                        </Expander.Header>
+                        <Expander.Content>
+                            <Border Margin="23,10,0,0" Style="{StaticResource BorderGradientStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="12 måneder" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="3 måneder" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="1 måned" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="cb_12months"
+                                            Checked="cb_12months_Checked"
+                                            Unchecked="cb_12months_Unchecked" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="cb_3months"
+                                            Checked="cb_3months_Checked"
+                                            Unchecked="cb_3months_Unchecked" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="cb_1month"
+                                            Checked="cb_1month_Checked"
+                                            Unchecked="cb_1month_Unchecked" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                        </Expander.Content>
+                    </Expander>
+
+                    <!--  Expander Header Billet type  -->
+
+                </StackPanel>
+                <StackPanel
                     Grid.Row="2"
-                    Grid.Column="0"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="12 Måneders" />
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Medlemskab" />
+                    Orientation="Vertical">
+                    <Expander
+                        x:Name="ep_Ticket"
+                        Width="300"
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White">
+                        <Expander.Header>
+                            <Border Background="#7F7F7F" CornerRadius="10">
+                                <TextBlock
+                                    Width="273"
+                                    FontSize="20"
+                                    FontWeight="DemiBold"
+                                    Text="Billettype"
+                                    TextAlignment="Center" />
+                            </Border>
+                        </Expander.Header>
+                        <Expander.Content>
+                            <Border Margin="23,10,0,0" Style="{StaticResource BorderGradientStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                        <TextBlock FontSize="15" Text="Titurskort" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="Børnebillet" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="Enkeltbillet" />
+                                    </StackPanel>
 
-                --><!--  Row 3  --><!--
-                <TextBlock
+                                    <!--  Plus Minus buttons  -->
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_TentimesMinus"
+                                            Click="rb_TentimesMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Tentimes"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_TentimesPlus"
+                                            Click="rb_TentimesPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_ChildMinus"
+                                            Click="rb_ChildMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Child"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_ChildPlus"
+                                            Click="rb_ChildPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_DayMinus"
+                                            Click="rb_DayMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Day"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_DayPlus"
+                                            Click="rb_DayPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                    </StackPanel>
+
+                                </Grid>
+                            </Border>
+                        </Expander.Content>
+                    </Expander>
+
+                    <!--  Expander Header Udstyr  -->
+                </StackPanel>
+                <StackPanel
                     Grid.Row="3"
-                    Grid.Column="0"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="3 Måneders" />
-                <TextBlock
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Medlemskab" />
+                    Orientation="Vertical">
+                    <Expander
+                        x:Name="ep_Equipment"
+                        Width="300"
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White">
+                        <Expander.Header>
+                            <Border Background="#7F7F7F" CornerRadius="10">
+                                <TextBlock
+                                    Width="273"
+                                    FontSize="20"
+                                    FontWeight="DemiBold"
+                                    Text="Udstyr"
+                                    TextAlignment="Center" />
+                            </Border>
+                        </Expander.Header>
+                        <Expander.Content>
+                            <Border Margin="23,10,0,0" Style="{StaticResource BorderGradientStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="Klatresko" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="Klatrereb" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                        <TextBlock FontSize="15" Text="Klatresele" />
+                                    </StackPanel>
 
-                --><!--  Row 4  --><!--
-                <TextBlock
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="1 Måned" />
-                <TextBlock
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Medlemskab" />
+                                    <!--  Plus Minus buttons  -->
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_ShoesMinus"
+                                            Click="rb_ShoesMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Shoes"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_ShoesPlus"
+                                            Click="rb_ShoesPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_RopeMinus"
+                                            Click="rb_RopeMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Rope"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_RopePlus"
+                                            Click="rb_RopePlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <RadioButton
+                                            x:Name="rb_HarnessMinus"
+                                            Click="rb_HarnessMinus_Click"
+                                            Content="-"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                        <Label
+                                            x:Name="lbl_Harness"
+                                            Content="0"
+                                            Foreground="White" />
+                                        <RadioButton
+                                            x:Name="rb_HarnessPlus"
+                                            Click="rb_HarnessPlus_Click"
+                                            Content="+"
+                                            Style="{StaticResource PlusMinusRadioButtonStyle}" />
+                                    </StackPanel>
 
-                --><!--  Row 5  --><!--
-                <TextBlock
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="10 Turs Billet" />
-                <TextBlock
-                    Grid.Row="5"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Billet" />
 
-                --><!--  Row 6  --><!--
-                <TextBlock
-                    Grid.Row="6"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Voksen" />
-                <TextBlock
-                    Grid.Row="6"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Billet" />
-
-                --><!--  Row 7  --><!--
-                <TextBlock
-                    Grid.Row="7"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Barn" />
-                <TextBlock
-                    Grid.Row="7"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Billet" />
-
-                --><!--  Row 8  --><!--
-                <TextBlock
-                    Grid.Row="8"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Klatresko" />
-                <TextBlock
-                    Grid.Row="8"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Udstyr" />
-
-                --><!--  Row 9  --><!--
-                <TextBlock
-                    Grid.Row="9"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Klatresele" />
-                <TextBlock
-                    Grid.Row="9"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Udstyr" />
-
-                --><!--  Row 10  --><!--
-                <TextBlock
-                    Grid.Row="10"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Klatrereb" />
-                <TextBlock
-                    Grid.Row="10"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    Foreground="#FFFFFF"
-                    Text="Udstyr" />-->
-
+                                </Grid>
+                            </Border>
+                        </Expander.Content>
+                    </Expander>
+                </StackPanel>
             </Grid>
         </Border>
 
@@ -401,8 +413,8 @@
         <Border Grid.Column="1" Style="{StaticResource BorderGradientStyle}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="300" />
                     <RowDefinition />
                     <RowDefinition Height="150" />
                 </Grid.RowDefinitions>
@@ -415,6 +427,105 @@
                     FontWeight="Bold"
                     Foreground="#FFFFFF"
                     Text="Betaling" />
+
+                <!--  Row 1  -->
+                <Grid
+                    Grid.Row="1"
+                    HorizontalAlignment="Center">
+                    <StackPanel
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+                        <Grid>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ListView
+                                    x:Name="lv_Items"
+                                    Width="400"
+                                    Height="250"
+                                    HorizontalAlignment="center"
+                                    BorderThickness="0"
+                                    IsEnabled="False"
+                                    ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn
+                                                Width="200"
+                                                DisplayMemberBinding="{Binding Name}"
+                                                Header="Produkt" />
+                                            <GridViewColumn
+                                                Width="200"
+                                                DisplayMemberBinding="{Binding Price}"
+                                                Header="Pris" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </ScrollViewer>
+                        </Grid>
+
+                    </StackPanel>
+                </Grid>
+
+                <!--
+                <Grid
+                    Grid.Row="2"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right">
+                    <StackPanel>
+                        <Grid
+                            Width="200"
+                            Margin="20,0"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                            <TextBlock
+                                Width="170"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                                Text="Subtoal" />
+                            <TextBox
+                                x:Name="tb_SubTotal"
+                                Foreground="Black"
+                                IsReadOnly="True"
+                                Style="{StaticResource tb_TextBoxInput}"
+                                TextAlignment="Right" />
+                        </Grid>
+
+                        <Grid
+                            Width="200"
+                            Margin="20,0"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                            <TextBlock
+                                Width="170"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                                Text="Total ex moms"
+                                Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            <TextBox
+                                x:Name="tb_ExcludeTaxTotal"
+                                Foreground="Black"
+                                IsReadOnly="True"
+                                Style="{StaticResource tb_TextBoxInput}"
+                                TextAlignment="Right" />
+                        </Grid>
+                        <Grid
+                            Width="200"
+                            Margin="20,0"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
+                            <TextBlock
+                                Width="170"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
+                                Text="Moms"
+                                Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            <TextBox
+                                x:Name="tb_Tax"
+                                Foreground="Black"
+                                IsReadOnly="True"
+                                Style="{StaticResource tb_TextBoxInput}"
+                                TextAlignment="Right" />
+                        </Grid>
+                    </StackPanel>
+                </Grid>                -->
 
                 <!--  Row 3  -->
                 <Grid
@@ -434,13 +545,15 @@
                         <TextBlock
                             Width="170"
                             HorizontalAlignment="Right"
+                            Foreground="Black"
                             Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                            Text="Total"
-                            Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
+                            Text="Total" />
                         <TextBox
                             x:Name="tb_Total"
                             Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}" />
+                            IsReadOnly="True"
+                            Style="{StaticResource tb_TextBoxInput}"
+                            TextAlignment="Right" />
                     </Grid>
 
                     <Button
@@ -469,14 +582,14 @@
                 </Grid.RowDefinitions>
 
                 <!--  Row 0  -->
-                <StackPanel HorizontalAlignment="Right" Margin="20">
+                <StackPanel Margin="20" HorizontalAlignment="Right">
                     <Button
                         x:Name="bt_NewCustomer"
-                    Width="180"
-                    Margin="0,0"
-                    Style="{StaticResource bt_DarkThemedButton}"
-                        Click="bt_NewCustomer_Click">
-                        <TextBlock Text="Ny Kunde" FontWeight="Bold"/>
+                        Width="180"
+                        Margin="0,0"
+                        Click="bt_NewCustomer_Click"
+                        Style="{StaticResource bt_DarkThemedButton}">
+                        <TextBlock FontWeight="Bold" Text="Ny Kunde" />
                     </Button>
                 </StackPanel>
 
@@ -525,11 +638,11 @@
                 <StackPanel Grid.Row="2">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ListView
-                            x:Name="lv_Overview"
+                            x:Name="lv_Customers"
                             Height="480"
                             HorizontalAlignment="center"
                             ItemsSource="{Binding Customers, Mode=TwoWay}"
-                            SelectionChanged="lv_Overview_SelectionChanged">
+                            SelectionChanged="lv_Customers_SelectionChanged">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn
@@ -545,9 +658,9 @@
                                         DisplayMemberBinding="{Binding Phone}"
                                         Header="Telefon" />
                                     <GridViewColumn
-                                        Width="100"
-                                        DisplayMemberBinding="{Binding Email}"
-                                        Header="Email" />
+                                        Width="70"
+                                        DisplayMemberBinding="{Binding Membership.Id}"
+                                        Header="Medlems Id" />
                                 </GridView>
                             </ListView.View>
                         </ListView>
