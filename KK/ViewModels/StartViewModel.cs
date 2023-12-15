@@ -159,17 +159,40 @@ namespace KK.ViewModels
             _entryRepository.Update(SelectedEntry);
         }
 
-        // Method to update Membership
-        public void UpdateCustomerMembership()
+        // Method to update or add Membership
+        private void AddMembershipToRepo()
         {
-            Membership membership = new Membership { }  => EntryItemsList.FirstOrDefault(x => x.Name == "YEAR");
+
             if (SelectedCustomer.Membership != null)
             {
+                SelectedCustomer.Membership.EndDate = SelectedMembership.EndDate;
                 _membershipRepository.Update(SelectedCustomer.Membership);
             }
-            else if (SelectedCustomer.Membership == null)
+            else
             {
-                _membershipRepository.Add(SelectedCustomer.Membership);
+                _membershipRepository.Add(SelectedMembership);
+            }
+        }
+
+        public void SetMembership()
+        {
+            int months = 0;
+            if (EntryItemsList != null)
+            {
+                var y = EntryItemsList.FirstOrDefault(x => x.Name == "YEAR");
+                var q = EntryItemsList.FirstOrDefault(x => x.Name == "QUARTER");
+                var m = EntryItemsList.FirstOrDefault(x => x.Name == "MONTH");
+
+                if (y != null) { months = 12;  return; }
+                else if (q != null) { months = 3; return; }
+                else if (m != null) { months = 1; return; }              
+            }
+            DateTime EndDate = DateTime.Now.AddMonths(months);
+            SelectedMembership.EndDate = EndDate;
+
+            if (months != 0)
+            {
+                AddMembershipToRepo();
             }
         }
 

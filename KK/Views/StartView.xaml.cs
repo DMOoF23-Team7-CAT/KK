@@ -109,7 +109,7 @@ namespace KK.Views
         {
             try
             {
-                
+                AddMembership();
             }
             catch (Exception ex)
             {
@@ -151,6 +151,15 @@ namespace KK.Views
             Opacity = 0.6;
             customerView.ShowDialog();
             Opacity = 1;
+        }
+
+        // is Membership added
+        private void AddMembership()
+        {
+            if(cb_12months.IsChecked == true || cb_3months.IsChecked == true || cb_1month.IsChecked == true)
+            {
+                startVM.SetMembership();
+            }
         }
 
         // Add Membership
