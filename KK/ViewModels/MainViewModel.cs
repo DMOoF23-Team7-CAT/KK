@@ -31,7 +31,7 @@ namespace KK.ViewModels
         public MainViewModel()
         {
             StartVM = new StartViewModel();
-            //OverviewVM = new OverviewViewModel();
+            OverviewVM = new OverviewViewModel();
 
             CurrentView = StartVM;
 

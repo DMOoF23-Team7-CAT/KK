@@ -37,7 +37,7 @@ namespace KK.Models.Entities
         // Sets startdate to curent time if the date hasnt already been set
         private void SetStartDate()
         {
-            if (StartDate < new DateTime(2020,01,01))
+            if (StartDate < new DateTime(2020,01,01) || StartDate == DateTime.MinValue)
             {
                 StartDate = DateTime.Now;
             }

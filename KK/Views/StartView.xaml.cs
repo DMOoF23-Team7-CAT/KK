@@ -14,7 +14,10 @@ namespace KK.Views
     /// </summary>
     public partial class StartView : UserControl
     {
-        StartViewModel startVM;
+        // private backing fields
+        private readonly StartViewModel startVM;
+
+        // Constructor
         public StartView()
         {
             startVM = new StartViewModel();
@@ -92,31 +95,16 @@ namespace KK.Views
         // Check customer in button click event
         private void bt_CheckMemberIn_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                startVM.CheckMemberIn();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    $"Der skete en fejl med intjekning af medlem. \nKunden skal have et aktivt medlemskab\n\n\n\n{ex.Message}",
-                    "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
+            CheckMemberIn();
         }
         // Pay button click event
         private void bt_pay_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                AddMembership();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    $"Der skete en fejl med betallingen. \n\n\n\n{ex.Message}",
-                    "fejl ved betaling", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+
+            CheckCustomerOrMemberIn();
+            AddMembership();
+            AddServiceItem();
+
         }
 
         // Resets all gui values
@@ -153,12 +141,64 @@ namespace KK.Views
             Opacity = 1;
         }
 
-        // is Membership added
+        // Method to Add checkcustomer or member in
+        private void CheckCustomerOrMemberIn()
+        {
+            try
+            {
+                startVM.CheckCustomerInWithItems();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en fejl ved intjekningen af kunden \n\n\n\n{ex.Message}",
+                    "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        // Method to Add checkcustomer or member in
+        private void CheckMemberIn()
+        {
+            try
+            {
+                startVM.CheckMemberIn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en fejl ved intjekningen af Medlem \n\n\n\n{ex.Message}",
+                    "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        // Method that checks if membership boxes are checked and then adds membership
         private void AddMembership()
         {
-            if(cb_12months.IsChecked == true || cb_3months.IsChecked == true || cb_1month.IsChecked == true)
+            try
             {
-                startVM.SetMembership();
+                if (cb_12months.IsChecked == true || cb_3months.IsChecked == true || cb_1month.IsChecked == true)
+                {
+                    startVM.SetMembership();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en fejl ved tilføjelsen medlemskab\n\n\n\n{ex.Message}",
+                    "fejl ved Tilføjelse af medlemskab", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+        // Add ServiceItem
+        private void AddServiceItem()
+        {
+            try
+            {
+                startVM.AddServiceItemToRepo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en fejl ved tilføjelsen af ekstra tjenester\n\n\n\n{ex.Message}",
+                    "fejl ved Tilføjelse af udstyr", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
