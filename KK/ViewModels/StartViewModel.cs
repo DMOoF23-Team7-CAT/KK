@@ -162,13 +162,14 @@ namespace KK.ViewModels
         // Method to update Membership
         public void UpdateCustomerMembership()
         {
+            Membership membership = new Membership { }  => EntryItemsList.FirstOrDefault(x => x.Name == "YEAR");
             if (SelectedCustomer.Membership != null)
             {
                 _membershipRepository.Update(SelectedCustomer.Membership);
             }
-            else
+            else if (SelectedCustomer.Membership == null)
             {
-
+                _membershipRepository.Add(SelectedCustomer.Membership);
             }
         }
 

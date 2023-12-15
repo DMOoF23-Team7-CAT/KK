@@ -68,7 +68,7 @@
                         <TextBox
                             x:Name="tb_TxtName"
                             Foreground="Black"
-                            Style="{StaticResource tb_TextBoxInput}"/>
+                            Style="{StaticResource tb_TextBoxInput}" />
                     </Grid>
                 </Grid>
 
@@ -77,12 +77,11 @@
                     <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Fødselsdato:" />
                     <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
                         <Border Style="{StaticResource bb_DatePickerBorder}">
-                            <DatePicker                                
+                            <DatePicker
                                 x:Name="dp_DateOfBirth"
                                 BorderThickness="0"
-                                Foreground="#b0b9c6"
-                                FontSize="12">
-                            </DatePicker>
+                                FontSize="12"
+                                Foreground="#b0b9c6" />
                         </Border>
                     </Grid>
                 </Grid>
@@ -121,9 +120,7 @@
                 <Grid Grid.Row="6" Margin="0,20,0,5">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Fraskrivningserklæring:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox
-                            x:Name="cb_disclaimer"
-                            HorizontalAlignment="Center" />
+                        <CheckBox x:Name="cb_disclaimer" HorizontalAlignment="Center" />
                     </Grid>
                 </Grid>
 
@@ -150,9 +147,7 @@
                 <Grid Grid.Row="8" Margin="0,20,0,10">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Lead sikret:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox
-                            x:Name="cb_lead"
-                            HorizontalAlignment="Center"/>
+                        <CheckBox x:Name="cb_lead" HorizontalAlignment="Center" />
                         <!--  IsEnabled="{Binding IsTopRopeChecked, Converter={StaticResource InverseBooleanConverter}}"  -->
                     </Grid>
                 </Grid>
@@ -161,9 +156,7 @@
                 <Grid Grid.Row="9" Margin="0,20,0,50">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Top-reb:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox
-                            x:Name="cb_top"
-                            HorizontalAlignment="Center"/>
+                        <CheckBox x:Name="cb_top" HorizontalAlignment="Center" />
                         <!--  IsEnabled="{Binding cb_lead, Converter={StaticResource InverseBooleanConverter}}"  -->
                     </Grid>
                 </Grid>
