@@ -29,6 +29,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel
@@ -46,7 +47,7 @@
 
                 </StackPanel>
 
-                <!--  Expander Header Medlemskab  -->
+                <!--  Expander Header Membership  -->
 
                 <StackPanel
                     Grid.Row="1"
@@ -59,7 +60,9 @@
                         Margin="0,20,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Foreground="White">
+                        Foreground="White"
+                        Expanded="ep_Member_Expanded"
+                        Collapsed="ep_Member_Collapsed">
                         <Expander.Header>
                             <Border Background="#7F7F7F" CornerRadius="10">
                                 <TextBlock
@@ -67,7 +70,7 @@
                                     FontSize="20"
                                     FontWeight="DemiBold"
                                     Text="Medlemskab"
-                                    TextAlignment="Center" />
+                                    TextAlignment="Center"/>
                             </Border>
                         </Expander.Header>
                         <Expander.Content>
@@ -145,7 +148,7 @@
                         </Expander.Content>
                     </Expander>
 
-                    <!--  Expander Header Billet type  -->
+                    <!--  Expander Header Ticket type  -->
 
                 </StackPanel>
                 <StackPanel
@@ -158,7 +161,9 @@
                         Margin="0,20,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Foreground="White">
+                        Foreground="White"
+                        Expanded="ep_Ticket_Expanded"
+                        Collapsed="ep_Ticket_Collapsed">
                         <Expander.Header>
                             <Border Background="#7F7F7F" CornerRadius="10">
                                 <TextBlock
@@ -275,7 +280,7 @@
                         </Expander.Content>
                     </Expander>
 
-                    <!--  Expander Header Udstyr  -->
+                    <!--  Expander Header Equipment  -->
                 </StackPanel>
                 <StackPanel
                     Grid.Row="3"
@@ -287,7 +292,9 @@
                         Margin="0,20,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Foreground="White">
+                        Foreground="White"
+                        Expanded="ep_Equipment_Expanded"
+                        Collapsed="ep_Equipment_Collapsed">
                         <Expander.Header>
                             <Border Background="#7F7F7F" CornerRadius="10">
                                 <TextBlock

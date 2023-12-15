@@ -45,11 +45,10 @@ namespace KK.Models.Entities
             };
         }
 
-        // Constructor
+        // Constructors
         public ServiceItem()
         {
         }
-
         public ServiceItem(string name, int entryId)
         {
             Name = name;

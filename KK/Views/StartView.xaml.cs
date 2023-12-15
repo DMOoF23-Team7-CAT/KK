@@ -24,36 +24,27 @@ namespace KK.Views
             ResetValues();
         }
 
-        // Uses Model.Entity to set Customer
+        // Event for Customers listview Selection Changed that resets all and sets the Selected customer 
         private void lv_Customers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lv_Customers.SelectedItem != null)
             {
+                startVM.ResetSelectedObjects();
                 ResetValues();
                 startVM.SelectedCustomer = (Customer)lv_Customers.SelectedItem;
                 startVM.GetDataForSelectedCustomer();
-
-                // Opens and closes expanders
-                if (startVM.SelectedCustomer.Membership == null)
-                {
-                    // If the customer does not have a membership, expand the expanders
-                    ExpandersEnabled();
-                }
-                else
-                {
-                    // If the customer has a membership, do not expand the expanders
-                    ExpandersDisabled();
-                }
             }
         }
 
-        // Expander methods
+        // ServiceItems Expander opening methods, sets new entry
         private void ExpandersEnabled()
         {
             ep_Member.IsExpanded = true;
             ep_Ticket.IsExpanded = true;
             ep_Equipment.IsExpanded = true;
+            //startVM.SetSelectedEntry();
         }
+        // ServiceItems Expander closing methods
         private void ExpandersDisabled()
         {
             ep_Member.IsExpanded = false;
@@ -78,7 +69,7 @@ namespace KK.Views
         // Checkind
         private void bt_CheckIn_Click(object sender, RoutedEventArgs e)
         {
-
+            startVM.CheckCustomerIn();
         }
 
         // Resets all gui values
@@ -93,18 +84,12 @@ namespace KK.Views
             lbl_Shoes.Content = 0;
             lbl_Rope.Content = 0;
             lbl_Harness.Content = 0;
-/*            tb_SubTotal.Text = string.Empty;
-            tb_ExcludeTaxTotal.Text = string.Empty;
-            tb_Tax.Text = string.Empty;*/
             tb_Total.Text = string.Empty;
         }
 
         // Set PaymentFields
         private void SetPaymentFields()
         {
-/*            tb_SubTotal.Text = string.Empty;
-            tb_ExcludeTaxTotal.Text = string.Empty;
-            tb_Tax.Text = string.Empty;*/
             tb_Total.Text = startVM.SelectedEntry.Price.ToString();
         }
 
@@ -242,7 +227,31 @@ namespace KK.Views
             return count.ToString();
         }
 
-
+        // Expander events
+        private void ep_Member_Expanded(object sender, RoutedEventArgs e)
+        {
+            ExpandersEnabled();
+        }
+        private void ep_Member_Collapsed(object sender, RoutedEventArgs e)
+        {
+            ExpandersDisabled();
+        }
+        private void ep_Ticket_Expanded(object sender, RoutedEventArgs e)
+        {
+            ExpandersEnabled();
+        }
+        private void ep_Ticket_Collapsed(object sender, RoutedEventArgs e)
+        {
+            ExpandersDisabled();
+        }
+        private void ep_Equipment_Expanded(object sender, RoutedEventArgs e)
+        {
+            ExpandersEnabled();
+        }
+        private void ep_Equipment_Collapsed(object sender, RoutedEventArgs e)
+        {
+            ExpandersDisabled();
+        }
     }
 }
 
