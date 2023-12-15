@@ -21,7 +21,7 @@ namespace KK.Views
             DataContext = startVM;
             InitializeComponent();
             ExpandersDisabled();
-            ResetValues();
+            ResetAllValuesInUI();
         }
 
         // Event for Customers listview Selection Changed that resets all and sets the Selected customer 
@@ -30,7 +30,7 @@ namespace KK.Views
             if (lv_Customers.SelectedItem != null)
             {
                 startVM.ResetSelectedObjects();
-                ResetValues();
+                ResetAllValuesInUI();
                 startVM.SelectedCustomer = (Customer)lv_Customers.SelectedItem;
                 startVM.GetDataForSelectedCustomer();
             }
@@ -65,15 +65,62 @@ namespace KK.Views
             }
         }
 
-
-        // Checkind
-        private void bt_CheckIn_Click(object sender, RoutedEventArgs e)
+        // Methods to enable or disable buttons
+        private void EnableDisableCheckInButton()
         {
-            startVM.CheckCustomerIn();
+            if (startVM.EntryItemsList.Count > 0)
+            {
+                bt_CheckMemberIn.IsEnabled = false;
+            }
+            else
+            {
+                bt_CheckMemberIn.IsEnabled = true;
+            }
+        }
+        private void EnableDisablePayButton()
+        {
+            if (startVM.EntryItemsList.Count > 0)
+            {
+                bt_pay.IsEnabled = true;
+            }
+            else
+            {
+                bt_pay.IsEnabled = false;
+            }
+        }
+
+        // Check customer in button click event
+        private void bt_CheckMemberIn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                startVM.CheckMemberIn();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en fejl med intjekning af medlem. \nKunden skal have et aktivt medlemskab\n\n\n\n{ex.Message}",
+                    "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+        // Pay button click event
+        private void bt_pay_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en fejl med betallingen. \n\n\n\n{ex.Message}",
+                    "fejl ved betaling", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // Resets all gui values
-        private void ResetValues()
+        private void ResetAllValuesInUI()
         {
             cb_12months.IsChecked = false;
             cb_3months.IsChecked = false;
@@ -85,12 +132,16 @@ namespace KK.Views
             lbl_Rope.Content = 0;
             lbl_Harness.Content = 0;
             tb_Total.Text = string.Empty;
+            bt_pay.IsEnabled = false;
+            bt_CheckMemberIn.IsEnabled = false;
         }
 
         // Set PaymentFields
         private void SetPaymentFields()
         {
             tb_Total.Text = startVM.SelectedEntry.Price.ToString();
+            EnableDisableCheckInButton();
+            EnableDisablePayButton();
         }
 
         // Click event to open new customer dialog
@@ -252,6 +303,8 @@ namespace KK.Views
         {
             ExpandersDisabled();
         }
+
+
     }
 }
 

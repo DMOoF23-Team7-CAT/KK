@@ -1,5 +1,6 @@
 ﻿using KK.Models.Entities;
 using KK.Models.Helpers;
+using KK.Models.Interfaces;
 using KK.Models.Repositories;
 using System;
 using System.Collections;
@@ -13,9 +14,12 @@ namespace KK.ViewModels
 {
     internal class StartViewModel : ObservableObject
     {
-
-        // Private backing fields
+        // private repositories
         private readonly CustomerRepository _customerRepo;
+        private readonly EntryRepository _entryRepository;
+        private readonly MembershipRepository _membershipRepository;
+        private readonly ServiceItemRepository _serviceItemRepository;
+        // Private backing fields
         private Membership _selectedMembership;
         private Customer _selectedCustomer;
         private Entry _selectedEntry;
@@ -82,9 +86,13 @@ namespace KK.ViewModels
         // Constructor for StartViewModel
         public StartViewModel()
         {
-            ResetSelectedObjects();
             _customerRepo = new CustomerRepository();
-           // _customerRepo.GetAllCustomersMemberships();
+            _entryRepository = new EntryRepository();
+            _membershipRepository = new MembershipRepository();
+            _serviceItemRepository = new ServiceItemRepository();
+
+            ResetSelectedObjects();
+            // _customerRepo.GetAllCustomersMemberships();
             Customers = _customerRepo.Customers;
         }
 
@@ -106,7 +114,7 @@ namespace KK.ViewModels
             SelectedCustomer = null;
             SelectedMembership = null;
         }
-        // Method to Set make new entry and set it as SelectedEntry
+        // Method to make new entry and set it as SelectedEntry
         public void SetSelectedEntry()
         {
             if (SelectedEntry == null || SelectedCustomer != null)
@@ -116,6 +124,7 @@ namespace KK.ViewModels
                     Customer = SelectedCustomer,
                     CustomerId = SelectedCustomer.Id,
                 };
+                _entryRepository.Add(SelectedEntry); // Adds it to repository to get Id so it can be set to Serviceitems
                 SetEntryItemsList();
             }
         }
@@ -136,15 +145,33 @@ namespace KK.ViewModels
                 SetEntryItemsList();
             }
         }
-        // Method to Check Customer with activ membership in without extra ServiceItems
-        public void CheckCustomerIn()
+        // Method to Check Customer with activ membership in without extra ServiceItems, usses SetEntryItemsList to set entry and piush it to repository
+        public void CheckMemberIn()
         {
             if (SelectedCustomer.Membership != null || SelectedCustomer.Membership.IsActive)
             {
                 SetSelectedEntry();
-                SelectedCustomer.AddEntry(SelectedEntry);
             }
         }
+        // Method to check Customer in with Selected items
+        public void CheckCustomerInWithItems()
+        {
+            _entryRepository.Update(SelectedEntry);
+        }
+
+        // Method to update Membership
+        public void UpdateCustomerMembership()
+        {
+            if (SelectedCustomer.Membership != null)
+            {
+                _membershipRepository.Update(SelectedCustomer.Membership);
+            }
+            else
+            {
+
+            }
+        }
+
         // Method to retrive data all coresponding data to a customer from database and set it to the Selected Customer
         public void GetDataForSelectedCustomer()
         {

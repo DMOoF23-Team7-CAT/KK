@@ -564,11 +564,12 @@
                     </Grid>
 
                     <Button
+                        x:Name="bt_pay"
                         Grid.Row="1"
                         Width="200"
                         Margin="0,0,0,0"
-                        Click="bt_CheckIn_Click"
-                        Style="{StaticResource bt_AddButton}">
+                        Style="{StaticResource bt_AddButton}"
+                        Click="bt_pay_Click">
                         <TextBlock Text="Bekræft Betaling" />
                     </Button>
                 </Grid>
@@ -631,9 +632,10 @@
                     </Grid>
                     <!--  Cheeack In Button  -->
                     <Button
+                        x:Name="bt_CheckMemberIn"
                         Width="180"
                         Margin="0,0,10,0"
-                        Click="bt_CheckIn_Click"
+                        Click="bt_CheckMemberIn_Click"
                         Style="{StaticResource bt_AddButton}">
                         <TextBlock Margin="0" Text="Check Ind" />
                     </Button>
