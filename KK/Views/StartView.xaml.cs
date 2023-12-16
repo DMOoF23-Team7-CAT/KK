@@ -122,7 +122,7 @@ namespace KK.Views
                 AddMembership();
                 CheckCustomerOrMemberIn();
                 ExpandersDisabled();
-                startVM.SetCustomerCollection();
+                startVM.SetCustomersCollection();
 
                 MessageBox.Show(
                     "Betaling er gennemført og Kunden er tjekked ind",
@@ -169,15 +169,30 @@ namespace KK.Views
         // Click event to open new customer dialog
         private void bt_NewCustomer_Click(object sender, RoutedEventArgs e)
         {
-            CustomerView customerView = new CustomerView((MainWindow)Application.Current.MainWindow);
-            Opacity = 0.6;
+            try
+            {
+                CustomerView customerView = new CustomerView((MainWindow)Application.Current.MainWindow);
+                Opacity = 0.6;
 
-            customerView.ShowDialog();
-            Opacity = 1;
-/*            if (
-                customerView.ShowDialog.IsChecked == true) { startVM.SetCustomersCollection(); 
-            }*/
+                bool? result = customerView.ShowDialog();
+                Opacity = 1;
+
+                if (result.HasValue && result.Value)
+                {
+                    startVM.SetCustomersCollection();
+                }
+                // Optional: Handle the case where the user closes the window without clicking OK
+                else
+                {
+                    // Handle as needed
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         // Method to Add checkcustomer or member in
         private void CheckCustomerOrMemberIn()

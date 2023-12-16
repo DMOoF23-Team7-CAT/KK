@@ -30,8 +30,8 @@ namespace KK.Views
         {
             try
             {
+                DialogResult = false;
                 Close();
-
             }
             catch (Exception ex)
             {
@@ -79,6 +79,8 @@ namespace KK.Views
                 if (result == MessageBoxResult.OK)
                 {
                     customerVM.Add();
+                    DialogResult = true;
+
                     Close();
                 }
             }
