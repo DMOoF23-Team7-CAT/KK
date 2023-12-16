@@ -93,6 +93,12 @@ namespace KK.ViewModels
             _serviceItemRepository = new ServiceItemRepository();
 
             ResetSelectedObjects();
+            SetCustomersCollection();
+        }
+
+        // Method to set Customes collection
+        public void SetCustomersCollection()
+        {
             _customerRepo.GetAllCustomersMemberships();
             Customers = _customerRepo.Customers;
         }
@@ -156,7 +162,7 @@ namespace KK.ViewModels
         {
             if (SelectedCustomer != null)
             {
-                if (SelectedCustomer != null || SelectedEntry == null)
+                if (SelectedEntry == null)
                 {
                     SelectedEntry = new Entry
                     {
@@ -219,6 +225,8 @@ namespace KK.ViewModels
 
             if (SelectedCustomer.Membership != null && months != 0)
             {
+                SelectedMembership = SelectedCustomer.Membership;
+                SelectedMembership.Customer = SelectedCustomer;
                 SelectedMembership.EndDate = EndDate;
                 AddMembershipToRepo();
             }

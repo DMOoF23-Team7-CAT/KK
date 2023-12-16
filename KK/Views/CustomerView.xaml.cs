@@ -86,6 +86,7 @@ namespace KK.Views
             {
                 MessageBox.Show($"Fej ved oprettelse af ny kunde generede fejlkode \n\n\n{ex.Message}", "Fejl ved oprettelse", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
         }
     }
 }

@@ -25,19 +25,12 @@ namespace KK.Models.Entities
         // Constructor
         public Membership()
         {
-            CheckMembershipStatus();
             SetStartDate();
-        }
-
-        // Method to set the memberships active status
-        private void CheckMembershipStatus()
-        {
-            IsActive = EndDate >= DateTime.Now;
         }
         // Sets startdate to curent time if the date hasnt already been set
         private void SetStartDate()
         {
-            if (StartDate < new DateTime(2020,01,01) || StartDate == DateTime.MinValue)
+            if (StartDate.Year < 2020 || StartDate == DateTime.MinValue)
             {
                 StartDate = DateTime.Now;
             }

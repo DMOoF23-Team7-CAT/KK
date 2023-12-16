@@ -36,6 +36,7 @@ namespace KK.Views
                 ResetAllValuesInUI();
                 startVM.SelectedCustomer = (Customer)lv_Customers.SelectedItem;
                 startVM.GetDataForSelectedCustomer();
+                EnableCheckinIfMembershipIsActiv();
             }
         }
 
@@ -68,26 +69,28 @@ namespace KK.Views
         }
 
         // Methods to enable or disable buttons
-        private void EnableDisableCheckInButton()
+        private void EnableDisableButtons()
         {
-            if (startVM.EntryItemsList.Count > 0)
+            if (startVM.EntryItemsList.Count >= 0)
             {
                 bt_CheckMemberIn.IsEnabled = false;
-            }
-            else
-            {
-                bt_CheckMemberIn.IsEnabled = true;
-            }
-        }
-        private void EnableDisablePayButton()
-        {
-            if (startVM.EntryItemsList.Count > 0)
-            {
                 bt_pay.IsEnabled = true;
             }
             else
             {
+                bt_CheckMemberIn.IsEnabled = false;
                 bt_pay.IsEnabled = false;
+            }
+        }
+        private void EnableCheckinIfMembershipIsActiv()
+        {
+            if (startVM.SelectedCustomer.Membership != null)
+            {
+                if (!startVM.SelectedCustomer.Membership.IsActive)
+                {
+                    bt_CheckMemberIn.IsEnabled = true;
+                    bt_pay.IsEnabled = false;
+                }
             }
         }
 
@@ -118,6 +121,9 @@ namespace KK.Views
                 AddServiceItem();
                 AddMembership();
                 CheckCustomerOrMemberIn();
+                ExpandersDisabled();
+                startVM.SetCustomerCollection();
+
                 MessageBox.Show(
                     "Betaling er gennemført og Kunden er tjekked ind",
                     "Kunde tjek ind", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -150,15 +156,14 @@ namespace KK.Views
             tb_Total.Text = string.Empty;
             bt_pay.IsEnabled = false;
             bt_CheckMemberIn.IsEnabled = false;
-            lv_Items.Items.Clear();
+            lv_Items.ItemsSource = new object[] { };
         }
 
         // Set PaymentFields
         private void SetPaymentFields()
         {
             tb_Total.Text = startVM.SelectedEntry.Price.ToString();
-            EnableDisableCheckInButton();
-            EnableDisablePayButton();
+            EnableDisableButtons();
         }
 
         // Click event to open new customer dialog
@@ -166,8 +171,12 @@ namespace KK.Views
         {
             CustomerView customerView = new CustomerView((MainWindow)Application.Current.MainWindow);
             Opacity = 0.6;
+
             customerView.ShowDialog();
             Opacity = 1;
+/*            if (
+                customerView.ShowDialog.IsChecked == true) { startVM.SetCustomersCollection(); 
+            }*/
         }
 
         // Method to Add checkcustomer or member in
@@ -408,9 +417,9 @@ namespace KK.Views
             try
             {
                 startVM.ResetSelectedObjects();
-                ResetAllValuesInUI();
                 startVM.RemoveEntry();
                 ExpandersDisabled();
+                ResetAllValuesInUI();
             }
             catch (Exception ex)
             {
