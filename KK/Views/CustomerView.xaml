@@ -162,8 +162,7 @@
                 </Grid>
 
 
-                <!--  Add Member Button  -->
-
+                <!--  Buttons  -->
                 <StackPanel
                     Grid.Row="10"
                     Margin="0,0,0,50"
@@ -171,17 +170,20 @@
                     VerticalAlignment="Bottom"
                     Orientation="Horizontal">
                     <Button
-                        Margin="0,0,10,0"
+                        x:Name="bt_Cancel"
+                        Margin="0,0"
+                        Click="bt_Cancel_Click"
+                        Style="{StaticResource vt_RedThemedButton}"
+                        Width="140">
+                        <TextBlock Text="Fortryd" />
+                    </Button>
+                    <Button
+                        Margin="20,0,0,0"
                         Click="bt_AddCustomer_Click"
                         Style="{StaticResource bt_AddButton}">
                         <TextBlock Text="Opret Ny Kunde" />
                     </Button>
-                    <Button
-                        Margin="0,0"
-                        Click="Button_Click"
-                        Style="{StaticResource bt_Update}">
-                        <TextBlock Text="Fortryd" />
-                    </Button>
+
                 </StackPanel>
 
 

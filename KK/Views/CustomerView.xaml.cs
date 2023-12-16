@@ -13,17 +13,10 @@ namespace KK.Views
     public partial class CustomerView : Window
     {
 
-
+        // firlds
         private readonly CustomerViewModel customerVM = new();
         private StartView startView;
-
-        public CustomerView(Window parentWindow)
-        {
-            Owner = parentWindow;
-            DataContext = customerVM;
-            InitializeComponent();
-        }
-
+        // Constructor
         public CustomerView(MainWindow mainWindow)
         {
             this.Owner = mainWindow;
@@ -32,27 +25,38 @@ namespace KK.Views
             this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        // Click evet for Cancel button
+        private void bt_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
-        }
-
-
-        private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            int qualification = 0;
-
-            if ((bool)cb_top.IsChecked)
-            {
-                qualification = 1;
-            }
-            else if ((bool)cb_lead.IsChecked)
-            {
-                qualification = 2;
-            }
-
             try
             {
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en fejl ved lukningen af vinduet \n\n\n\n{ex.Message}",
+                    "fejl ved fortyd", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        // click event for Add customer
+        private void bt_AddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int qualification = 0;
+
+                if ((bool)cb_top.IsChecked)
+                {
+                    qualification = 1;
+                }
+                else if ((bool)cb_lead.IsChecked)
+                {
+                    qualification = 2;
+                }
+
                 if (string.IsNullOrWhiteSpace(tb_TxtName.Text))
                 {
                     MessageBox.Show("Navn skal udfyldes", "Advarsel", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -83,8 +87,5 @@ namespace KK.Views
                 MessageBox.Show($"Fej ved oprettelse af ny kunde generede fejlkode \n\n\n{ex.Message}", "Fejl ved oprettelse", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
-
-
     }
 }

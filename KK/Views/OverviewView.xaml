@@ -331,7 +331,7 @@
                     Orientation="Horizontal">
                     <Button
                         x:Name="bt_Update"
-                        Margin="0,0,10,0"
+                        Margin="0,0,20,0"
                         BorderThickness="0"
                         Click="bt_Update_Click"
                         Content="Opdater"
@@ -339,32 +339,13 @@
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Bold"
-                        Foreground="White">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#462AD8" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#28AEED" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border
-                                    Width="100"
-                                    Height="30"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="10">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
+                        Foreground="White"
+                        Width="140"
+                        Style="{StaticResource bt_DarkThemedButton}">
                     </Button>
                     <Button
                         x:Name="bt_Delete"
-                        Margin="0,0,0,0"
+                        Margin="20,0,0,0"
                         BorderThickness="0"
                         Click="bt_Delete_Click"
                         Content="Slet"
@@ -372,28 +353,10 @@
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Bold"
-                        Foreground="White">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#ffcd5c5c" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#ffdc143c" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border
-                                    Width="100"
-                                    Height="30"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="10">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
+                        Foreground="White"
+                        Width="140"
+                        Style="{StaticResource vt_RedThemedButton}">
+
                     </Button>
                 </StackPanel>
             </Grid>

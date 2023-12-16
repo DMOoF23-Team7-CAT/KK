@@ -45,7 +45,6 @@ namespace KK.Views
             ep_Member.IsExpanded = true;
             ep_Ticket.IsExpanded = true;
             ep_Equipment.IsExpanded = true;
-            //startVM.SetSelectedEntry();
         }
         // ServiceItems Expander closing methods
         private void ExpandersDisabled()
@@ -95,16 +94,42 @@ namespace KK.Views
         // Check customer in button click event
         private void bt_CheckMemberIn_Click(object sender, RoutedEventArgs e)
         {
-            CheckMemberIn();
+            try
+            {
+                CheckMemberIn();
+                MessageBox.Show(
+                    "Medlem er tjekked ind",
+                    "Medlem tjek ind", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                     $"Der skete en fejl ved intjekningen af medlem \n\n\n\n{ex.Message}",
+                     "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+            
         }
         // Pay button click event
         private void bt_pay_Click(object sender, RoutedEventArgs e)
         {
-
-            CheckCustomerOrMemberIn();
-            AddMembership();
-            AddServiceItem();
-
+            try
+            {
+                AddServiceItem();
+                AddMembership();
+                CheckCustomerOrMemberIn();
+                ResetAllValuesInUI();
+                startVM.ResetSelectedObjects();
+                MessageBox.Show(
+                    "Betaling er gennemført og Kunden er tjekked ind",
+                    "Kunde tjek ind", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                     $"Der skete en fejl ved intjekningen af kunden \n\n\n\n{ex.Message}",
+                     "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // Resets all gui values
@@ -122,6 +147,7 @@ namespace KK.Views
             tb_Total.Text = string.Empty;
             bt_pay.IsEnabled = false;
             bt_CheckMemberIn.IsEnabled = false;
+            lv_Items.Items.Clear();
         }
 
         // Set PaymentFields
@@ -208,18 +234,21 @@ namespace KK.Views
             cb_3months.IsChecked = false;
             cb_1month.IsChecked = false;
             startVM.AddServiceItem("YEAR");
+            SetPaymentFields();
         }
         private void cb_3months_Checked(object sender, RoutedEventArgs e)
         {
             cb_12months.IsChecked = false;
             cb_1month.IsChecked = false;
             startVM.AddServiceItem("QUARTER");
+            SetPaymentFields();
         }
         private void cb_1month_Checked(object sender, RoutedEventArgs e)
         {
             cb_12months.IsChecked = false;
             cb_3months.IsChecked = false;
             startVM.AddServiceItem("MONTH");
+            SetPaymentFields();
 
         }
 
@@ -352,8 +381,41 @@ namespace KK.Views
         {
             ExpandersDisabled();
         }
-
-
+        // Click event for Add item button
+        private void bt_AddItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (startVM.SelectedCustomer != null)
+            {
+                try
+                {
+                    startVM.SetSelectedEntry();
+                    ExpandersEnabled();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Der skete en fejl sætningen af indgang \n\n\n\n{ex.Message}",
+                        "fejl ved sætte indgang", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        // click event for Cancel button
+        private void bt_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                startVM.ResetSelectedObjects();
+                ResetAllValuesInUI();
+                startVM.RemoveEntry();
+                ExpandersDisabled();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Der skete en da indagangen blev fjernet \n\n\n\n{ex.Message}",
+                    "fejl ved indgang fjernelse", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
 

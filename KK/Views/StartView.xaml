@@ -25,11 +25,10 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="100" />
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
-                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel
@@ -44,6 +43,14 @@
                         FontWeight="Bold"
                         Foreground="#FFFFFF"
                         Text="Oversigt" />
+                    <Button
+                        x:Name="bt_AddItem"
+                        Width="180"
+                        Margin="0,10,0,0"
+                        Click="bt_AddItem_Click"
+                        Style="{StaticResource bt_DarkThemedButton}">
+                        <TextBlock Text="Tilføj Ekstra" />
+                    </Button>
 
                 </StackPanel>
 
@@ -563,15 +570,25 @@
                             TextAlignment="Right" />
                     </Grid>
 
-                    <Button
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button
+                        x:Name="bt_Cancel"
+                        Margin="0,0,20,0"
+                        Click="bt_Cancel_Click"
+                        Style="{StaticResource vt_RedThemedButton}"
+                        Width="140">
+                            <TextBlock Text="Fortryd" />
+                        </Button>
+                        <Button
                         x:Name="bt_pay"
-                        Grid.Row="1"
                         Width="200"
                         Margin="0,0,0,0"
                         Style="{StaticResource bt_AddButton}"
                         Click="bt_pay_Click">
-                        <TextBlock Text="Bekræft Betaling" />
-                    </Button>
+                            <TextBlock Text="Bekræft Betaling" />
+                        </Button>
+                    </StackPanel>
+
                 </Grid>
 
 
@@ -597,7 +614,7 @@
                         Margin="0,0"
                         Click="bt_NewCustomer_Click"
                         Style="{StaticResource bt_DarkThemedButton}">
-                        <TextBlock FontWeight="Bold" Text="Ny Kunde" />
+                        <TextBlock Text="Ny Kunde" />
                     </Button>
                 </StackPanel>
 

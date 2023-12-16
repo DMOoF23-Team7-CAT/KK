@@ -125,7 +125,7 @@ namespace KK.ViewModels
         // Method to remove ServiceItem from SelectedEntry list of items
         public void RemoveServiceItem(string name)
         {
-            if (SelectedEntry.Items == null)
+            if (SelectedEntry.Items != null)
             {
                 var item = SelectedEntry.Items.FirstOrDefault(x => x.Name == name);
                 SelectedEntry.RemoveServiceItem(item);
@@ -154,21 +154,36 @@ namespace KK.ViewModels
         // Method to make new entry and set it as SelectedEntry
         public void SetSelectedEntry()
         {
-            if (SelectedEntry == null || SelectedCustomer != null)
+            if (SelectedCustomer != null)
             {
-                SelectedEntry = new Entry
+                if (SelectedCustomer != null || SelectedEntry == null)
                 {
-                    Customer = SelectedCustomer,
-                    CustomerId = SelectedCustomer.Id,
-                };
-                _entryRepository.Add(SelectedEntry); // Adds it to repository to get Id so it can be set to Serviceitems
-                SetEntryItemsList();
+                    SelectedEntry = new Entry
+                    {
+                        Customer = SelectedCustomer,
+                        CustomerId = SelectedCustomer.Id,
+                    };
+                    _entryRepository.Add(SelectedEntry); // Adds it to repository to get Id so it can be set to Serviceitems
+                    SetEntryItemsList();
+                }
             }
+
         }
         // Method to check Customer in with Selected items
         public void CheckCustomerInWithItems()
         {
-            _entryRepository.Update(SelectedEntry);
+            if (SelectedEntry != null)
+            {
+                _entryRepository.Update(SelectedEntry);
+            }
+        }
+        // method to remove enrty
+        public void RemoveEntry()
+        {
+            if(SelectedEntry != null)
+            {
+                _entryRepository.Remove(SelectedEntry);
+            }
         }
 
         // Method to update or add Membership
@@ -195,15 +210,25 @@ namespace KK.ViewModels
                 var q = EntryItemsList.FirstOrDefault(x => x.Name == "QUARTER");
                 var m = EntryItemsList.FirstOrDefault(x => x.Name == "MONTH");
 
-                if (y != null) { months = 12;  return; }
-                else if (q != null) { months = 3; return; }
-                else if (m != null) { months = 1; return; }              
+                if (y != null) { months = 12; }
+                else if (q != null) { months = 3; }
+                else if (m != null) { months = 1; }              
             }
-            DateTime EndDate = DateTime.Now.AddMonths(months);
-            SelectedMembership.EndDate = EndDate;
 
-            if (months != 0)
+            DateTime EndDate = DateTime.Now.AddMonths(months);
+
+            if (SelectedCustomer.Membership != null && months != 0)
             {
+                SelectedMembership.EndDate = EndDate;
+                AddMembershipToRepo();
+            }
+            else
+            {
+                SelectedMembership = new Membership {
+                    Customer = SelectedCustomer,
+                    CustomerId = SelectedCustomer.Id,
+                    EndDate = EndDate,
+                };
                 AddMembershipToRepo();
             }
         }

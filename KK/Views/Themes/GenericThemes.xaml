@@ -340,12 +340,13 @@
                         Width="{TemplateBinding Width}"
                         Height="40"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="20">
+                        CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Foreground" Value="White"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#28AEED" />
@@ -353,16 +354,16 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="bt_Delete" TargetType="Button">
+    <Style x:Key="vt_RedThemedButton" TargetType="Button">
         <Setter Property="Background" Value="#ffcd5c5c" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border
-                        Width="150"
+                        Width="{TemplateBinding Width}"
                         Height="40"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="20">
+                        CornerRadius="10">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
