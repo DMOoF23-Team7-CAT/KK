@@ -118,8 +118,6 @@ namespace KK.Views
                 AddServiceItem();
                 AddMembership();
                 CheckCustomerOrMemberIn();
-                ResetAllValuesInUI();
-                startVM.ResetSelectedObjects();
                 MessageBox.Show(
                     "Betaling er gennemført og Kunden er tjekked ind",
                     "Kunde tjek ind", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -129,6 +127,11 @@ namespace KK.Views
                 MessageBox.Show(
                      $"Der skete en fejl ved intjekningen af kunden \n\n\n\n{ex.Message}",
                      "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                ResetAllValuesInUI();
+                startVM.ResetSelectedObjects();
             }
         }
 

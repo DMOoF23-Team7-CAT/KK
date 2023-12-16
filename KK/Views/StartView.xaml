@@ -553,8 +553,8 @@
                     <Grid
                         Grid.Row="0"
                         Width="200"
-                        Margin="20,0"
-                        HorizontalAlignment="Center"
+                        Margin="0"
+                        HorizontalAlignment="Right"
                         Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
                         <TextBlock
                             Width="170"
@@ -676,7 +676,7 @@
                                         DisplayMemberBinding="{Binding Id}"
                                         Header="Id" />
                                     <GridViewColumn
-                                        Width="130"
+                                        Width="120"
                                         DisplayMemberBinding="{Binding Name}"
                                         Header="Navn" />
                                     <GridViewColumn
@@ -687,6 +687,13 @@
                                         Width="70"
                                         DisplayMemberBinding="{Binding Membership.Id}"
                                         Header="Medlems Id" />
+                                    <GridViewColumn Width="50" Header="Aktiv">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding Membership.IsActive}" BorderThickness="0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
