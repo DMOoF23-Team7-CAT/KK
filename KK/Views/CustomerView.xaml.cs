@@ -86,7 +86,7 @@ namespace KK.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fej ved oprettelse af ny kunde generede fejlkode \n\n\n{ex.Message}", "Fejl ved oprettelse", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"Fejl ved oprettelse af ny kunde genererede fejlkode \n\n\n{ex.Message}", "Fejl ved oprettelse", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }

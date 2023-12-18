@@ -444,16 +444,16 @@
 
                 <!--  Row 1  -->
                 <Grid Grid.Row="1" HorizontalAlignment="Center">
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <StackPanel Grid.Row="1">
                         <Grid>
-                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                                 <ListView
                                     x:Name="lv_Items"
                                     Width="400"
-                                    Height="250"
+                                    Height="300"
                                     HorizontalAlignment="center"
                                     BorderThickness="0"
-                                    IsEnabled="False"
+                                    IsEnabled="True"
                                     ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
                                     <ListView.View>
                                         <GridView>
@@ -462,7 +462,7 @@
                                                 DisplayMemberBinding="{Binding Name}"
                                                 Header="Produkt" />
                                             <GridViewColumn
-                                                Width="200"
+                                                Width="190"
                                                 DisplayMemberBinding="{Binding Price}"
                                                 Header="Pris" />
                                         </GridView>

@@ -6,7 +6,7 @@ using System;
 
 namespace KK.ViewModels
 {
-    internal class CustomerViewModel : ObservableObject
+    internal class CustomerViewModel
     {
 
         private readonly CustomerRepository _customerRepo;

@@ -12,9 +12,10 @@ namespace KK.ViewModels
 
         private object _currentView;
 
-        public StartViewModel StartVM { get; set; }
-        public OverviewViewModel OverviewVM { get; set; }
+        private StartViewModel StartVM;
+        private OverviewViewModel OverviewVM;
 
+        // Public Propperties
         public RelayCommand StartViewCommand { get; set; }
         public RelayCommand OverviewViewCommand { get; set; }
 

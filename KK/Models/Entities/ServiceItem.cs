@@ -4,8 +4,6 @@ namespace KK.Models.Entities
 {
     public class ServiceItem
     {
-        public decimal monthPrice = 500;
-
         // Private backing field for Name
         private string _name;
 

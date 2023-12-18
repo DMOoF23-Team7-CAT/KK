@@ -186,8 +186,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Background="White"
-                                    Foreground="Black"
-                                    >
+                                    Foreground="Black">
                                     <Expander.Header>
                                         <Grid Margin="0" Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
                                             <TextBox
@@ -331,6 +330,7 @@
                     Orientation="Horizontal">
                     <Button
                         x:Name="bt_Update"
+                        Width="140"
                         Margin="0,0,20,0"
                         BorderThickness="0"
                         Click="bt_Update_Click"
@@ -340,11 +340,10 @@
                         FontSize="12"
                         FontWeight="Bold"
                         Foreground="White"
-                        Width="140"
-                        Style="{StaticResource bt_DarkThemedButton}">
-                    </Button>
+                        Style="{StaticResource bt_DarkThemedButton}" />
                     <Button
                         x:Name="bt_Delete"
+                        Width="140"
                         Margin="20,0,0,0"
                         BorderThickness="0"
                         Click="bt_Delete_Click"
@@ -354,10 +353,7 @@
                         FontSize="12"
                         FontWeight="Bold"
                         Foreground="White"
-                        Width="140"
-                        Style="{StaticResource vt_RedThemedButton}">
-
-                    </Button>
+                        Style="{StaticResource vt_RedThemedButton}" />
                 </StackPanel>
             </Grid>
         </Border>

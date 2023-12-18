@@ -28,7 +28,7 @@ namespace KK.ViewModels
         private ObservableCollection<Customer> _customers;
         private ObservableCollection<ServiceItem> _entryItemsList;
 
-        // Public Fields
+        // Public Propperties
         public ServiceItem SelectedServiceItem
         {
             get { return _selectedServiceItem; }
@@ -133,9 +133,13 @@ namespace KK.ViewModels
         {
             if (SelectedEntry.Items != null)
             {
-                var item = SelectedEntry.Items.FirstOrDefault(x => x.Name == name);
-                SelectedEntry.RemoveServiceItem(item);
-                SetEntryItemsList();
+                var item = SelectedEntry.Items.FirstOrDefault(x => x.Name == name); // skal fikses
+                if (item != null)
+                {
+                    SelectedEntry.RemoveServiceItem(item);
+                    SetEntryItemsList();
+                }
+
             }
         }
         // Method for adding ServiceItem to repo
