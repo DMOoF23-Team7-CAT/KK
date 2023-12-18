@@ -24,20 +24,10 @@ namespace KK.ViewModels
         private Membership _selectedMembership;
         private Customer _selectedCustomer;
         private Entry _selectedEntry;
-        private ServiceItem _selectedServiceItem;
         private ObservableCollection<Customer> _customers;
         private ObservableCollection<ServiceItem> _entryItemsList;
 
         // Public Propperties
-        public ServiceItem SelectedServiceItem
-        {
-            get { return _selectedServiceItem; }
-            set
-            {
-                _selectedServiceItem = value;
-                OnPropertyChanged(nameof(SelectedServiceItem));
-            }
-        }
         public Entry SelectedEntry
         {
             get { return _selectedEntry; }
@@ -116,7 +106,6 @@ namespace KK.ViewModels
         // Method to reset all selected objects to null
         public void ResetSelectedObjects()
         {
-            SelectedServiceItem = null;
             SelectedEntry = null;
             SelectedCustomer = null;
             SelectedMembership = null;
