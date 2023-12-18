@@ -13,12 +13,13 @@ namespace KK.Views
     public partial class CustomerView : Window
     {
 
-        // firlds
-        private readonly CustomerViewModel customerVM = new();
-        private StartView startView;
+        // fields
+        private readonly CustomerViewModel customerVM;
+
         // Constructor
         public CustomerView(MainWindow mainWindow)
         {
+            customerVM = new CustomerViewModel();
             this.Owner = mainWindow;
             DataContext = customerVM;
             InitializeComponent();

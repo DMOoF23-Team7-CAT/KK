@@ -46,6 +46,9 @@ namespace KK.Views
             ep_Member.IsExpanded = true;
             ep_Ticket.IsExpanded = true;
             ep_Equipment.IsExpanded = true;
+            ep_Member.IsEnabled = true;
+            ep_Ticket.IsEnabled = true;
+            ep_Equipment.IsEnabled = true;
         }
         // ServiceItems Expander closing methods
         private void ExpandersDisabled()
@@ -53,6 +56,9 @@ namespace KK.Views
             ep_Member.IsExpanded = false;
             ep_Ticket.IsExpanded = false;
             ep_Equipment.IsExpanded = false;
+            ep_Member.IsEnabled = false;
+            ep_Ticket.IsEnabled = false;
+            ep_Equipment.IsEnabled = false;
         }
 
         // Search method for the Customers listview
