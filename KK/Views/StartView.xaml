@@ -67,8 +67,6 @@
                         Margin="0,20,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Collapsed="ep_Member_Collapsed"
-                        Expanded="ep_Member_Expanded"
                         Foreground="White">
                         <Expander.Header>
                             <Border Background="#7F7F7F" CornerRadius="10">
@@ -168,8 +166,6 @@
                         Margin="0,20,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Collapsed="ep_Ticket_Collapsed"
-                        Expanded="ep_Ticket_Expanded"
                         Foreground="White">
                         <Expander.Header>
                             <Border Background="#7F7F7F" CornerRadius="10">
@@ -299,8 +295,6 @@
                         Margin="0,20,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Collapsed="ep_Equipment_Collapsed"
-                        Expanded="ep_Equipment_Expanded"
                         Foreground="White">
                         <Expander.Header>
                             <Border Background="#7F7F7F" CornerRadius="10">
@@ -444,34 +438,29 @@
 
                 <!--  Row 1  -->
                 <Grid Grid.Row="1" HorizontalAlignment="Center">
-                    <StackPanel Grid.Row="1">
-                        <Grid>
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
-                                <ListView
-                                    x:Name="lv_Items"
-                                    Width="400"
-                                    Height="300"
-                                    HorizontalAlignment="center"
-                                    BorderThickness="0"
-                                    IsEnabled="True"
-                                    ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn
-                                                Width="200"
-                                                DisplayMemberBinding="{Binding Name}"
-                                                Header="Produkt" />
-                                            <GridViewColumn
-                                                Width="190"
-                                                DisplayMemberBinding="{Binding Price}"
-                                                Header="Pris" />
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>
-                            </ScrollViewer>
-                        </Grid>
-
-                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <ListView
+                            x:Name="lv_Items"
+                            Width="400"
+                            Height="300"
+                            HorizontalAlignment="center"
+                            BorderThickness="0"
+                            IsEnabled="True"
+                            ItemsSource="{Binding EntryItemsList, Mode=TwoWay}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn
+                                        Width="190"
+                                        DisplayMemberBinding="{Binding Name}"
+                                        Header="Produkt" />
+                                    <GridViewColumn
+                                        Width="190"
+                                        DisplayMemberBinding="{Binding Price}"
+                                        Header="Pris" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
                 </Grid>
 
                 <!--

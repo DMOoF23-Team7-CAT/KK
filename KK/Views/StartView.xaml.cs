@@ -106,6 +106,8 @@ namespace KK.Views
             try
             {
                 CheckMemberIn();
+                lv_Customers.UnselectAll();
+
                 MessageBox.Show(
                     "Medlem er tjekked ind",
                     "Medlem tjek ind", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -129,6 +131,7 @@ namespace KK.Views
                 CheckCustomerOrMemberIn();
                 ExpandersDisabled();
                 startVM.SetCustomersCollection();
+                lv_Customers.UnselectAll();
 
                 MessageBox.Show(
                     "Betaling er gennemført og Kunden er tjekked ind",
@@ -288,15 +291,24 @@ namespace KK.Views
         // Remove membership
         private void cb_12months_Unchecked(object sender, RoutedEventArgs e)
         {
-            startVM.RemoveServiceItem("YEAR");
+            if (cb_12months.IsChecked == true)
+            {
+                startVM.RemoveServiceItem("YEAR");
+            }
         }
         private void cb_3months_Unchecked(object sender, RoutedEventArgs e)
         {
-            startVM.RemoveServiceItem("QUARTER");
+            if (cb_3months.IsChecked == true)
+            {
+                startVM.RemoveServiceItem("QUARTER");
+            }
         }
         private void cb_1month_Unchecked(object sender, RoutedEventArgs e)
         {
-            startVM.RemoveServiceItem("MONTH");
+            if ( cb_1month.IsChecked == true)
+            {
+                startVM.RemoveServiceItem("MONTH");
+            }
         }
 
         // Add Tickets
@@ -389,31 +401,6 @@ namespace KK.Views
             return count.ToString();
         }
 
-        // Expander events
-        private void ep_Member_Expanded(object sender, RoutedEventArgs e)
-        {
-            ExpandersEnabled();
-        }
-        private void ep_Member_Collapsed(object sender, RoutedEventArgs e)
-        {
-            ExpandersDisabled();
-        }
-        private void ep_Ticket_Expanded(object sender, RoutedEventArgs e)
-        {
-            ExpandersEnabled();
-        }
-        private void ep_Ticket_Collapsed(object sender, RoutedEventArgs e)
-        {
-            ExpandersDisabled();
-        }
-        private void ep_Equipment_Expanded(object sender, RoutedEventArgs e)
-        {
-            ExpandersEnabled();
-        }
-        private void ep_Equipment_Collapsed(object sender, RoutedEventArgs e)
-        {
-            ExpandersDisabled();
-        }
         // Click event for Add item button
         private void bt_AddItem_Click(object sender, RoutedEventArgs e)
         {
@@ -441,6 +428,7 @@ namespace KK.Views
                 startVM.RemoveEntry();
                 ExpandersDisabled();
                 ResetAllValuesInUI();
+                lv_Customers.UnselectAll();
             }
             catch (Exception ex)
             {
