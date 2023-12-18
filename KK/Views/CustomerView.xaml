@@ -177,7 +177,7 @@
                         Width="140"
                         Margin="0,0"
                         Click="bt_Cancel_Click"
-                        Style="{StaticResource vt_RedThemedButton}">
+                        Style="{StaticResource bt_RedThemedButton}">
                         <TextBlock Text="Fortryd" />
                     </Button>
                     <Button

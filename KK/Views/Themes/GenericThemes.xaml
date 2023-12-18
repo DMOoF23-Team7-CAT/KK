@@ -32,35 +32,6 @@
         <Setter Property="CornerRadius" Value="20" />
     </Style>
 
-    <!--  CustomerView  -->
-    <Style x:Key="bt_AddButton" TargetType="Button">
-        <Setter Property="Background" Value="#32CD32" />
-        <Setter Property="Foreground" Value="#ffffff" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Width" Value="200" />
-        <Setter Property="Height" Value="35" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0,20,0,0" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="Grid.Row" Value="0" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="7">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#279537" />
-                <Setter Property="Foreground" Value="#ffffff" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <!--  DatePicker Style dosnt work  -->
     <Style x:Key="DateickerStyle" TargetType="DatePickerTextBox">
         <Setter Property="Padding" Value="10,7" />
@@ -236,28 +207,27 @@
 
     <!--  MainWindowThemes  -->
     <Style x:Key="bt_ControlbarButton" TargetType="Button">
-        <Setter Property="Width" Value="26" />
-        <Setter Property="Height" Value="26" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Border Width="18" Height="18" CornerRadius="9" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Background" Value="#DA34AE" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Montserrat" />
+        <Setter Property="Cursor" Value="Hand" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="#C62DAE"/>
             </Trigger>
         </Style.Triggers>
     </Style>
+
 
     <!--  MenuButtonThemes  -->
     <Style
@@ -307,39 +277,52 @@
         </Style.Triggers>
     </Style>
 
-    <!--  Button  -->
-    <Style x:Key="bt_Update" TargetType="Button">
-        <Setter Property="Background" Value="#462AD8" />
+    <!--  Buttons  -->
+
+    <Style x:Key="bt_AddButton" TargetType="Button">
+        <Setter Property="Background" Value="#32CD32" />
+        <Setter Property="Foreground" Value="#ffffff" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Montserrat" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Margin" Value="0,20,0,0" />        
+        <Setter Property="Grid.Row" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border
-                        Width="150"
-                        Height="40"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="20">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="7">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
+
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#28AEED" />
+                <Setter Property="Background" Value="#279537" />
+                <Setter Property="Foreground" Value="#ffffff" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="bt_DarkThemedButton" TargetType="Button">
         <Setter Property="Background" Value="#462AD8" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="FontFamily" Value="Montserrat" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border
-                        Width="{TemplateBinding Width}"
-                        Height="40"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="10">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="7">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
@@ -353,16 +336,18 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="vt_RedThemedButton" TargetType="Button">
+    <Style x:Key="bt_RedThemedButton" TargetType="Button">
         <Setter Property="Background" Value="#ffcd5c5c" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontFamily" Value="Montserrat" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border
-                        Width="{TemplateBinding Width}"
-                        Height="40"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="10">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="7">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
@@ -379,9 +364,10 @@
     <Style x:Key="PlusMinusRadioButtonStyle" TargetType="RadioButton">
         <Setter Property="FontSize" Value="18" />
         <Setter Property="Width" Value="25" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Height" Value="25" />
         <Setter Property="Background" Value="LightGray" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="Black" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -395,16 +381,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Border Width="18" Height="18" CornerRadius="9" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 
 
 </ResourceDictionary>

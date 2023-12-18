@@ -34,8 +34,7 @@
     <Border
         Background="#272537"
         CornerRadius="10"
-        MouseDown="Border_MouseDown"
-        MouseLeftButtonDown="Border_DoubleMouseLeftButtonClick">
+        MouseDown="Border_MouseDown">
 
         <Grid x:Name="gr_Main">
             <Grid.RowDefinitions>
@@ -47,34 +46,47 @@
             <!--#region Controlbar-->
 
             <Border BorderBrush="#22202f" BorderThickness="0,0,0,1" />
-            <StackPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+
                 <TextBlock
                     Margin="20,5,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Foreground="Gray"
                     Text="KlatreKongen" />
-            </StackPanel>
-            <StackPanel
-                Grid.Row="0"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal">
+
                 <Button
                     Click="btn_Minimize_Click"
-                    Content="⨀"
-                    Style="{StaticResource bt_ControlbarButton}" />
-                <Button
-                    Click="btn_Maximize_Click"
-                    Content="⨁"
-                    Style="{StaticResource bt_ControlbarButton}" />
+                    Content="-"
+                    Grid.Column="1">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource bt_ControlbarButton}">
+                            <Setter Property="Background" Value="#28AEED" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="FontFamily" Value="Montserrat" />
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
                 <Button Click="btn_Close_Click"
-                    Content="⨂"
-                    Style="{StaticResource bt_ControlbarButton}"/>
-
-
-
-            </StackPanel>
-            <!--#endregion-->
+                        Style="{StaticResource bt_ControlbarButton}"
+                        Grid.Column="2"
+                        Content="X"/>
+            </Grid>
 
 
             <Grid x:Name="gr_Controlbar" Grid.Row="1">

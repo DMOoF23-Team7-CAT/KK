@@ -333,12 +333,7 @@
                         Margin="0,0,20,0"
                         BorderThickness="0"
                         Click="bt_Update_Click"
-                        Content="Opdater"
-                        Cursor="Hand"
-                        FontFamily="Montserrat"
-                        FontSize="12"
-                        FontWeight="Bold"
-                        Foreground="White"
+                        Content="Opdater"                       
                         Style="{StaticResource bt_DarkThemedButton}" />
                     <Button
                         x:Name="bt_Delete"
@@ -346,13 +341,8 @@
                         Margin="20,0,0,0"
                         BorderThickness="0"
                         Click="bt_Delete_Click"
-                        Content="Slet"
-                        Cursor="Hand"
-                        FontFamily="Montserrat"
-                        FontSize="12"
-                        FontWeight="Bold"
-                        Foreground="White"
-                        Style="{StaticResource vt_RedThemedButton}" />
+                        Content="Slet"                                              
+                        Style="{StaticResource bt_RedThemedButton}" />
                 </StackPanel>
             </Grid>
         </Border>
