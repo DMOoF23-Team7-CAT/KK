@@ -147,8 +147,8 @@
                 <Grid Grid.Row="8" Margin="0,20,0,10">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Lead sikret:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox x:Name="cb_lead" HorizontalAlignment="Center" />
-                        <!--  IsEnabled="{Binding IsTopRopeChecked, Converter={StaticResource InverseBooleanConverter}}"  -->
+                        <CheckBox x:Name="cb_lead" HorizontalAlignment="Center" 
+                                  Checked="cb_lead_Checked"/>
                     </Grid>
                 </Grid>
 
@@ -156,8 +156,8 @@
                 <Grid Grid.Row="9" Margin="0,20,0,50">
                     <TextBlock Style="{StaticResource tb_CustomerQualAndDisclaimer}" Text="Top-reb:" />
                     <Grid Style="{StaticResource gr_CustomerQualAndDisclaimer}">
-                        <CheckBox x:Name="cb_top" HorizontalAlignment="Center" />
-                        <!--  IsEnabled="{Binding cb_lead, Converter={StaticResource InverseBooleanConverter}}"  -->
+                        <CheckBox x:Name="cb_top" HorizontalAlignment="Center" 
+                                  Checked="cb_top_Checked"/>
                     </Grid>
                 </Grid>
 

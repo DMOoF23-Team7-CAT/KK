@@ -91,5 +91,21 @@ namespace KK.Views
             }
 
         }
+
+        private void cb_lead_Checked(object sender, RoutedEventArgs e)
+        {
+
+            cb_top.IsChecked = false;
+
+        }
+
+        private void cb_top_Checked(object sender, RoutedEventArgs e)
+        {
+
+            cb_lead.IsChecked = false;
+
+        }
+
+
     }
 }

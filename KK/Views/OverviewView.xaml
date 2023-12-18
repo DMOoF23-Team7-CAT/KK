@@ -13,7 +13,6 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <CollectionViewSource x:Key="CustomersView" Source="{Binding Customers}" />
-        <Themes:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     </UserControl.Resources>
 
     <Grid>
