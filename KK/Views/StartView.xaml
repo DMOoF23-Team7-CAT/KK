@@ -590,7 +590,7 @@
                 </Grid.RowDefinitions>
 
                 <!--  Row 0  -->
-                <StackPanel Margin="0,20,23,0" HorizontalAlignment="Right">
+                <StackPanel Margin="0,20,24,0" HorizontalAlignment="Right">
                     <Button
                         x:Name="bt_NewCustomer"
                         Width="180"
