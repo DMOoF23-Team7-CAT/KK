@@ -22,6 +22,29 @@ namespace Test
         }
 
         [TestMethod]
+        public void GetItemPrice_Quarter_Test()
+        {
+            // Arrange
+            var serviceItem = new ServiceItem { Name = "QUARTER" };
+
+            // Act
+            var quarterPrice = serviceItem.Price;
+
+            // Assert
+            Assert.AreEqual(1200.00m, quarterPrice);
+        }
+
+        [TestMethod]
+        public void GetItemPrice_InvalidName_Test()
+        {
+            // Arrange
+            var serviceItem = new ServiceItem { Name = "INVALID" };
+
+            // Act and Assert
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => serviceItem.Price);
+        }
+
+        [TestMethod]
         public void AddServiceItem_Test()
         {
             // Arrange
