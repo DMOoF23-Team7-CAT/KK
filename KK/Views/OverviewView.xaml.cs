@@ -31,7 +31,7 @@ namespace KK.Views
             overviewVM = new OverviewViewModel();
             DataContext = overviewVM;
             InitializeComponent();
-            ClearAllTextBoxes();            
+            ClearAllTextBoxes();
 
         }
 
@@ -42,7 +42,7 @@ namespace KK.Views
             {
                 overviewVM.SelectedCustomer = (Customer)lv_Overview.SelectedItem;
 
-                SetQualificationCheckbox(); 
+                SetQualificationCheckbox();
 
                 overviewVM.GetDataForSelectedCustomer();
 
@@ -54,31 +54,40 @@ namespace KK.Views
 
         private void bt_Update_Click(object sender, RoutedEventArgs e)
         {
-
             int qualification = 0;
 
-            if (cb_QualificationTop.IsChecked == true)
+            if (overviewVM.SelectedCustomer != null)
             {
-                qualification = 1;
+                if (cb_QualificationTop.IsChecked == true)
+                {
+                    qualification = 1;
+                }
+                else if (cb_QualificationLead.IsChecked == true)
+                {
+                    qualification = 2;
+                }
+
+                string name = tb_Name.Text;
+                DateTime dob = Convert.ToDateTime(tb_DateOfBirth.Text);
+                string phone = tb_Phone.Text;
+                string email = tb_Email.Text;
+                bool disclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
+
+                MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    overviewVM.UpdateCustomer(name, dob, phone, email, qualification, disclaimer);
+                }
+                return;
             }
-            else if (cb_QualificationLead.IsChecked == true)
+            else
             {
-                qualification = 2;
+                MessageBox.Show("Vælg først en kunde du vil opdatere", "Vælg kunde", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
-            string name = tb_Name.Text;
-            DateTime dob = Convert.ToDateTime(tb_DateOfBirth.Text);
-            string phone = tb_Phone.Text;
-            string email = tb_Email.Text;
-            bool disclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
 
-            MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            if (result == MessageBoxResult.Yes)
-            {
-                overviewVM.UpdateCustomer(name, dob, phone, email, qualification, disclaimer);
-            }
-            return;
 
             //MessageBoxResult result = MessageBox.Show("Kunden blev opdateret", "Kunde opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -91,14 +100,22 @@ namespace KK.Views
 
         private void bt_Delete_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Denne handling kan ikke fortrydes. Er du sikker på du vil slette kunden?", "Slet Kunden", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            if (result == MessageBoxResult.Yes)
+            if (overviewVM.SelectedCustomer != null)
             {
-                overviewVM.DeleteCustomer();
-                ClearAllTextBoxes();
+                MessageBoxResult result = MessageBox.Show("Denne handling kan ikke fortrydes. Er du sikker på du vil slette kunden?", "Slet Kunden", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    overviewVM.DeleteCustomer();
+                    ClearAllTextBoxes();
+                }
+                return;
             }
-            return; 
+            else
+            {
+                MessageBox.Show("Vælg først en kunde du vil slette", "Vælg kunde", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+           
         }
 
         private void tb_SearchBox_TextChanged(object sender, TextChangedEventArgs e)
