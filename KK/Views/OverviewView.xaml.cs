@@ -54,68 +54,74 @@ namespace KK.Views
 
         private void bt_Update_Click(object sender, RoutedEventArgs e)
         {
-            int qualification = 0;
-
-            if (overviewVM.SelectedCustomer != null)
+            try
             {
-                if (cb_QualificationTop.IsChecked == true)
-                {
-                    qualification = 1;
-                }
-                else if (cb_QualificationLead.IsChecked == true)
-                {
-                    qualification = 2;
-                }
+                int qualification = 0;
 
-                string name = tb_Name.Text;
-                DateTime dob = Convert.ToDateTime(tb_DateOfBirth.Text);
-                string phone = tb_Phone.Text;
-                string email = tb_Email.Text;
-                bool disclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
-
-                MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                if (result == MessageBoxResult.Yes)
+                if (overviewVM.SelectedCustomer != null)
                 {
-                    overviewVM.UpdateCustomer(name, dob, phone, email, qualification, disclaimer);
+                    if (cb_QualificationTop.IsChecked == true)
+                    {
+                        qualification = 1;
+                    }
+                    else if (cb_QualificationLead.IsChecked == true)
+                    {
+                        qualification = 2;
+                    }
+
+                    string name = tb_Name.Text;
+                    DateTime dob = Convert.ToDateTime(tb_DateOfBirth.Text);
+                    string phone = tb_Phone.Text;
+                    string email = tb_Email.Text;
+                    bool disclaimer = Convert.ToBoolean(cb_disclaimer.IsChecked);
+
+                    MessageBoxResult result = MessageBox.Show("Er du sikker på du vil opdatere kunden", "Opdater Kunde", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        overviewVM.UpdateCustomer(name, dob, phone, email, qualification, disclaimer);
+                    }
+                    return;
                 }
-                return;
+                else
+                {
+                    MessageBox.Show("Vælg først en kunde du vil opdatere", "Vælg kunde", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Vælg først en kunde du vil opdatere", "Vælg kunde", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    $"Der skete en fejl ved opdatering af kunden \n\n\n\n{ex.Message}",
+                    "fejl ved opdatering", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-
-
-
-            //MessageBoxResult result = MessageBox.Show("Kunden blev opdateret", "Kunde opdateret", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            //if (result == MessageBoxResult.OK)
-            //{
-            //    overviewVM.UpdateCustomer();
-            //}
-
         }
 
         private void bt_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (overviewVM.SelectedCustomer != null)
+            try
             {
-                MessageBoxResult result = MessageBox.Show("Denne handling kan ikke fortrydes. Er du sikker på du vil slette kunden?", "Slet Kunden", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                if (result == MessageBoxResult.Yes)
+                if (overviewVM.SelectedCustomer != null)
                 {
-                    overviewVM.DeleteCustomer();
-                    ClearAllTextBoxes();
+                    MessageBoxResult result = MessageBox.Show("Denne handling kan ikke fortrydes. Er du sikker på du vil slette kunden?", "Slet Kunden", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        overviewVM.DeleteCustomer();
+                        ClearAllTextBoxes();
+                    }
+                    return;
                 }
-                return;
+                else
+                {
+                    MessageBox.Show("Vælg først en kunde du vil slette", "Vælg kunde", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Vælg først en kunde du vil slette", "Vælg kunde", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-           
+                MessageBox.Show(
+                    $"Der skete en fejl ved sletning af kunden \n\n\n\n{ex.Message}",
+                    "fejl ved sletning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }           
         }
 
         private void tb_SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -134,7 +140,7 @@ namespace KK.Views
         {
             tb_SearchBox.Clear();
             tb_Name.Clear();
-            tb_DateOfBirth.Clear();
+            tb_DateOfBirth.SelectedDate = DateTime.MinValue;
             tb_Email.Clear();
             tb_Phone.Clear();
             tb_Qualification.Clear();

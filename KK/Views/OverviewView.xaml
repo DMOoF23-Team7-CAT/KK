@@ -146,11 +146,14 @@
                         <Grid>
                             <TextBlock Style="{StaticResource tk_CustomerDetailsHeadersText}" Text="Fødselsdato:" />
                             <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                                <TextBox
+                                <Border Style="{StaticResource bb_DatePickerBorder}">
+                                    <DatePicker
                                     x:Name="tb_DateOfBirth"
+                                    BorderThickness="0"
+                                    FontSize="12"
                                     Foreground="Black"
-                                    Style="{StaticResource tb_TextBoxInput}"
-                                    Text="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=d}" />
+                                    SelectedDate="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=d}" />
+                                </Border>
                             </Grid>
                         </Grid>
                         <Grid>
