@@ -166,6 +166,7 @@ namespace KK.Views
             bt_pay.IsEnabled = false;
             bt_CheckMemberIn.IsEnabled = false;
             lv_Items.ItemsSource = new object[] { };
+            ExpandersDisabled();
         }
 
         // Set PaymentFields

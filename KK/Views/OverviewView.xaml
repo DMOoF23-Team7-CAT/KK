@@ -333,7 +333,7 @@
                         Margin="0,0,20,0"
                         BorderThickness="0"
                         Click="bt_Update_Click"
-                        Content="Opdater"                       
+                        Content="Opdater"
                         Style="{StaticResource bt_DarkThemedButton}" />
                     <Button
                         x:Name="bt_Delete"
@@ -341,7 +341,7 @@
                         Margin="20,0,0,0"
                         BorderThickness="0"
                         Click="bt_Delete_Click"
-                        Content="Slet"                                              
+                        Content="Slet"
                         Style="{StaticResource bt_RedThemedButton}" />
                 </StackPanel>
             </Grid>
