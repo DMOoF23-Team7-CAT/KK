@@ -5,8 +5,6 @@
 
     <!--  Converter  -->
     <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter" />
-    <local:BooleanToValueConverter x:Key="BooleanToValueConverter" />
-    <local:CheckBoxTextConverter x:Key="CheckBoxTextConverter" />
 
     <!--  GenericThemes  -->
     <Style x:Key="BorderGradientStyle" TargetType="Border">

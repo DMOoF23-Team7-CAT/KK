@@ -16,10 +16,7 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-    <Window.Resources>
-        <themes:BooleanToValueConverter x:Key="BooleanToValueConverter" />
-        <themes:CheckBoxTextConverter x:Key="CheckBoxTextConverter" />
-    </Window.Resources>
+
 
     <Window.DataContext>
         <ViewModel:CustomerViewModel />
