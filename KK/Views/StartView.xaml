@@ -36,13 +36,6 @@
                     Margin="20,0,0,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                    <!--<TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="23"
-                        FontWeight="Bold"
-                        Foreground="#FFFFFF"
-                        Text="Oversigt" />-->
                     <Button
                         x:Name="bt_AddItem"
                         Width="180"
@@ -460,69 +453,6 @@
                         </ListView>
                     </ScrollViewer>
                 </Grid>
-
-                <!--
-                <Grid
-                    Grid.Row="2"
-                    Margin="0,0,20,0"
-                    HorizontalAlignment="Right">
-                    <StackPanel>
-                        <Grid
-                            Width="200"
-                            Margin="20,0"
-                            HorizontalAlignment="Center"
-                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBlock
-                                Width="170"
-                                HorizontalAlignment="Right"
-                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                                Text="Subtoal" />
-                            <TextBox
-                                x:Name="tb_SubTotal"
-                                Foreground="Black"
-                                IsReadOnly="True"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                TextAlignment="Right" />
-                        </Grid>
-
-                        <Grid
-                            Width="200"
-                            Margin="20,0"
-                            HorizontalAlignment="Center"
-                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBlock
-                                Width="170"
-                                HorizontalAlignment="Right"
-                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                                Text="Total ex moms"
-                                Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
-                            <TextBox
-                                x:Name="tb_ExcludeTaxTotal"
-                                Foreground="Black"
-                                IsReadOnly="True"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                TextAlignment="Right" />
-                        </Grid>
-                        <Grid
-                            Width="200"
-                            Margin="20,0"
-                            HorizontalAlignment="Center"
-                            Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
-                            <TextBlock
-                                Width="170"
-                                HorizontalAlignment="Right"
-                                Style="{StaticResource tk_CustomerDetailsTextBlocks}"
-                                Text="Moms"
-                                Visibility="{Binding ElementName=tb_Total, Path=Text, Converter={StaticResource TextToVisibilityConverter}}" />
-                            <TextBox
-                                x:Name="tb_Tax"
-                                Foreground="Black"
-                                IsReadOnly="True"
-                                Style="{StaticResource tb_TextBoxInput}"
-                                TextAlignment="Right" />
-                        </Grid>
-                    </StackPanel>
-                </Grid>-->
 
                 <!--  Row 3  -->
                 <Grid
