@@ -148,11 +148,11 @@
                             <Grid Style="{StaticResource gr_CustomerDetailsHeadersGrid}">
                                 <Border Style="{StaticResource bb_DatePickerBorder}">
                                     <DatePicker
-                                    x:Name="tb_DateOfBirth"
-                                    BorderThickness="0"
-                                    FontSize="12"
-                                    Foreground="Black"
-                                    SelectedDate="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=d}" />
+                                        x:Name="tb_DateOfBirth"
+                                        BorderThickness="0"
+                                        FontSize="12"
+                                        Foreground="Black"
+                                        SelectedDate="{Binding SelectedCustomer.DateOfBirth, Mode=TwoWay, StringFormat=d}" />
                                 </Border>
                             </Grid>
                         </Grid>

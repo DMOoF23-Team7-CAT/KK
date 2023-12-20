@@ -52,8 +52,10 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_MEMBERSHIP", connection))
+                using (SqlCommand command = new SqlCommand("kk_spGetAllMemberships", connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -75,8 +77,9 @@ namespace KK.Models.Repositories
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM kk_MEMBERSHIP WHERE Id = @Id", connection))
+                using (SqlCommand command = new SqlCommand("kk_spGetMembershipById", connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Id", id);
 
                     using (SqlDataReader reader = command.ExecuteReader())
