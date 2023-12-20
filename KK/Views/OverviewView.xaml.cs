@@ -25,7 +25,7 @@ namespace KK.Views
     /// </summary>
     public partial class OverviewView : UserControl
     {
-        public OverviewViewModel overviewVM;
+        private readonly OverviewViewModel overviewVM;
         public OverviewView()
         {
             overviewVM = new OverviewViewModel();

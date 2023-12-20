@@ -49,10 +49,10 @@
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock
@@ -63,11 +63,11 @@
                     Text="KlatreKongen" />
 
                 <Button
+                    Grid.Column="1"
                     Click="bt_Minimize_Click"
-                    Content="-"
-                    Grid.Column="1">
+                    Content="-">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource bt_ControlbarButton}">
+                        <Style BasedOn="{StaticResource bt_ControlbarButton}" TargetType="Button">
                             <Setter Property="Background" Value="#28AEED" />
                             <Setter Property="Foreground" Value="White" />
                             <Setter Property="FontSize" Value="12" />
@@ -75,17 +75,18 @@
                             <Setter Property="Cursor" Value="Hand" />
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#278BEF"/>
+                                    <Setter Property="Background" Value="#278BEF" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                 </Button>
 
-                <Button Click="bt_Close_Click"
-                        Style="{StaticResource bt_ControlbarButton}"
-                        Grid.Column="2"
-                        Content="X"/>
+                <Button
+                    Grid.Column="2"
+                    Click="bt_Close_Click"
+                    Content="X"
+                    Style="{StaticResource bt_ControlbarButton}" />
             </Grid>
 
 
