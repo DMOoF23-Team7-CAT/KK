@@ -63,7 +63,7 @@
                     Text="KlatreKongen" />
 
                 <Button
-                    Click="btn_Minimize_Click"
+                    Click="bt_Minimize_Click"
                     Content="-"
                     Grid.Column="1">
                     <Button.Style>
@@ -82,7 +82,7 @@
                     </Button.Style>
                 </Button>
 
-                <Button Click="btn_Close_Click"
+                <Button Click="bt_Close_Click"
                         Style="{StaticResource bt_ControlbarButton}"
                         Grid.Column="2"
                         Content="X"/>

@@ -14,14 +14,14 @@ namespace KK.Views
             InitializeComponent();
         }
 
-        private void btn_Close_Click(object sender, RoutedEventArgs e)
+        private void bt_Close_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
         private bool IsMaximized = false;
 
-        private void btn_Minimize_Click(object sender, RoutedEventArgs e)
+        private void bt_Minimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
