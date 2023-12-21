@@ -92,7 +92,7 @@ namespace KK.Views
         {
             if (startVM.SelectedCustomer.Membership != null)
             {
-                if (!startVM.SelectedCustomer.Membership.IsActive)
+                if (startVM.SelectedCustomer.Membership.IsActive)
                 {
                     bt_CheckMemberIn.IsEnabled = true;
                     bt_pay.IsEnabled = false;
@@ -117,9 +117,7 @@ namespace KK.Views
                 MessageBox.Show(
                      $"Der skete en fejl ved intjekningen af medlem \n\n\n\n{ex.Message}",
                      "fejl ved indtjekning", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
-            
+            }                     
         }
         // Pay button click event
         private void bt_pay_Click(object sender, RoutedEventArgs e)

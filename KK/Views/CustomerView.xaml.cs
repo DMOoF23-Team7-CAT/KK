@@ -76,14 +76,14 @@ namespace KK.Views
                 customerVM.NewCustomerHasSignedDisclaimer = (bool)cb_disclaimer.IsChecked;
                 customerVM.NewCustomerQualification = qualification;
 
-                MessageBoxResult result = MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
-                if (result == MessageBoxResult.OK)
-                {
-                    customerVM.Add();
-                    DialogResult = true;
+                customerVM.Add();
 
-                    Close();
-                }
+                DialogResult = true;
+                    
+                MessageBox.Show("Kunden blev oprettet", "Kunde oprettet", MessageBoxButton.OK, MessageBoxImage.Information);
+                    
+                Close();
+
             }
             catch (Exception ex)
             {
