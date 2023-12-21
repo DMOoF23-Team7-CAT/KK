@@ -23,7 +23,7 @@ namespace Test
                 DateOfBirth = new DateTime(1990, 1, 1),
                 Phone = "123-456-7890",
                 Email = "john.doe@example.com",
-                Qualification = Qualification.TopRope, // Updated property
+                Qualification = Qualification.TopRope, 
                 HasSignedDisclaimer = true
             };
 
@@ -48,7 +48,7 @@ namespace Test
                 DateOfBirth = new DateTime(1990, 1, 1),
                 Phone = "123-456-7890",
                 Email = "john.doe@example.com",
-                Qualification = Qualification.TopRope, // Updated property
+                Qualification = Qualification.TopRope,
                 HasSignedDisclaimer = true
             };
 
@@ -75,7 +75,7 @@ namespace Test
                 DateOfBirth = new DateTime(1990, 1, 1),
                 Phone = "123-456-7890",
                 Email = "john.doe@example.com",
-                Qualification = Qualification.TopRope, // Updated property
+                Qualification = Qualification.TopRope,
                 HasSignedDisclaimer = true
             };
 
@@ -103,7 +103,7 @@ namespace Test
                 DateOfBirth = new DateTime(1990, 1, 1),
                 Phone = "123-456-7890",
                 Email = "john.doe@example.com",
-                Qualification = Qualification.TopRope, // Updated property
+                Qualification = Qualification.TopRope,
                 HasSignedDisclaimer = true
             };
 
@@ -127,7 +127,7 @@ namespace Test
                 DateOfBirth = new DateTime(1990, 1, 1),
                 Phone = "123-456-7890",
                 Email = "john.doe@example.com",
-                Qualification = Qualification.TopRope, // Updated property
+                Qualification = Qualification.TopRope,
                 HasSignedDisclaimer = true
             };
 
@@ -137,7 +137,7 @@ namespace Test
                 DateOfBirth = new DateTime(1985, 5, 10),
                 Phone = "987-654-3210",
                 Email = "jane.doe@example.com",
-                Qualification = Qualification.Lead, // Updated property
+                Qualification = Qualification.Lead,
                 HasSignedDisclaimer = false
             };
 

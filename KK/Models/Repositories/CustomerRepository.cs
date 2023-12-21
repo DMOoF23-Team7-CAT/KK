@@ -248,7 +248,6 @@ namespace KK.Models.Repositories
             else
             {
                 List<Entry> entries = new List<Entry>();
-
                 do
                 {
                     Entry entry = new Entry
@@ -266,7 +265,6 @@ namespace KK.Models.Repositories
 
                 return entries;
             }
-
         }
 
         private static ICollection<ServiceItem> MapDataToServiceItems(SqlDataReader reader)
@@ -278,7 +276,6 @@ namespace KK.Models.Repositories
             else
             {
                 List<ServiceItem> serviceItems = new List<ServiceItem>();
-
                 do
                 {
                     ServiceItem serviceItem = new ServiceItem

@@ -191,11 +191,6 @@ namespace KK.Views
                 {
                     startVM.SetCustomersCollection();
                 }
-                // Optional: Handle the case where the user closes the window without clicking OK
-                else
-                {
-                    // Handle as needed
-                }
             }
             catch (Exception ex)
             {
