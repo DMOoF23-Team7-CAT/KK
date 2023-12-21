@@ -285,21 +285,21 @@ namespace KK.Views
         // Remove membership
         private void cb_12months_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (cb_12months.IsChecked == true)
+            if (cb_12months.IsChecked == false)
             {
                 startVM.RemoveServiceItem("YEAR");
             }
         }
         private void cb_3months_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (cb_3months.IsChecked == true)
+            if (cb_3months.IsChecked == false)
             {
                 startVM.RemoveServiceItem("QUARTER");
             }
         }
         private void cb_1month_Unchecked(object sender, RoutedEventArgs e)
         {
-            if ( cb_1month.IsChecked == true)
+            if ( cb_1month.IsChecked == false)
             {
                 startVM.RemoveServiceItem("MONTH");
             }
